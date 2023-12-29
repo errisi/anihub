@@ -1,14 +1,10 @@
-import reactLogo from './assets/react.svg';
-import './App.css';
+import { Button } from '@mui/material';
+import { Outlet } from 'react-router-dom';
 
-const App = () => (
+export const App = () => (
   <>
-    <div>
-      <a href="https://react.dev" target="_blank" rel="noreferrer">
-        <img src={reactLogo} className="logo react" alt="React logo" />
-      </a>
-    </div>
+    <Button variant="text">Text</Button>
+
+    <Outlet />
   </>
 );
-
-export default App;
