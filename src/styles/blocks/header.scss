@@ -1,0 +1,16 @@
+.header {
+  background-color: #000;
+  position: relative;
+  min-height: 72px;
+  display: grid;
+  align-items: center;
+
+  &__wrapper {
+    display: flex;
+  }
+
+  &__search {
+    min-width: 100px;
+    max-width: 360px;
+  }
+}

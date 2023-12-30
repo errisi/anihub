@@ -1,1 +1,1 @@
-export const AnimeСatalog = () => <h1>asdasdasd</h1>;
+export const AnimeСatalog = () => <h1>Сatalog Page</h1>;

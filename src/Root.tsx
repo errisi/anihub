@@ -1,20 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import { HomePage } from './pages/homePage/homePage';
 import { AnimeСatalog } from './pages/animeСatalogPage/animeСatalog';
 import { PageNotFound } from './pages/pageNotFound/pageNotFound';
 import { App } from './App';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#e91e63',
-    },
-    secondary: {
-      main: '#f50057',
-    },
-  },
-});
+import { theme } from './store/theme';
 
 export const Root = () => (
   <Router>

@@ -1,10 +1,13 @@
-import { Button } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+import { Container } from '@mui/material';
+import { AppHeader } from './components/appHeader/AppHeader';
 
 export const App = () => (
   <>
-    <Button variant="text">Text</Button>
+    <AppHeader />
 
-    <Outlet />
+    <Container className="mainContainer">
+      <Outlet />
+    </Container>
   </>
 );
