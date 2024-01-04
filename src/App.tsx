@@ -18,9 +18,11 @@ export const App = () => {
     <>
       <AppHeader />
 
-      <Container className='mainContainer'>
-        <Outlet />
-      </Container>
+      <main className='main'>
+        <Container className='mainContainer'>
+          <Outlet />
+        </Container>
+      </main>
     </>
   );
 };
