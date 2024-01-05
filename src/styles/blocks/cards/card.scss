@@ -1,0 +1,114 @@
+.card {
+  width: 192px;
+  height: 332px;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+
+  &:hover &__image__wrapper__item {
+    transform: scale(1.04);
+  }
+
+  &:hover
+    &__image__wrapper__item__overlay {
+    visibility: visible;
+    transform: scale(1.04);
+    opacity: 80%;
+  }
+  &:hover
+    &__image__wrapper__item__overlay
+    &__image__wrapper__item__overlay__score {
+    opacity: 100%;
+  }
+
+  &__image__wrapper {
+    display: block;
+    border-radius: 10px;
+    position: relative;
+    transition-duration: 0.4s;
+    margin-bottom: 8px;
+    transform-origin: 50% 100%;
+
+    &__item {
+      display: block;
+      width: 100%;
+      height: 258px;
+      border-radius: 10px;
+      transition: all 0.2s;
+
+      &__overlay {
+        position: absolute;
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        height: 0;
+        visibility: hidden;
+        height: 100%;
+        width: 100%;
+        background-color: #000;
+        opacity: 0;
+        border-radius: 10px;
+        z-index: 1;
+        transition:
+          opacity 0.2s,
+          transform 0.2s;
+
+        &__score {
+          color: #fff;
+          padding: 2px 4px;
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          border: 2px solid #e91e63;
+          border-radius: 6px;
+          opacity: 100%;
+        }
+
+        &__series {
+          color: #fff;
+          font-size: 1.5rem;
+          opacity: 100%;
+        }
+
+        &__kind {
+          color: #fff;
+          position: absolute;
+          left: 12px;
+          font-size: 1.1rem;
+          bottom: 10px;
+          opacity: 100%;
+          padding-bottom: 2px;
+          border-bottom: 2px solid #e91e63;
+        }
+      }
+    }
+  }
+
+  &__title {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  &__additional {
+    margin: 0;
+    padding: 0;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+
+    &__status {
+      padding: 0 4px;
+      display: flex;
+      align-items: center;
+      height: 30px;
+      max-width: 74px;
+      border: 1px solid #e91e63;
+      color: #e91e63;
+      border-radius: 10px;
+    }
+  }
+}

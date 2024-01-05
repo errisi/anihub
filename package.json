@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --max-warnings 0 --fix",
     "preview": "vite preview",
     "format": "prettier . --ignore-path ./gitignore --write",
-    "fix-style": "npm run format & npm run lint",
+    "fix-style": "npm run lint",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -53,7 +53,6 @@
     "typescript": "^5.3.3"
   },
   "lint-staged": {
-    "*": "npm run format",
     "*.ts": "npm run fix-style",
     "*.tsx": "npm run fix-style"
   }

@@ -9,3 +9,15 @@ export const fetchAnimes = () => {
     return response.json();
   });
 };
+
+export const fetchGenres = () => {
+  return fetch(
+    'https://shikimori.one/api/genres',
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error();
+    }
+
+    return response.json();
+  });
+};
