@@ -1,8 +1,29 @@
 .catalog {
   display: flex;
   justify-content: space-between;
+  align-items: start;
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__filter-title {
+    margin-top: 10px;
+  }
 
   &__filter {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    &__block {
+
+      &__title {
+        font-size: 0.95rem;
+        padding: 4px;
+      }
+    }
+
     &__field {
       width: 300px;
       height: 56px;

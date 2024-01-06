@@ -8,39 +8,49 @@ type Props = {
 };
 
 export const AnimeCatalogCards: FC<Props> = ({ animes }) => (
-  <div className="card__catalog-grid">
-    {animes.map((anime) => (
-      <div className="card">
-        <div className="card__image__wrapper">
-          <img
-            className="card__image__wrapper__item"
-            src={`https://shikimori.one:${anime.image.original}`}
-            alt="anime"
-          />
-          <div className="card__image__wrapper__item__overlay">
-            <div className="card__image__wrapper__item__overlay__score">
-              {`${anime.score}`}
-            </div>
+  <>
+    <div className="catalog__cards-wrapper">
+      <h1
+        className="catalog__title"
+      >
+        Аниме
+      </h1>
 
-            <div className="card__image__wrapper__item__overlay__series">
-              {`${anime.episodes_aired ? `${anime.episodes_aired}/` : ''}${
-                anime.episodes
-              }`}
-            </div>
+      <div className="card__catalog-grid">
+        {animes.map((anime) => (
+          <div className="card">
+            <div className="card__image__wrapper">
+              <img
+                className="card__image__wrapper__item"
+                src={`https://shikimori.one:${anime.image.original}`}
+                alt="anime"
+              />
+              <div className="card__image__wrapper__item__overlay">
+                <div className="card__image__wrapper__item__overlay__score">
+                  {`${anime.score}`}
+                </div>
 
-            <div className="card__image__wrapper__item__overlay__kind">
-              <p>{`${returnAnimeKind(anime.kind as AnimeKind) || ''}`}</p>
+                <div className="card__image__wrapper__item__overlay__series">
+                  {`${anime.episodes_aired ? `${anime.episodes_aired}/` : ''}${
+                    anime.episodes
+                  }`}
+                </div>
+
+                <div className="card__image__wrapper__item__overlay__kind">
+                  <p>{`${returnAnimeKind(anime.kind as AnimeKind) || ''}`}</p>
+                </div>
+              </div>
             </div>
+            <p className="card__title">{anime.russian}</p>
+            <p className="card__additional">
+              <p>{anime.aired_on.split('-').splice(0, 1)}</p>
+              <p className="card__additional__status">
+                {anime.status === 'ongoing' ? 'Онгоинг' : 'Вышел'}
+              </p>
+            </p>
           </div>
-        </div>
-        <p className="card__title">{anime.russian}</p>
-        <p className="card__additional">
-          <p>{anime.aired_on.split('-').splice(0, 1)}</p>
-          <p className="card__additional__status">
-            {anime.status === 'ongoing' ? 'Онгоинг' : 'Вышел'}
-          </p>
-        </p>
+        ))}
       </div>
-    ))}
-  </div>
+    </div>
+  </>
 );
