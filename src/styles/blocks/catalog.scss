@@ -7,26 +7,59 @@
     margin-bottom: 20px;
   }
 
-  &__filter-title {
-    margin-top: 10px;
-  }
-
   &__filter {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: flex-end;
 
+    &-title {
+      margin-bottom: 16px;
+    }
+
     &__block {
+      height: 82px;
+      width: 300px;
 
       &__title {
         font-size: 0.95rem;
-        padding: 4px;
+        padding: 8px 4px;
       }
+
+      &-years {
+        display: flex;
+        justify-content: center;
+      }
+
+      &-status {
+        width: 300px;
+      }
+
+      &-score {
+        width: 300px;
+      }
+
+      &-raiting {
+        margin-bottom: 12px;
+      }
+
+      &__button {
+        width: 300px;
+      }
+
     }
 
     &__field {
       width: 300px;
       height: 56px;
     }
+  }
+
+  &__filter > :nth-last-child(2) {
+    margin-bottom: 12px;
+  }
+
+  &__filter > :nth-child(1) {
+    margin-bottom: 4px;
   }
 }

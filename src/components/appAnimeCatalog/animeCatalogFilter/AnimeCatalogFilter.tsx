@@ -1,26 +1,44 @@
-import {
+import React, {
   FC,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
-import {
-  Autocomplete,
-  Checkbox,
-  TextField,
-} from '@mui/material';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
+
+import { Button } from '@mui/material';
 import { getGenres } from '../../../api/animes';
+import {
+  AnimeCatalogFilterGenreBlock,
+} from './filterBlocks/AnimeCatalogFilterGenreBlock';
+import {
+  AnimeCatalogFilterTypeBlock,
+} from './filterBlocks/AnimeCatalogFilterTypeBlock';
+import {
+  AnimeCatalogFilterStatusBlock,
+} from './filterBlocks/AnimeCatalogFilterStatusBlock';
+import {
+  AnimeCatalogFilterYearsBlock,
+} from './filterBlocks/AnimeCatalogFilterYearsBlock';
+import {
+  AnimeCatalogFilterScoreBlock,
+} from './filterBlocks/AnimeCatalogFilterScoreBlock';
+import {
+  AnimeCatalogFilterRatingBlock,
+} from './filterBlocks/AnimeCatalogFilterRatingBlock';
 
 export const AnimeCatalogFilter: FC = () => {
   const [genresList, setGenresList] = useState<string[]>([]);
+  const typesList = ['Аниме Сериал', 'Аниме Фильм', 'OVA', 'ONA', 'Спешл'];
+  const statusList = ['Анонс', 'Вышел', 'Онгоинг'];
+  const scoreList = ['Выше 9', 'Выше 8', 'Выше 7', 'Выше 6', 'Выше 5'];
+  const raitingsList = ['G', 'PG', 'PG-13', 'R', 'R-17', 'R+'];
+
+  const [selectedYears, setSelectedYears]
+    = React.useState<number[]>([1959, 2024]);
   const [selectedGeners, setSelectedGeners] = useState<string[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-  const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-  const checkedIcon = <CheckBoxIcon fontSize="small" />;
-
-  const typesList = ['Аниме Сериал', 'Аниме Фильм', 'OVA', 'ONA', 'Спешл'];
+  const [selectedStatus, setSelectedStatus] = React.useState('');
+  const [selectedScore, setSelectedScore] = React.useState('');
+  const [selectedRaitings, setSelectedRaitings] = useState<string[]>([]);
 
   useEffect(() => {
     getGenres()
@@ -29,20 +47,6 @@ export const AnimeCatalogFilter: FC = () => {
         setGenresList([...error]);
       });
   }, []);
-
-  const setSelectedGenersAction
-    = (_: React.SyntheticEvent, value: string[]) => {
-      setSelectedGeners(value);
-    };
-
-  const setSelectedTypesAction
-  = (_: React.SyntheticEvent, value: string[]) => {
-    setSelectedTypes(value);
-  };
-
-  const sortedGenresList = useMemo(() => {
-    return genresList.sort((a, b) => a.localeCompare(b));
-  }, [genresList]);
 
   return (
     <>
@@ -54,85 +58,51 @@ export const AnimeCatalogFilter: FC = () => {
         </h2>
 
         <div className="catalog__filter">
-          <div className="catalog__filter__block">
-            <p
-              className="catalog__filter__block__title"
-            >
-              Жанр
-            </p>
-            <Autocomplete
-              multiple
-              disableCloseOnSelect
-              id="combo-box-demo"
-              options={sortedGenresList}
-              size="small"
-              value={selectedGeners}
-              onChange={setSelectedGenersAction}
-              className="catalog__filter__field"
-              renderOption={(props, option, { selected }) => (
-                <li {...props}>
-                  <Checkbox
-                    icon={icon}
-                    size="small"
-                    checkedIcon={checkedIcon}
-                    style={{ marginRight: 8 }}
-                    checked={selected}
-                  />
-                  {option}
-                </li>
-              )}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Жанр Аниме"
-                  size="small"
-                  className="catalog__filter__field"
-                />
-              )}
-            />
-          </div>
+          <AnimeCatalogFilterYearsBlock
+            selectedYears={selectedYears}
+            setSelectedYears={setSelectedYears}
+          />
 
-          <div className="catalog__filter__block">
-            <p
-              className="catalog__filter__block__title"
-            >
-              Тип
-            </p>
-            <Autocomplete
-              multiple
-              disableCloseOnSelect
-              id="combo-box-demo"
-              options={typesList}
-              size="small"
-              value={selectedTypes}
-              onChange={setSelectedTypesAction}
-              className="catalog__filter__field"
-              renderOption={(props, option, { selected }) => (
-                <li {...props}>
-                  <Checkbox
-                    icon={icon}
-                    size="small"
-                    checkedIcon={checkedIcon}
-                    style={{ marginRight: 8 }}
-                    checked={selected}
-                  />
-                  {option}
-                </li>
-              )}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Тип Аниме"
-                  size="small"
-                  className="catalog__filter__field"
-                />
-              )}
-            />
-          </div>
+          <AnimeCatalogFilterGenreBlock
+            genresList={genresList}
+            selectedGeners={selectedGeners}
+            setSelectedGeners={setSelectedGeners}
+          />
+
+          <AnimeCatalogFilterTypeBlock
+            typesList={typesList}
+            selectedTypes={selectedTypes}
+            setSelectedTypes={setSelectedTypes}
+          />
+
+          <AnimeCatalogFilterStatusBlock
+            statusList={statusList}
+            selectedStatus={selectedStatus}
+            setSelectedStatus={setSelectedStatus}
+          />
+
+          <AnimeCatalogFilterScoreBlock
+            scoreList={scoreList}
+            selectedScore={selectedScore}
+            setSelectedScore={setSelectedScore}
+          />
+
+          <AnimeCatalogFilterRatingBlock
+            raitingsList={raitingsList}
+            selectedRaitings={selectedRaitings}
+            setSelectedRaitings={setSelectedRaitings}
+          />
+
+          <Button
+            variant="contained"
+            fullWidth
+            className="catalog__filter__button"
+          >
+            Применить
+          </Button>
         </div>
-      </div>
 
-      {/* <p>{`${data.join(' ')}`}</p> */}
+      </div>
     </>
   );
 };
