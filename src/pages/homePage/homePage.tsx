@@ -1,20 +1,19 @@
-// import {
-//   BestLastestList,
-// } from '../../components/appHomePage/BestLastestList/BestLastestList';
-
 import {
-  LastUpdatedCards,
-} from '../../components/appHomePage/LastUpdated/LastUpdatedCards';
+  BestSeasonOngoings,
+} from '../../components/appHomePage/BestSeasonOngoings/BestSeasonOngoings';
+import {
+  LastUpdated,
+} from '../../components/appHomePage/LastUpdated/LastUpdated';
 import { useAppSelector } from '../../store/hooks';
 
 export const HomePage = () => {
   const { animes } = useAppSelector((state) => state.anime);
 
   return (
-    <>
-      <LastUpdatedCards animes={animes} />
+    <div className="home">
+      <LastUpdated animes={animes} />
 
-      {/* <BestLastestList /> */}
-    </>
+      <BestSeasonOngoings animes={animes} />
+    </div>
   );
 };

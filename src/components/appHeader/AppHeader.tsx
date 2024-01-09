@@ -7,34 +7,32 @@ import { AppHeaderLogo } from './Logo/AppHeaderLogo';
 
 export const AppHeader = () => (
   <>
-    <header className="header">
-      <Container>
-        <div className="header__wrapper">
-          <div className="header__left-side">
-            <AppHeaderLogo />
+    <Container>
+      <div className="header__wrapper">
+        <div className="header__left-side">
+          <AppHeaderLogo />
 
-            <AppHeaderHavigation />
+          <AppHeaderHavigation />
 
-            <AppHeaderSearch />
-          </div>
+          <AppHeaderSearch />
+        </div>
 
-          <div className="header__right-side">
-            <Button variant="text" component={Link} to="/">
-              <Notifications color="primary" />
+        <div className="header__right-side">
+          <Button variant="text" component={Link} to="/">
+            <Notifications color="primary" />
+          </Button>
+
+          <ButtonGroup>
+            <Button variant="outlined" component={Link} to="/">
+              Войти
             </Button>
 
-            <ButtonGroup>
-              <Button variant="outlined" component={Link} to="/">
-                Войти
-              </Button>
-
-              <Button variant="contained" component={Link} to="/">
-                Регистрация
-              </Button>
-            </ButtonGroup>
-          </div>
+            <Button variant="contained" component={Link} to="/">
+              Регистрация
+            </Button>
+          </ButtonGroup>
         </div>
-      </Container>
-    </header>
+      </div>
+    </Container>
   </>
 );

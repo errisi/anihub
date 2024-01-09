@@ -1,0 +1,42 @@
+.footer {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+
+  &__wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__links {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &__item {
+      color: aliceblue;
+      text-decoration: none;
+      border-bottom: 1px #e91e626d solid;
+      padding: 4px;
+      transition: all 0.2s;
+    }
+
+    &__item:hover {
+      border-bottom: 1px #e91e63 solid;
+    }
+  }
+
+  &__copyright {
+    color: rgb(148, 148, 148);
+    position: absolute;
+    bottom: -32px;
+  }
+}

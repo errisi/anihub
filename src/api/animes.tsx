@@ -1,11 +1,19 @@
 import { Gener } from '../types/Gener';
-import { fetchAnimes, fetchGenres } from '../utils/fetchClient';
+import { get } from '../utils/fetchClient';
 
 export const getAnimes = () => {
-  return fetchAnimes().then((response) => response);
+  return get.animes;
 };
 
 export const getGenres = () => {
-  return fetchGenres()
+  return get.genres
     .then((response) => response.map((gener: Gener) => gener.russian));
+};
+
+export const getAnimeConstans = () => {
+  return get.constants;
+};
+
+export const getBestSeasonOngoing = () => {
+  return get.bestSeasonOngoing('winter_2024');
 };

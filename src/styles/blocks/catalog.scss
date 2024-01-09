@@ -77,4 +77,11 @@
   &__filter > :nth-child(1) {
     margin-bottom: 4px;
   }
+
+  &__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 82px;
+  }
 }

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { AppHeader } from './components/appHeader/AppHeader';
 import { useAppDispatch } from './store/hooks';
 import * as animesActions from './features/anime';
+import { AppFooter } from './components/appFooter/AppFooter';
 
 export const App = () => {
   /* eslint-disable */
@@ -16,13 +17,19 @@ export const App = () => {
 
   return (
     <>
+    <header className="header">
       <AppHeader />
+    </header>
 
       <main className='main'>
-        <Container className='mainContainer'>
+        <Container>
           <Outlet />
         </Container>
       </main>
+
+      <footer className='footer'>
+        <AppFooter />
+      </footer>
     </>
   );
 };

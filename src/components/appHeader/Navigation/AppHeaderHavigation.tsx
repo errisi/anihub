@@ -28,7 +28,7 @@ export const AppHeaderHavigation = () => (
           to="/top"
           className="nav__link"
         >
-          Топ
+          Подборки
         </Button>
       </li>
     </ul>

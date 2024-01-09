@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Pagination } from '@mui/material';
 import { Anime } from '../../../types/Anime';
 import { returnAnimeKind } from '../../../helpers/returnAnimeKind';
 import { AnimeKind } from '../../../types/AnimeKind';
@@ -55,6 +56,10 @@ export const AnimeCatalogCards: FC<Props> = ({ animes }) => (
             </p>
           </div>
         ))}
+      </div>
+
+      <div className="catalog__pagination">
+        <Pagination count={10} color="primary" />
       </div>
     </div>
   </>
