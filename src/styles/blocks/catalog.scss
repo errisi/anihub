@@ -3,6 +3,21 @@
   justify-content: space-between;
   align-items: start;
 
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    &__block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      &-sort {
+        width: 134px;
+      }
+    }
+  }
+
   &__title {
     margin-bottom: 20px;
   }

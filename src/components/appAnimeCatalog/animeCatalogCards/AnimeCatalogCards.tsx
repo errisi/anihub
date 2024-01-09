@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Anime } from '../../../types/Anime';
 import { returnAnimeKind } from '../../../helpers/returnAnimeKind';
 import { AnimeKind } from '../../../types/AnimeKind';
+import { AnimeCatalogSort } from '../AnimeCatalogSort/AnimeCatalogSort';
 
 type Props = {
   animes: Anime[];
@@ -10,11 +11,15 @@ type Props = {
 export const AnimeCatalogCards: FC<Props> = ({ animes }) => (
   <>
     <div className="catalog__cards-wrapper">
-      <h1
-        className="catalog__title"
-      >
-        Аниме
-      </h1>
+      <div className="catalog__header">
+        <h1
+          className="catalog__title"
+        >
+          Аниме
+        </h1>
+
+        <AnimeCatalogSort />
+      </div>
 
       <div className="card__catalog-grid">
         {animes.map((anime) => (
