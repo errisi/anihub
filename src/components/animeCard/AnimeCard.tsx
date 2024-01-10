@@ -31,7 +31,11 @@ export const AnimeCard: FC<Props> = ({ anime }) => (
         </div>
       </div>
     </div>
-    <p className="card__title">{anime.russian}</p>
+    <p className="card__title">
+      {anime.russian.length < 35
+        ? anime.russian
+        : `${anime.russian.split('').slice(0, 35).join('')}...`}
+    </p>
     <p className="card__additional">
       <p>{anime.aired_on.split('-').splice(0, 1)}</p>
       <p className="card__additional__status">

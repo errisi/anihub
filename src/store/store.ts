@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import animeReducer from '../features/anime';
+import BestSeasonOngoingsReducer from '../features/BestSeasonOngoings';
+import NewReleasedReducer from '../features/NewReleased';
 
 const store = configureStore({
   reducer: {
-    anime: animeReducer,
+    BestSeasonOngoings: BestSeasonOngoingsReducer,
+    NewReleased: NewReleasedReducer,
   },
 });
 

@@ -1,19 +1,29 @@
+import { useEffect } from 'react';
+import {
+  NewReleased,
+} from '../../components/appHomePage/NewReleased/NewReleased';
 import {
   BestSeasonOngoings,
 } from '../../components/appHomePage/BestSeasonOngoings/BestSeasonOngoings';
-import {
-  LastUpdated,
-} from '../../components/appHomePage/LastUpdated/LastUpdated';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch } from '../../store/hooks';
+import * as BestSeasonOngoingsActions from '../../features/BestSeasonOngoings';
+import * as NewReleasedActions from '../../features/NewReleased';
 
 export const HomePage = () => {
-  const { animes } = useAppSelector((state) => state.anime);
+  const dispatch = useAppDispatch();
+  // const { animes, loading, error } = useAppSelector(state => state.anime);
+
+  useEffect(() => {
+    dispatch(BestSeasonOngoingsActions.init());
+    dispatch(NewReleasedActions.init());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="home">
-      <LastUpdated animes={animes} />
+      <BestSeasonOngoings />
 
-      <BestSeasonOngoings animes={animes} />
+      <NewReleased />
 
       {/* <ReleaseCalendar /> */}
     </div>

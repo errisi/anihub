@@ -3,28 +3,28 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Anime } from '../types/Anime';
 import { getAnimes } from '../api/animes';
 
-type AnimesState = {
-  animes: Anime[];
+type NewReleasedState = {
+  NewReleased: Anime[];
   loading: boolean;
   error: string;
 };
 
-const initialState: AnimesState = {
-  animes: [],
+const initialState: NewReleasedState = {
+  NewReleased: [],
   loading: false,
   error: '',
 };
 
-export const init = createAsyncThunk('animes/fetch', () => {
+export const init = createAsyncThunk('NewReleased/fetch', () => {
   return getAnimes();
 });
 
-const animeSlice = createSlice({
-  name: 'animes',
+const NewReleasedSlice = createSlice({
+  name: 'NewReleased',
   initialState,
   reducers: {
     set: (state, action: PayloadAction<Anime[]>) => {
-      state.animes = action.payload;
+      state.NewReleased = action.payload;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
@@ -39,7 +39,7 @@ const animeSlice = createSlice({
     });
 
     builder.addCase(init.fulfilled, (state, action) => {
-      state.animes = action.payload;
+      state.NewReleased = action.payload;
       state.loading = false;
     });
 
@@ -50,5 +50,5 @@ const animeSlice = createSlice({
   },
 });
 
-export default animeSlice.reducer;
-export const { set, setLoading, setError } = animeSlice.actions;
+export default NewReleasedSlice.reducer;
+export const { set, setLoading, setError } = NewReleasedSlice.actions;

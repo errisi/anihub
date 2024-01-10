@@ -5,10 +5,17 @@
   justify-content: center;
   gap: 24px;
 
-  &__title {
-    font-size: 1.7rem;
-    position: relative;
-    right: 340px;
+  &__block {
+    &__title-new-relised {
+      font-size: 1.7rem;
+      padding-bottom: 12px;
+    }
+
+    &__title-best-ongoings {
+      font-size: 1.7rem;
+      position: relative;
+      left: 18px;
+    }
   }
 
   &__carousel {

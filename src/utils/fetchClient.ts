@@ -13,13 +13,13 @@ function request(url: string) {
 }
 
 export const get = {
-  animes: request('animes?page=1&limit=15&order=ranked'),
+  animes: request,
   genres: request('genres'),
   constants: request('constants/anime'),
   newest: request('animes?limit=1&order=aired_on&status=released'),
   oldest: request('???'),
   bestSeasonOngoing: (season: string) => request(
     // eslint-disable-next-line prefer-template
-    'animes?limit=12&order=popularity&type=tv&status=ongoing&season=' + season,
+    'animes?limit=15&order=popularity&type=tv&status=ongoing&season=' + season,
   ),
 };
