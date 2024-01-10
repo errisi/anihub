@@ -14,6 +14,8 @@ export const HomePage = () => {
       <LastUpdated animes={animes} />
 
       <BestSeasonOngoings animes={animes} />
+
+      {/* <ReleaseCalendar /> */}
     </div>
   );
 };

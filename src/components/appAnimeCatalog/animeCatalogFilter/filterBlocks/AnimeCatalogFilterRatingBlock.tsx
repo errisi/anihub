@@ -27,45 +27,35 @@ export const AnimeCatalogFilterRatingBlock: FC<Props> = ({
     };
 
   return (
-    <>
-      <div className="catalog__filter__block">
-        <p
-          className="catalog__filter__block__title"
-        >
-          Возрастное Ограничение
-        </p>
-
-        <Autocomplete
-          multiple
-          disableCloseOnSelect
-          id="combo-box-demo"
-          options={raitingsList}
+    <Autocomplete
+      multiple
+      disableCloseOnSelect
+      id="combo-box-demo"
+      options={raitingsList}
+      size="small"
+      value={selectedRaitings}
+      onChange={handleRaitingsSelect}
+      className="catalog__filter__field"
+      renderOption={(props, option, { selected }) => (
+        <li {...props}>
+          <Checkbox
+            icon={icon}
+            size="small"
+            checkedIcon={checkedIcon}
+            style={{ marginRight: 8 }}
+            checked={selected}
+          />
+          {option}
+        </li>
+      )}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Выберите ограничение"
           size="small"
-          value={selectedRaitings}
-          onChange={handleRaitingsSelect}
           className="catalog__filter__field"
-          renderOption={(props, option, { selected }) => (
-            <li {...props}>
-              <Checkbox
-                icon={icon}
-                size="small"
-                checkedIcon={checkedIcon}
-                style={{ marginRight: 8 }}
-                checked={selected}
-              />
-              {option}
-            </li>
-          )}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Выберите ограничение"
-              size="small"
-              className="catalog__filter__field"
-            />
-          )}
         />
-      </div>
-    </>
+      )}
+    />
   );
 };

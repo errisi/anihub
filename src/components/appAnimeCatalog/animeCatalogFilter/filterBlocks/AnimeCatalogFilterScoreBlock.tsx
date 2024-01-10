@@ -23,39 +23,28 @@ export const AnimeCatalogFilterScoreBlock: FC<Props> = ({
   };
 
   return (
-    <>
-      <div className="catalog__filter__block">
-        <p
-          className="catalog__filter__block__title"
+    <div className="catalog__filter__block-score">
+      <FormControl
+        fullWidth
+        size="small"
+      >
+        <InputLabel id="demo-simple-select-label">
+          Выберите рейтинг
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={selectedScore}
+          label="Выберите рейтинг"
+          onChange={handleScoreSelect}
         >
-          Рейтинг
-        </p>
+          <MenuItem value="">Не учитывать</MenuItem>
 
-        <div className="catalog__filter__block-score">
-          <FormControl
-            fullWidth
-            size="small"
-          >
-            <InputLabel id="demo-simple-select-label">
-              Выберите рейтинг
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={selectedScore}
-              label="Выберите рейтинг"
-              onChange={handleScoreSelect}
-            >
-              <MenuItem value="">Не учитывать</MenuItem>
-
-              {scoreList.map(status => (
-                <MenuItem value={status}>{status}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
-
-      </div>
-    </>
+          {scoreList.map(status => (
+            <MenuItem value={status}>{status}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </div>
   );
 };

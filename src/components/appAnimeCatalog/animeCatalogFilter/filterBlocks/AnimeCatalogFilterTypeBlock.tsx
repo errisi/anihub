@@ -27,44 +27,35 @@ export const AnimeCatalogFilterTypeBlock: FC<Props> = ({
   };
 
   return (
-    <>
-      <div className="catalog__filter__block">
-        <p
-          className="catalog__filter__block__title"
-        >
-          Тип
-        </p>
-        <Autocomplete
-          multiple
-          disableCloseOnSelect
-          id="combo-box-demo"
-          options={typesList}
+    <Autocomplete
+      multiple
+      disableCloseOnSelect
+      id="combo-box-demo"
+      options={typesList}
+      size="small"
+      value={selectedTypes}
+      onChange={handleTypesSelect}
+      className="catalog__filter__field"
+      renderOption={(props, option, { selected }) => (
+        <li {...props}>
+          <Checkbox
+            icon={icon}
+            size="small"
+            checkedIcon={checkedIcon}
+            style={{ marginRight: 8 }}
+            checked={selected}
+          />
+          {option}
+        </li>
+      )}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Выберите тип"
           size="small"
-          value={selectedTypes}
-          onChange={handleTypesSelect}
           className="catalog__filter__field"
-          renderOption={(props, option, { selected }) => (
-            <li {...props}>
-              <Checkbox
-                icon={icon}
-                size="small"
-                checkedIcon={checkedIcon}
-                style={{ marginRight: 8 }}
-                checked={selected}
-              />
-              {option}
-            </li>
-          )}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Выберите тип"
-              size="small"
-              className="catalog__filter__field"
-            />
-          )}
         />
-      </div>
-    </>
+      )}
+    />
   );
 };

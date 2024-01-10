@@ -31,45 +31,36 @@ export const AnimeCatalogFilterGenreBlock: FC<Props> = ({
     };
 
   return (
-    <>
-      <div className="catalog__filter__block">
-        <p
-          className="catalog__filter__block__title"
-        >
-          Жанр
-        </p>
-        <Autocomplete
-          multiple
-          disableCloseOnSelect
-          id="combo-box-demo"
-          options={sortedGenresList}
+    <Autocomplete
+      multiple
+      disableCloseOnSelect
+      id="combo-box-demo"
+      options={sortedGenresList}
+      size="small"
+      value={selectedGeners}
+      onChange={handleGenersSelect}
+      className="catalog__filter__field"
+      renderOption={(props, option, { selected }) => (
+        <li {...props}>
+          <Checkbox
+            icon={icon}
+            size="small"
+            checkedIcon={checkedIcon}
+            style={{ marginRight: 8 }}
+            checked={selected}
+          />
+          {option}
+        </li>
+      )}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Выберите жанр"
           size="small"
-          value={selectedGeners}
-          onChange={handleGenersSelect}
           className="catalog__filter__field"
-          renderOption={(props, option, { selected }) => (
-            <li {...props}>
-              <Checkbox
-                icon={icon}
-                size="small"
-                checkedIcon={checkedIcon}
-                style={{ marginRight: 8 }}
-                checked={selected}
-              />
-              {option}
-            </li>
-          )}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Выберите жанр"
-              size="small"
-              className="catalog__filter__field"
-            />
-          )}
-          sx={{ display: 'block' }}
         />
-      </div>
-    </>
+      )}
+      sx={{ display: 'block' }}
+    />
   );
 };

@@ -23,38 +23,28 @@ export const AnimeCatalogFilterStatusBlock: FC<Props> = ({
   };
 
   return (
-    <>
-      <div className="catalog__filter__block">
-        <p
-          className="catalog__filter__block__title"
+    <div className="catalog__filter__block-score">
+      <FormControl
+        fullWidth
+        size="small"
+      >
+        <InputLabel id="demo-simple-select-label">
+          Выберите статус
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={selectedStatus}
+          label="Выберите статус"
+          onChange={handleStatusSelect}
         >
-          Cтатус
-        </p>
+          <MenuItem value="">Не учитывать</MenuItem>
 
-        <div className="catalog__filter__block-score">
-          <FormControl
-            fullWidth
-            size="small"
-          >
-            <InputLabel id="demo-simple-select-label">
-              Выберите статус
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={selectedStatus}
-              label="Выберите статус"
-              onChange={handleStatusSelect}
-            >
-              <MenuItem value="">Не учитывать</MenuItem>
-
-              {statusList.map(status => (
-                <MenuItem value={status}>{status}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
-      </div>
-    </>
+          {statusList.map(status => (
+            <MenuItem value={status}>{status}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </div>
   );
 };

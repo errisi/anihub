@@ -4,7 +4,7 @@ import React, {
   useState,
 } from 'react';
 
-import { Button } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 import { getGenres } from '../../../api/animes';
 import {
   AnimeCatalogFilterGenreBlock,
@@ -57,7 +57,10 @@ export const AnimeCatalogFilter: FC = () => {
           Фильтр
         </h2>
 
-        <div className="catalog__filter">
+        <Stack
+          spacing={3}
+          sx={{ width: 300 }}
+        >
           <AnimeCatalogFilterYearsBlock
             selectedYears={selectedYears}
             setSelectedYears={setSelectedYears}
@@ -100,7 +103,7 @@ export const AnimeCatalogFilter: FC = () => {
           >
             Применить
           </Button>
-        </div>
+        </Stack>
 
       </div>
     </>

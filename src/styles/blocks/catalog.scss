@@ -33,8 +33,9 @@
     }
 
     &__block {
-      height: 82px;
       width: 300px;
+      display: flex;
+      flex-direction: column;
 
       &__title {
         font-size: 0.95rem;
@@ -66,7 +67,6 @@
 
     &__field {
       width: 300px;
-      height: 56px;
     }
   }
 

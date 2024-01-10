@@ -7,5 +7,35 @@
 
   &__title {
     font-size: 1.7rem;
+    position: relative;
+    right: 340px;
+  }
+
+  &__carousel {
+    width: 1040px;
+    padding: 10px 4px;
+    position: relative;
+
+    &__wrapper {
+      width: 1064px;
+      height: 342px;
+    }
+
+    &__slide {
+      display: flex;
+      gap: 26px;
+    }
+
+    &__back {
+      position: absolute;
+      left: -70px;
+      top: -30px;
+    }
+
+    &__forward {
+      position: absolute;
+      left: 70px;
+      top: -30px;
+    }
   }
 }
