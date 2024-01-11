@@ -4,13 +4,13 @@ import { Anime } from '../types/Anime';
 import { getBestSeasonOngoings } from '../api/animes';
 
 type BestSeasonOngoingsState = {
-  BestSeasonOngoings: Anime[];
+  bestSeasonOngoings: Anime[];
   loading: boolean;
   error: string;
 };
 
 const initialState: BestSeasonOngoingsState = {
-  BestSeasonOngoings: [],
+  bestSeasonOngoings: [],
   loading: false,
   error: '',
 };
@@ -24,7 +24,7 @@ const BestSeasonOngoingsSlice = createSlice({
   initialState,
   reducers: {
     set: (state, action: PayloadAction<Anime[]>) => {
-      state.BestSeasonOngoings = action.payload;
+      state.bestSeasonOngoings = action.payload;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
@@ -39,7 +39,7 @@ const BestSeasonOngoingsSlice = createSlice({
     });
 
     builder.addCase(init.fulfilled, (state, action) => {
-      state.BestSeasonOngoings = action.payload;
+      state.bestSeasonOngoings = action.payload;
       state.loading = false;
     });
 

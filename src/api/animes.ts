@@ -2,7 +2,7 @@ import { Gener } from '../types/Gener';
 import { get } from '../utils/fetchClient';
 
 export const getAnimes = () => {
-  return get.animes('animes?page=1&limit=15&order=ranked');
+  return get.request('animes?page=1&limit=15&order=ranked');
 };
 
 export const getGenres = () => {
@@ -19,5 +19,11 @@ export const getBestSeasonOngoings = () => {
 };
 
 export const getNewReleased = () => {
-  return get.animes('animes?page=1&limit=15&orderer=aired_on&status=released');
+  return get.request(
+    'animes?page=1&limit=15&order=aired_on&kind=tv&status=released&score=5',
+  );
+};
+
+export const getReleaseCalendar = () => {
+  return get.request('calendar');
 };

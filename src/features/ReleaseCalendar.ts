@@ -1,30 +1,30 @@
 /* eslint-disable no-param-reassign */
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Anime } from '../types/Anime';
-import { getNewReleased } from '../api/animes';
+import { getReleaseCalendar } from '../api/animes';
+import { Calendar } from '../types/Calendar';
 
-type NewReleasedState = {
-  NewReleased: Anime[];
+type ReleaseCalendarState = {
+  releaseCalendar: Calendar[];
   loading: boolean;
   error: string;
 };
 
-const initialState: NewReleasedState = {
-  NewReleased: [],
+const initialState: ReleaseCalendarState = {
+  releaseCalendar: [],
   loading: false,
   error: '',
 };
 
-export const init = createAsyncThunk('NewReleased/fetch', () => {
-  return getNewReleased();
+export const init = createAsyncThunk('ReleaseCalendar/fetch', () => {
+  return getReleaseCalendar();
 });
 
-const NewReleasedSlice = createSlice({
-  name: 'NewReleased',
+const ReleaseCalendarSlice = createSlice({
+  name: 'ReleaseCalendar',
   initialState,
   reducers: {
-    set: (state, action: PayloadAction<Anime[]>) => {
-      state.NewReleased = action.payload;
+    set: (state, action: PayloadAction<Calendar[]>) => {
+      state.releaseCalendar = action.payload;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
@@ -39,7 +39,7 @@ const NewReleasedSlice = createSlice({
     });
 
     builder.addCase(init.fulfilled, (state, action) => {
-      state.NewReleased = action.payload;
+      state.releaseCalendar = action.payload;
       state.loading = false;
     });
 
@@ -50,5 +50,5 @@ const NewReleasedSlice = createSlice({
   },
 });
 
-export default NewReleasedSlice.reducer;
-export const { set, setLoading, setError } = NewReleasedSlice.actions;
+export default ReleaseCalendarSlice.reducer;
+export const { set, setLoading, setError } = ReleaseCalendarSlice.actions;

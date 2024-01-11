@@ -1,0 +1,41 @@
+.releases__wrapper {
+  width: 1040px;
+}
+
+.release {
+  &__title {
+    color: #e91e63;
+  }
+
+  &__table {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+
+    &__image {
+      border-radius: 12%;
+    }
+
+    &__left-side {
+      display: flex;
+      align-items: center;
+      gap: 24px
+    }
+
+    &__right-side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__time {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  &__table:last-child {
+    padding-bottom: 0;
+  }
+}

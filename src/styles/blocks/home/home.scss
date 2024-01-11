@@ -45,4 +45,27 @@
       top: -30px;
     }
   }
+
+  &__promo {
+    width: 1040px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &__line {
+      color: #e91e63;
+      margin: 12px 0;
+    }
+  }
+
+  &__welcome {
+    &__line {
+      color: #e91e63;
+      margin: 12px 0;
+    }
+
+    &__title {
+      text-align: center;
+    }
+  }
 }

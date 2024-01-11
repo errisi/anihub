@@ -23,7 +23,10 @@ export const AnimeCatalogCards: FC<Props> = ({ animes }) => (
 
       <div className="card__catalog-grid">
         {animes.map((anime) => (
-          <AnimeCard anime={anime} />
+          <AnimeCard
+            key={anime.id}
+            anime={anime}
+          />
         ))}
       </div>
 

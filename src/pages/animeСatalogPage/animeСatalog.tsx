@@ -7,7 +7,7 @@ import {
 import { useAppSelector } from '../../store/hooks';
 
 export const AnimeСatalog = () => {
-  const { BestSeasonOngoings: animes } = useAppSelector(
+  const { bestSeasonOngoings: animes } = useAppSelector(
     (state) => state.BestSeasonOngoings,
   );
 

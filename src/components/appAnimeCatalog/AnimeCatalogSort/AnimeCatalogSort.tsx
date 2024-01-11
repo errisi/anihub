@@ -36,7 +36,12 @@ export const AnimeCatalogSort: FC = () => {
               onChange={handleOrderSelect}
             >
               {ordersList.map(status => (
-                <MenuItem value={status}>{status}</MenuItem>
+                <MenuItem
+                  key={status}
+                  value={status}
+                >
+                  {status}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>

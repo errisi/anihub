@@ -41,7 +41,12 @@ export const AnimeCatalogFilterScoreBlock: FC<Props> = ({
           <MenuItem value="">Не учитывать</MenuItem>
 
           {scoreList.map(status => (
-            <MenuItem value={status}>{status}</MenuItem>
+            <MenuItem
+              key={status}
+              value={status}
+            >
+              {status}
+            </MenuItem>
           ))}
         </Select>
       </FormControl>
