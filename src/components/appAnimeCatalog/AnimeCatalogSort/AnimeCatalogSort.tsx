@@ -1,16 +1,29 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import {
   FormControl,
   MenuItem,
   Select,
   SelectChangeEvent,
 } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
+import { getSearchWith } from '../../../utils/getSearchWith';
+import { Params } from '../../../types/Params';
 
 export const AnimeCatalogSort: FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const ordersList = ['Рейтингу', 'Популярности', 'Названию', 'Дате выхода'];
-  const [selectedOrder, setSelectedOrder] = useState('Рейтингу');
-  const handleOrderSelect = (event: SelectChangeEvent) => {
-    setSelectedOrder(event.target.value as string);
+  const selectedOrder = searchParams.get('order') || 'Рейтингу';
+
+  function setSearchWith(params: Params) {
+    const search = getSearchWith(params, searchParams);
+
+    setSearchParams(search);
+  }
+
+  const handleOrderSelect
+  = (event: SelectChangeEvent) => {
+    setSearchWith({ order: event.target.value as string });
   };
 
   return (
