@@ -33,9 +33,14 @@ export function getPreparedApiUrl(
 
   if (selectedGenres.length > 0) {
     const matchingGenres: Gener[]
-      = genres.filter((genre: Gener) => selectedGenres.includes(genre.russian));
+      = genres.filter((genre: Gener) => (
+        selectedGenres.includes(genre.russian) && genre.entry_type === 'Anime'
+      ));
 
-    urlParts.push(`gener=${matchingGenres.map((genre) => genre.id).join(',')}`);
+    const genresString
+      = matchingGenres.map((genre) => `genre=${genre.id}`).join('&');
+
+    urlParts.push(genresString);
   }
 
   if (selectedTypes.length > 0) {
