@@ -4,7 +4,9 @@ import React, {
   useState,
 } from 'react';
 
-import { Button, Stack } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
+
+import { Button, SelectChangeEvent, Stack } from '@mui/material';
 import { getGenres } from '../../../api/animes';
 import {
   AnimeCatalogFilterGenreBlock,
@@ -24,29 +26,70 @@ import {
 import {
   AnimeCatalogFilterRatingBlock,
 } from './filterBlocks/AnimeCatalogFilterRatingBlock';
+import { getSearchWith } from '../../../utils/getSearchWith';
+import { Params } from '../../../types/Params';
+import { Gener } from '../../../types/Gener';
 
 export const AnimeCatalogFilter: FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [genresList, setGenresList] = useState<string[]>([]);
   const typesList = ['Аниме Сериал', 'Аниме Фильм', 'OVA', 'ONA', 'Спешл'];
   const statusList = ['Анонс', 'Вышел', 'Онгоинг'];
   const scoreList = ['Выше 9', 'Выше 8', 'Выше 7', 'Выше 6', 'Выше 5'];
-  const raitingsList = ['G', 'PG', 'PG-13', 'R', 'R-17', 'R+'];
+  const raitingsList = ['G', 'PG', 'PG-13', 'R', 'R+'];
 
-  const [selectedYears, setSelectedYears]
-    = React.useState<number[]>([1959, 2024]);
-  const [selectedGeners, setSelectedGeners] = useState<string[]>([]);
-  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-  const [selectedStatus, setSelectedStatus] = React.useState('');
-  const [selectedScore, setSelectedScore] = React.useState('');
-  const [selectedRaitings, setSelectedRaitings] = useState<string[]>([]);
+  const selectedYears
+    = searchParams.getAll('season').map(Number).length > 0
+      ? searchParams.getAll('season').map(Number)
+      : [1959, 2024];
+  const selectedGeners = searchParams.getAll('genre') || [];
+  const selectedTypes = searchParams.getAll('kind') || [];
+  const selectedStatus = searchParams.get('status') || '';
+  const selectedScore = searchParams.get('score') || '';
+  const selectedRaitings = searchParams.getAll('rating') || [];
 
   useEffect(() => {
     getGenres()
+      .then((response) => response.map((gener: Gener) => gener.russian))
       .then((r: string) => setGenresList([...new Set<string>(r)]))
       .catch((error) => {
         setGenresList([...error]);
       });
   }, []);
+
+  function setSearchWith(params: Params) {
+    const search = getSearchWith(params, searchParams);
+
+    setSearchParams(search);
+  }
+
+  const handleGenersSelect
+  = (_: React.SyntheticEvent, value: string[]) => {
+    setSearchWith({ genre: value });
+  };
+
+  const handleTypesSelect
+  = (_: React.SyntheticEvent, value: string[]) => {
+    setSearchWith({ kind: value });
+  };
+
+  const handleStatusSelect = (event: SelectChangeEvent) => {
+    setSearchWith({ status: event.target.value as string });
+  };
+
+  const handleYearsSelect = (_: Event, newValue: number | number[]) => {
+    setSearchWith({ season: newValue as number[] });
+  };
+
+  const handleScoreSelect = (event: SelectChangeEvent) => {
+    setSearchWith({ score: event.target.value as string });
+  };
+
+  const handleRaitingsSelect
+  = (_: React.SyntheticEvent, value: string[]) => {
+    setSearchWith({ rating: value });
+  };
 
   return (
     <>
@@ -63,37 +106,37 @@ export const AnimeCatalogFilter: FC = () => {
         >
           <AnimeCatalogFilterYearsBlock
             selectedYears={selectedYears}
-            setSelectedYears={setSelectedYears}
+            handleYearsSelect={handleYearsSelect}
           />
 
           <AnimeCatalogFilterGenreBlock
             genresList={genresList}
             selectedGeners={selectedGeners}
-            setSelectedGeners={setSelectedGeners}
+            handleGenersSelect={handleGenersSelect}
           />
 
           <AnimeCatalogFilterTypeBlock
             typesList={typesList}
             selectedTypes={selectedTypes}
-            setSelectedTypes={setSelectedTypes}
+            handleTypesSelect={handleTypesSelect}
           />
 
           <AnimeCatalogFilterStatusBlock
             statusList={statusList}
             selectedStatus={selectedStatus}
-            setSelectedStatus={setSelectedStatus}
+            handleStatusSelect={handleStatusSelect}
           />
 
           <AnimeCatalogFilterScoreBlock
             scoreList={scoreList}
             selectedScore={selectedScore}
-            setSelectedScore={setSelectedScore}
+            handleScoreSelect={handleScoreSelect}
           />
 
           <AnimeCatalogFilterRatingBlock
             raitingsList={raitingsList}
             selectedRaitings={selectedRaitings}
-            setSelectedRaitings={setSelectedRaitings}
+            handleRaitingsSelect={handleRaitingsSelect}
           />
 
           <Button

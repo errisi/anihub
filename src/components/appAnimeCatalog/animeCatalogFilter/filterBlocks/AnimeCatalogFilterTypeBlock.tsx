@@ -10,21 +10,16 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 type Props = {
   typesList: string[];
   selectedTypes: string[];
-  setSelectedTypes: React.Dispatch<React.SetStateAction<string[]>>;
+  handleTypesSelect: (_: React.SyntheticEvent, value: string[]) => void;
 };
 
 export const AnimeCatalogFilterTypeBlock: FC<Props> = ({
   typesList,
   selectedTypes,
-  setSelectedTypes,
+  handleTypesSelect,
 }) => {
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
-
-  const handleTypesSelect
-  = (_: React.SyntheticEvent, value: string[]) => {
-    setSelectedTypes(value);
-  };
 
   return (
     <Autocomplete

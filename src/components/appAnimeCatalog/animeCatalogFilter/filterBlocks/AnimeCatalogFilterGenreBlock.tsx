@@ -10,13 +10,13 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 type Props = {
   genresList: string[];
   selectedGeners: string[];
-  setSelectedGeners: React.Dispatch<React.SetStateAction<string[]>>;
+  handleGenersSelect: (_: React.SyntheticEvent, value: string[]) => void;
 };
 
 export const AnimeCatalogFilterGenreBlock: FC<Props> = ({
   genresList,
   selectedGeners,
-  setSelectedGeners,
+  handleGenersSelect,
 }) => {
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -24,11 +24,6 @@ export const AnimeCatalogFilterGenreBlock: FC<Props> = ({
   const sortedGenresList = useMemo(() => {
     return genresList.sort((a, b) => a.localeCompare(b));
   }, [genresList]);
-
-  const handleGenersSelect
-    = (_: React.SyntheticEvent, value: string[]) => {
-      setSelectedGeners(value);
-    };
 
   return (
     <Autocomplete

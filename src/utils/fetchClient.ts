@@ -14,7 +14,6 @@ async function request(url: string) {
 
 export const get = {
   request,
-  genres: request('genres'),
   constants: request('constants/anime'),
   newest: request('animes?limit=1&order=aired_on&status=released'),
   oldest: request('???'),

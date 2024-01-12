@@ -30,7 +30,7 @@ export const ReleaseCalendar: FC = () => {
     dayName: 'Четверг',
     dayNumber: 4,
   }, {
-    dayName: 'Пятницы',
+    dayName: 'Пятница',
     dayNumber: 5,
   }, {
     dayName: 'Суббота',

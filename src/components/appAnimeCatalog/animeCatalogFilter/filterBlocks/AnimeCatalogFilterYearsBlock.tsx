@@ -5,17 +5,13 @@ import {
 
 type Props = {
   selectedYears: number[];
-  setSelectedYears: React.Dispatch<React.SetStateAction<number[]>>;
+  handleYearsSelect: (_: Event, newValue: number | number[]) => void;
 };
 
 export const AnimeCatalogFilterYearsBlock: FC<Props> = ({
   selectedYears,
-  setSelectedYears,
+  handleYearsSelect,
 }) => {
-  const handleYearsSelect = (_: Event, newValue: number | number[]) => {
-    setSelectedYears(newValue as number[]);
-  };
-
   const minmaxvalue = [1959, 2024];
 
   const marks = [

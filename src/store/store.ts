@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import BestSeasonOngoingsReducer from '../features/BestSeasonOngoings';
 import NewReleasedReducer from '../features/NewReleased';
 import ReleaseCalendarReducer from '../features/ReleaseCalendar';
+import CatalogAnimesReducer from '../features/CatalogAnimes';
 
 const store = configureStore({
   reducer: {
     BestSeasonOngoings: BestSeasonOngoingsReducer,
     NewReleased: NewReleasedReducer,
     ReleaseCalendar: ReleaseCalendarReducer,
+    CatalogAnimes: CatalogAnimesReducer,
   },
 });
 

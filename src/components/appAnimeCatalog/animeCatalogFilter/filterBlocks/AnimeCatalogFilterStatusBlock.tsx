@@ -10,46 +10,40 @@ import {
 type Props = {
   statusList: string[];
   selectedStatus: string;
-  setSelectedStatus: React.Dispatch<React.SetStateAction<string>>
+  handleStatusSelect: (event: SelectChangeEvent) => void;
 };
 
 export const AnimeCatalogFilterStatusBlock: FC<Props> = ({
   statusList,
   selectedStatus,
-  setSelectedStatus,
-}) => {
-  const handleStatusSelect = (event: SelectChangeEvent) => {
-    setSelectedStatus(event.target.value as string);
-  };
-
-  return (
-    <div className="catalog__filter__block-score">
-      <FormControl
-        fullWidth
-        size="small"
+  handleStatusSelect,
+}) => (
+  <div className="catalog__filter__block-score">
+    <FormControl
+      fullWidth
+      size="small"
+    >
+      <InputLabel id="demo-simple-select-label">
+        Выберите статус
+      </InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={selectedStatus}
+        label="Выберите статус"
+        onChange={handleStatusSelect}
       >
-        <InputLabel id="demo-simple-select-label">
-          Выберите статус
-        </InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={selectedStatus}
-          label="Выберите статус"
-          onChange={handleStatusSelect}
-        >
-          <MenuItem value="">Не учитывать</MenuItem>
+        <MenuItem value="">Не учитывать</MenuItem>
 
-          {statusList.map(status => (
-            <MenuItem
-              key={status}
-              value={status}
-            >
-              {status}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
-  );
-};
+        {statusList.map(status => (
+          <MenuItem
+            key={status}
+            value={status}
+          >
+            {status}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  </div>
+);

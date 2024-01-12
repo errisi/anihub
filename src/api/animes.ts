@@ -1,4 +1,3 @@
-import { Gener } from '../types/Gener';
 import { get } from '../utils/fetchClient';
 
 export const getAnimes = () => {
@@ -6,8 +5,7 @@ export const getAnimes = () => {
 };
 
 export const getGenres = () => {
-  return get.genres
-    .then((response) => response.map((gener: Gener) => gener.russian));
+  return get.request('genres');
 };
 
 export const getAnimeConstans = () => {
@@ -26,4 +24,10 @@ export const getNewReleased = () => {
 
 export const getReleaseCalendar = () => {
   return get.request('calendar');
+};
+
+export const getCatalogAnimes = (url: string) => {
+  return get.request(url
+    ? `animes?limit=50&${url}`
+    : 'animes?order=ranked&limit=48&status=!anons');
 };
