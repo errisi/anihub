@@ -13,7 +13,7 @@ type Props = {
   handleRaitingsSelect: (_: React.SyntheticEvent, value: string[]) => void;
 };
 
-export const AnimeCatalogFilterRatingBlock: FC<Props> = ({
+export const CatalogFilterRatingBlock: FC<Props> = ({
   raitingsList,
   selectedRaitings,
   handleRaitingsSelect,

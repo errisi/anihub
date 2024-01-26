@@ -15,6 +15,7 @@ export const AnimeCard: FC<Props> = ({ anime }) => (
         src={`https://shikimori.one:${anime.image.original}`}
         alt="anime"
       />
+
       <div className="card__image__wrapper__item__overlay">
         <div className="card__image__wrapper__item__overlay__score">
           {`${anime.score}`}
@@ -31,6 +32,7 @@ export const AnimeCard: FC<Props> = ({ anime }) => (
         </div>
       </div>
     </div>
+
     <p className="card__title">
       {anime.russian.length < 35
         ? anime.russian

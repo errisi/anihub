@@ -3,7 +3,7 @@ import Carousel from 'nuka-carousel';
 import { Button, CircularProgress } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { AnimeCard } from '../../animeCard/AnimeCard';
+import { AnimeCard } from '../../Card/Card';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import * as BestSeasonOngoingsActions
   from '../../../features/BestSeasonOngoings';

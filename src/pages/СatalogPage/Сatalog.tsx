@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
-  AnimeCatalogCards,
-} from '../../components/appAnimeCatalog/animeCatalogCards/AnimeCatalogCards';
+  CatalogCards,
+} from '../../components/Catalog/CatalogCards/CatalogCards';
 import {
   AnimeCatalogFilter,
-} from '../../components/appAnimeCatalog/animeCatalogFilter/AnimeCatalogFilter';
+} from '../../components/Catalog/CatalogFilter';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import * as CatalogAnimesActions from '../../features/CatalogAnimes';
 import { Gener } from '../../types/Gener';
 import { getGenres } from '../../api/animes';
 import { getPreparedApiUrl } from '../../helpers/getPreparedApiUrl';
 
-export const AnimeСatalog = () => {
+export const Сatalog = () => {
   const dispatch = useAppDispatch();
 
   const { catalogAnimes: animes } = useAppSelector(
@@ -58,7 +58,7 @@ export const AnimeСatalog = () => {
   return (
     <>
       <div className="catalog">
-        <AnimeCatalogCards animes={animes} />
+        <CatalogCards animes={animes} />
         <AnimeCatalogFilter />
       </div>
     </>

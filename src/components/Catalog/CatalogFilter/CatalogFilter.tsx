@@ -9,23 +9,23 @@ import { useSearchParams } from 'react-router-dom';
 import { Button, SelectChangeEvent, Stack } from '@mui/material';
 import { getGenres } from '../../../api/animes';
 import {
-  AnimeCatalogFilterGenreBlock,
-} from './filterBlocks/AnimeCatalogFilterGenreBlock';
+  CatalogFilterGenreBlock,
+} from './filterBlocks/CatalogFilterGenreBlock';
 import {
-  AnimeCatalogFilterTypeBlock,
-} from './filterBlocks/AnimeCatalogFilterTypeBlock';
+  CatalogFilterTypeBlock,
+} from './filterBlocks/CatalogFilterTypeBlock';
 import {
-  AnimeCatalogFilterStatusBlock,
-} from './filterBlocks/AnimeCatalogFilterStatusBlock';
+  CatalogFilterStatusBlock,
+} from './filterBlocks/CatalogFilterStatusBlock';
 import {
-  AnimeCatalogFilterYearsBlock,
-} from './filterBlocks/AnimeCatalogFilterYearsBlock';
+  CatalogFilterYearsBlock,
+} from './filterBlocks/CatalogFilterYearsBlock';
 import {
-  AnimeCatalogFilterScoreBlock,
-} from './filterBlocks/AnimeCatalogFilterScoreBlock';
+  CatalogFilterScoreBlock,
+} from './filterBlocks/CatalogFilterScoreBlock';
 import {
-  AnimeCatalogFilterRatingBlock,
-} from './filterBlocks/AnimeCatalogFilterRatingBlock';
+  CatalogFilterRatingBlock,
+} from './filterBlocks/CatalogFilterRatingBlock';
 import { getSearchWith } from '../../../utils/getSearchWith';
 import { Params } from '../../../types/Params';
 import { Gener } from '../../../types/Gener';
@@ -104,36 +104,36 @@ export const AnimeCatalogFilter: FC = () => {
           spacing={3}
           sx={{ width: 300 }}
         >
-          <AnimeCatalogFilterYearsBlock
+          <CatalogFilterYearsBlock
             selectedYears={selectedYears}
             handleYearsSelect={handleYearsSelect}
           />
 
-          <AnimeCatalogFilterGenreBlock
+          <CatalogFilterGenreBlock
             genresList={genresList}
             selectedGeners={selectedGeners}
             handleGenersSelect={handleGenersSelect}
           />
 
-          <AnimeCatalogFilterTypeBlock
+          <CatalogFilterTypeBlock
             typesList={typesList}
             selectedTypes={selectedTypes}
             handleTypesSelect={handleTypesSelect}
           />
 
-          <AnimeCatalogFilterStatusBlock
+          <CatalogFilterStatusBlock
             statusList={statusList}
             selectedStatus={selectedStatus}
             handleStatusSelect={handleStatusSelect}
           />
 
-          <AnimeCatalogFilterScoreBlock
+          <CatalogFilterScoreBlock
             scoreList={scoreList}
             selectedScore={selectedScore}
             handleScoreSelect={handleScoreSelect}
           />
 
-          <AnimeCatalogFilterRatingBlock
+          <CatalogFilterRatingBlock
             raitingsList={raitingsList}
             selectedRaitings={selectedRaitings}
             handleRaitingsSelect={handleRaitingsSelect}

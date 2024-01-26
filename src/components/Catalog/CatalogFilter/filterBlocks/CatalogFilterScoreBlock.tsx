@@ -13,7 +13,7 @@ type Props = {
   handleScoreSelect: (event: SelectChangeEvent) => void;
 };
 
-export const AnimeCatalogFilterScoreBlock: FC<Props> = ({
+export const CatalogFilterScoreBlock: FC<Props> = ({
   scoreList,
   selectedScore,
   handleScoreSelect,

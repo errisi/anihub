@@ -1,14 +1,14 @@
 import { FC } from 'react';
 import { Pagination } from '@mui/material';
 import { Anime } from '../../../types/Anime';
-import { AnimeCatalogSort } from '../AnimeCatalogSort/AnimeCatalogSort';
-import { AnimeCard } from '../../animeCard/AnimeCard';
+import { CatalogSort } from '../CatalogSort/CatalogSort';
+import { AnimeCard } from '../../Card/Card';
 
 type Props = {
   animes: Anime[];
 };
 
-export const AnimeCatalogCards: FC<Props> = ({ animes }) => (
+export const CatalogCards: FC<Props> = ({ animes }) => (
   <>
     <div className="catalog__cards-wrapper">
       <div className="catalog__header">
@@ -18,7 +18,7 @@ export const AnimeCatalogCards: FC<Props> = ({ animes }) => (
           Аниме
         </h1>
 
-        <AnimeCatalogSort />
+        <CatalogSort />
       </div>
 
       <div className="card__catalog-grid">

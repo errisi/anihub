@@ -13,7 +13,7 @@ type Props = {
   handleStatusSelect: (event: SelectChangeEvent) => void;
 };
 
-export const AnimeCatalogFilterStatusBlock: FC<Props> = ({
+export const CatalogFilterStatusBlock: FC<Props> = ({
   statusList,
   selectedStatus,
   handleStatusSelect,

@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@mui/material';
 import { HomePage } from './pages/homePage/homePage';
-import { AnimeСatalog } from './pages/animeСatalogPage/animeСatalog';
-import { PageNotFound } from './pages/pageNotFound/pageNotFound';
+import { Сatalog } from './pages/СatalogPage/Сatalog';
+import { PageNotFound } from './pages/pageNotFound';
 import { App } from './App';
 import { theme } from './store/theme';
 import store from './store/store';
@@ -15,10 +15,9 @@ export const Root = () => (
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<HomePage />} />
-            <Route path="anime" element={<AnimeСatalog />} />
+            <Route path="anime" element={<Сatalog />} />
+            <Route path="*" element={<PageNotFound />} />
           </Route>
-
-          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </ThemeProvider>
     </Router>

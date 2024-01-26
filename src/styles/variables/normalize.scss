@@ -1,7 +1,9 @@
+@import 'colors.scss';
+
 html {
-  background-color: #111;
+  background-color: $background-color;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  color: aliceblue;
+  color: $text-primary;
 }
 
 body {

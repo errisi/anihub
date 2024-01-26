@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Button, CircularProgress } from '@mui/material';
-import { AnimeCard } from '../../animeCard/AnimeCard';
+import { AnimeCard } from '../../Card/Card';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import * as NewReleasedActions from '../../../features/NewReleased';
 

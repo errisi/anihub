@@ -8,7 +8,7 @@ type Props = {
   handleYearsSelect: (_: Event, newValue: number | number[]) => void;
 };
 
-export const AnimeCatalogFilterYearsBlock: FC<Props> = ({
+export const CatalogFilterYearsBlock: FC<Props> = ({
   selectedYears,
   handleYearsSelect,
 }) => {

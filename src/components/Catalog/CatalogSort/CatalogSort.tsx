@@ -9,7 +9,7 @@ import { useSearchParams } from 'react-router-dom';
 import { getSearchWith } from '../../../utils/getSearchWith';
 import { Params } from '../../../types/Params';
 
-export const AnimeCatalogSort: FC = () => {
+export const CatalogSort: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const ordersList = ['Рейтингу', 'Популярности', 'Названию', 'Дате выхода'];

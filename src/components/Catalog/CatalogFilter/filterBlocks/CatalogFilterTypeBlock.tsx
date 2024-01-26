@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import {
   Autocomplete,
   Checkbox,
@@ -8,32 +8,28 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 type Props = {
-  genresList: string[];
-  selectedGeners: string[];
-  handleGenersSelect: (_: React.SyntheticEvent, value: string[]) => void;
+  typesList: string[];
+  selectedTypes: string[];
+  handleTypesSelect: (_: React.SyntheticEvent, value: string[]) => void;
 };
 
-export const AnimeCatalogFilterGenreBlock: FC<Props> = ({
-  genresList,
-  selectedGeners,
-  handleGenersSelect,
+export const CatalogFilterTypeBlock: FC<Props> = ({
+  typesList,
+  selectedTypes,
+  handleTypesSelect,
 }) => {
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
-
-  const sortedGenresList = useMemo(() => {
-    return genresList.sort((a, b) => a.localeCompare(b));
-  }, [genresList]);
 
   return (
     <Autocomplete
       multiple
       disableCloseOnSelect
       id="combo-box-demo"
-      options={sortedGenresList}
+      options={typesList}
       size="small"
-      value={selectedGeners}
-      onChange={handleGenersSelect}
+      value={selectedTypes}
+      onChange={handleTypesSelect}
       className="catalog__filter__field"
       renderOption={(props, option, { selected }) => (
         <li {...props}>
@@ -50,12 +46,11 @@ export const AnimeCatalogFilterGenreBlock: FC<Props> = ({
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Выберите жанр"
+          label="Выберите тип"
           size="small"
           className="catalog__filter__field"
         />
       )}
-      sx={{ display: 'block' }}
     />
   );
 };
