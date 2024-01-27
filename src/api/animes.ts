@@ -28,6 +28,6 @@ export const getReleaseCalendar = () => {
 
 export const getCatalogAnimes = (url: string) => {
   return get.request(url
-    ? `animes?limit=50&${url}`
+    ? `animes?limit=48&${url}`
     : 'animes?order=ranked&limit=48&status=!anons');
 };

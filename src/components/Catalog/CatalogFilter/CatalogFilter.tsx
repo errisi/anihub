@@ -40,16 +40,6 @@ export const AnimeCatalogFilter: FC = () => {
   const scoreList = ['Выше 9', 'Выше 8', 'Выше 7', 'Выше 6', 'Выше 5'];
   const raitingsList = ['G', 'PG', 'PG-13', 'R', 'R+'];
 
-  const selectedYears
-    = searchParams.getAll('season').map(Number).length > 0
-      ? searchParams.getAll('season').map(Number)
-      : [1959, 2024];
-  const selectedGeners = searchParams.getAll('genre') || [];
-  const selectedTypes = searchParams.getAll('kind') || [];
-  const selectedStatus = searchParams.get('status') || '';
-  const selectedScore = searchParams.get('score') || '';
-  const selectedRaitings = searchParams.getAll('rating') || [];
-
   useEffect(() => {
     getGenres()
       .then((response) => response.map((gener: Gener) => gener.russian))
@@ -59,6 +49,15 @@ export const AnimeCatalogFilter: FC = () => {
       });
   }, []);
 
+  const [tempSelectedYears, setTempSelectedYears]
+    = useState<number[]>([1959, 2024]);
+  const [tempSelectedGeners, setTempSelectedGeners] = useState<string[]>([]);
+  const [tempSelectedTypes, setTempSelectedTypes] = useState<string[]>([]);
+  const [tempSelectedStatus, setTempSelectedStatus] = useState('');
+  const [tempSelectedScore, setTempSelectedScore] = useState('');
+  const [tempSelectedRaitings, setTempSelectedRaitings]
+    = useState<string[]>([]);
+
   function setSearchWith(params: Params) {
     const search = getSearchWith(params, searchParams);
 
@@ -67,29 +66,40 @@ export const AnimeCatalogFilter: FC = () => {
 
   const handleGenersSelect
   = (_: React.SyntheticEvent, value: string[]) => {
-    setSearchWith({ genre: value });
+    setTempSelectedGeners(value);
   };
 
   const handleTypesSelect
   = (_: React.SyntheticEvent, value: string[]) => {
-    setSearchWith({ kind: value });
+    setTempSelectedTypes(value);
   };
 
   const handleStatusSelect = (event: SelectChangeEvent) => {
-    setSearchWith({ status: event.target.value as string });
+    setTempSelectedStatus(event.target.value as string);
   };
 
   const handleYearsSelect = (_: Event, newValue: number | number[]) => {
-    setSearchWith({ season: newValue as number[] });
+    setTempSelectedYears(newValue as number[]);
   };
 
   const handleScoreSelect = (event: SelectChangeEvent) => {
-    setSearchWith({ score: event.target.value as string });
+    setTempSelectedScore(event.target.value as string);
   };
 
   const handleRaitingsSelect
   = (_: React.SyntheticEvent, value: string[]) => {
-    setSearchWith({ rating: value });
+    setTempSelectedRaitings(value);
+  };
+
+  const handleApplyButton = () => {
+    setSearchWith({
+      genre: tempSelectedGeners,
+      kind: tempSelectedTypes,
+      status: tempSelectedStatus,
+      season: tempSelectedYears,
+      score: tempSelectedScore,
+      rating: tempSelectedRaitings,
+    });
   };
 
   return (
@@ -106,37 +116,37 @@ export const AnimeCatalogFilter: FC = () => {
           sx={{ width: 300 }}
         >
           <CatalogFilterYearsBlock
-            selectedYears={selectedYears}
+            selectedYears={tempSelectedYears}
             handleYearsSelect={handleYearsSelect}
           />
 
           <CatalogFilterGenreBlock
             genresList={genresList}
-            selectedGeners={selectedGeners}
+            selectedGeners={tempSelectedGeners}
             handleGenersSelect={handleGenersSelect}
           />
 
           <CatalogFilterTypeBlock
             typesList={typesList}
-            selectedTypes={selectedTypes}
+            selectedTypes={tempSelectedTypes}
             handleTypesSelect={handleTypesSelect}
           />
 
           <CatalogFilterStatusBlock
             statusList={statusList}
-            selectedStatus={selectedStatus}
+            selectedStatus={tempSelectedStatus}
             handleStatusSelect={handleStatusSelect}
           />
 
           <CatalogFilterScoreBlock
             scoreList={scoreList}
-            selectedScore={selectedScore}
+            selectedScore={tempSelectedScore}
             handleScoreSelect={handleScoreSelect}
           />
 
           <CatalogFilterRatingBlock
             raitingsList={raitingsList}
-            selectedRaitings={selectedRaitings}
+            selectedRaitings={tempSelectedRaitings}
             handleRaitingsSelect={handleRaitingsSelect}
           />
 
@@ -144,6 +154,7 @@ export const AnimeCatalogFilter: FC = () => {
             variant="contained"
             fullWidth
             className={styles.catalog__filter__button}
+            onClick={handleApplyButton}
           >
             Применить
           </Button>

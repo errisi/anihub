@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styles from './Catalog.module.scss';
@@ -10,10 +11,11 @@ import {
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import * as CatalogAnimesActions from '../../features/CatalogAnimes';
 import { Gener } from '../../types/Gener';
-import { getGenres } from '../../api/animes';
+import { getCatalogAnimes, getGenres } from '../../api/animes';
 import { getPreparedApiUrl } from '../../helpers/getPreparedApiUrl';
 
 export const Сatalog = () => {
+  const [page, setPage] = useState<number>(1);
   const dispatch = useAppDispatch();
 
   const { catalogAnimes: animes } = useAppSelector(
@@ -52,14 +54,26 @@ export const Сatalog = () => {
   );
 
   useEffect(() => {
-    dispatch(CatalogAnimesActions.init(preparedApiUrl));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
+    setPage(0);
+    dispatch(CatalogAnimesActions.set([]));
+
+    dispatch(CatalogAnimesActions.init(`${preparedApiUrl}&page=${page}`));
+  }, [preparedApiUrl]);
+
+  useEffect(() => {
+    getCatalogAnimes(`${preparedApiUrl}&page=${page}`)
+      .then((data) => (
+        dispatch(CatalogAnimesActions.set([...animes, ...data]))
+      ));
+  }, [page]);
 
   return (
     <>
       <div className={styles.catalog}>
-        <CatalogCards animes={animes} />
+        <CatalogCards
+          animes={animes}
+          setPage={setPage}
+        />
         <AnimeCatalogFilter />
       </div>
     </>
