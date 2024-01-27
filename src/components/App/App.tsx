@@ -1,21 +1,22 @@
 import { Outlet } from 'react-router-dom';
 import { Container } from '@mui/material';
-import { AppHeader } from './components/Header/AppHeader';
-import { AppFooter } from './components/Footer/AppFooter';
+import { AppHeader } from '../Header/Header';
+import { AppFooter } from '../Footer/Footer';
+import styles from './App.module.scss';
 
 export const App = () => (
   <div className="wrap">
-    <header className="header">
+    <header className={styles.header}>
       <AppHeader />
     </header>
 
-    <main className="main">
+    <main className={styles.main}>
       <Container>
         <Outlet />
       </Container>
     </main>
 
-    <footer className="footer">
+    <footer className={styles.footer}>
       <AppFooter />
     </footer>
   </div>

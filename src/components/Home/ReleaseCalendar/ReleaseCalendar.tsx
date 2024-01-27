@@ -13,6 +13,7 @@ import 'moment/dist/locale/ru';
 import * as ReleaseCalendarActions from '../../../features/ReleaseCalendar';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { Calendar } from '../../../types/Calendar';
+import styles from './ReleaseCalendar.module.scss';
 
 export const ReleaseCalendar: FC = () => {
   const dispatch = useAppDispatch();
@@ -70,8 +71,8 @@ export const ReleaseCalendar: FC = () => {
   }
 
   return (
-    <div className="home__block">
-      <h1 className="home__block__title-new-relised">
+    <div className={styles.home__block}>
+      <h1 className={styles.home__block__title_relise_calendar}>
         Календарь релизов
       </h1>
 
@@ -92,7 +93,7 @@ export const ReleaseCalendar: FC = () => {
 
       {!loading && !error && (
         <>
-          <div className="releases__wrapper">
+          <div className={styles.releases__wrapper}>
             {daysOfTheWeek.map((day) => (
               <Accordion
                 key={day.dayNumber}
@@ -104,7 +105,7 @@ export const ReleaseCalendar: FC = () => {
                   id="panel1-header"
                 >
                   <Typography
-                    className="release__title"
+                    className={styles.release__title}
                   >
                     {day.dayName}
                   </Typography>
@@ -114,13 +115,13 @@ export const ReleaseCalendar: FC = () => {
                     {filterReleasesByDay(data, day.dayNumber).map((release) => (
                       <div
                         key={release.anime.id}
-                        className="release__table"
+                        className={styles.release__table}
                       >
-                        <div className="release__table__left-side">
+                        <div className={styles.release__table__left_side}>
                           <img
                             src={`https://shikimori.one${release.anime.image.x48}`}
                             alt="anime"
-                            className="release__table__image"
+                            className={styles.release__table__image}
                           />
 
                           <div className="release__table__next-episode">
@@ -128,12 +129,12 @@ export const ReleaseCalendar: FC = () => {
                           </div>
                         </div>
 
-                        <div className="release__table__right-side">
+                        <div className={styles.release__table__right_side}>
                           <div className="release__table__seria-number">
                             <p>{`${release.next_episode} серия`}</p>
                           </div>
 
-                          <div className="release__table__time">
+                          <div className={styles.release__table__time}>
                             <p>
                               {formatReleaseTime(release.next_episode_at)}
                             </p>

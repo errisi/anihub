@@ -1,0 +1,12 @@
+@import '../../../styles/variables/colors.scss';
+
+.welcome {
+  &__line {
+    color: $primary-color;
+    margin: 12px 0;
+  }
+
+  &__title {
+    text-align: center;
+  }
+}

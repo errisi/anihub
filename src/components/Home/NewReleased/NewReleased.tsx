@@ -3,6 +3,7 @@ import { Button, CircularProgress } from '@mui/material';
 import { AnimeCard } from '../../Card/Card';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import * as NewReleasedActions from '../../../features/NewReleased';
+import styles from './NewReleased.module.scss';
 
 export const NewReleased: FC = () => {
   const dispatch = useAppDispatch();
@@ -18,8 +19,8 @@ export const NewReleased: FC = () => {
   };
 
   return (
-    <div className="home__block">
-      <h1 className="home__block__title-new-relised">
+    <div className={styles.home__block}>
+      <h1 className={styles.home__block__title_new_relised}>
         Недавно вышедшие
       </h1>
 
@@ -39,7 +40,7 @@ export const NewReleased: FC = () => {
       )}
 
       {!loading && !error && (
-        <div className="card__home-grid">
+        <div className={styles.home__card__grid}>
           {animes.map((anime) => (
             <AnimeCard
               key={anime.id}

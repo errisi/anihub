@@ -1,0 +1,18 @@
+.header {
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__left_side {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  &__right_side {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+}

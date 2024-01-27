@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from '@mui/material';
 import { HomePage } from './pages/homePage/homePage';
 import { Сatalog } from './pages/СatalogPage/Сatalog';
-import { PageNotFound } from './pages/pageNotFound';
-import { App } from './App';
+import { PageNotFound } from './pages/pageNotFound/pageNotFound';
+import { App } from './components/App/App';
 import { theme } from './store/theme';
 import store from './store/store';
 

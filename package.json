@@ -33,6 +33,7 @@
     "react-router-dom": "^6.21.1",
     "sass": "^1.69.6",
     "styled-components": "^6.1.6",
+    "swiper": "^11.0.5",
     "vite": "^5.0.8"
   },
   "devDependencies": {

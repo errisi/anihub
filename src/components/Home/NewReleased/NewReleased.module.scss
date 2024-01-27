@@ -1,0 +1,21 @@
+.home__block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__title-new-relised {
+    font-size: 1.7rem;
+    padding-bottom: 12px;
+  }
+
+  .home__card__grid {
+    display: grid;
+    grid-template-columns: 192px 192px 192px 192px 192px;
+    column-gap: 20px;
+    row-gap: 26px;
+    align-items: start;
+    justify-content: center;
+    justify-items: stretch;
+  }
+}
+

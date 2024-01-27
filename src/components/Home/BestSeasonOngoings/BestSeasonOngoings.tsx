@@ -7,6 +7,7 @@ import { AnimeCard } from '../../Card/Card';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import * as BestSeasonOngoingsActions
   from '../../../features/BestSeasonOngoings';
+import styles from './BestSeasonOngoings.module.scss';
 
 export const BestSeasonOngoings: FC = () => {
   const dispatch = useAppDispatch();
@@ -34,7 +35,7 @@ export const BestSeasonOngoings: FC = () => {
     renderCenterLeftControls:
       ({ previousSlide }: { previousSlide: () => void }) => (
         <Button
-          className="home__carousel__back"
+          className={styles.home__carousel__back}
           onClick={previousSlide}
           variant="text"
         >
@@ -44,7 +45,7 @@ export const BestSeasonOngoings: FC = () => {
     renderCenterRightControls:
       ({ nextSlide }: { nextSlide: () => void }) => (
         <Button
-          className="home__carousel__forward"
+          className={styles.home__carousel__forward}
           onClick={nextSlide}
           variant="text"
         >
@@ -54,8 +55,8 @@ export const BestSeasonOngoings: FC = () => {
   };
 
   return (
-    <div className="home__block">
-      <h1 className="home__block__title-best-ongoings">
+    <div className={styles.home__block}>
+      <h1 className={styles.home__block__title_best_ongoings}>
         Лучшие онгоинги сезона
       </h1>
 
@@ -74,12 +75,12 @@ export const BestSeasonOngoings: FC = () => {
 
       {!loading && !error && (
         <div
-          className="home__carousel__wrapper"
+          className={styles.home__carousel__wrapper}
         >
           <Carousel
             {...sliderParams}
           >
-            <div className="home__carousel__slide">
+            <div className={styles.home__carousel__slide}>
               {(animes.slice(0, 5)).map((anime) => (
                 <AnimeCard
                   key={anime.id}
@@ -88,7 +89,7 @@ export const BestSeasonOngoings: FC = () => {
               ))}
             </div>
 
-            <div className="home__carousel__slide">
+            <div className={styles.home__carousel__slide}>
               {(animes.slice(5, 10)).map((anime) => (
                 <AnimeCard
                   key={anime.id}
@@ -97,7 +98,7 @@ export const BestSeasonOngoings: FC = () => {
               ))}
             </div>
 
-            <div className="home__carousel__slide">
+            <div className={styles.home__carousel__slide}>
               {(animes.slice(10, 15)).map((anime) => (
                 <AnimeCard
                   key={anime.id}

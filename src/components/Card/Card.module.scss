@@ -1,3 +1,5 @@
+@import '../../styles/variables/colors.scss';
+
 .card {
   width: 192px;
   height: 332px;
@@ -59,7 +61,7 @@
           position: absolute;
           top: 12px;
           right: 12px;
-          border: 2px solid #e91e63;
+          border: 2px solid $primary-color;
           border-radius: 6px;
           opacity: 100%;
         }
@@ -78,7 +80,7 @@
           bottom: 10px;
           opacity: 100%;
           padding-bottom: 2px;
-          border-bottom: 2px solid #e91e63;
+          border-bottom: 2px solid $primary-color;
         }
       }
     }
@@ -106,8 +108,8 @@
       align-items: center;
       height: 30px;
       max-width: 74px;
-      border: 1px solid #e91e63;
-      color: #e91e63;
+      border: 1px solid $primary-color;
+      color: $primary-color;
       border-radius: 10px;
     }
   }

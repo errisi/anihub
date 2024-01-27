@@ -1,9 +1,11 @@
+import styles from './Promo.module.scss';
+
 export const Promo = () => (
-  <div className="home__promo">
+  <div className={styles.promo}>
     <hr
-      className="home__promo__line"
+      className={styles.promo__line}
     />
-    <h3 className="home__promo__title">
+    <h3 className={styles.promo__title}>
       AniHub.icu - Ваш уютный уголок мира аниме онлайн
     </h3>
 
@@ -27,7 +29,7 @@ export const Promo = () => (
     </p>
 
     <hr
-      className="home__promo__line"
+      className={styles.promo__line}
     />
   </div>
 );

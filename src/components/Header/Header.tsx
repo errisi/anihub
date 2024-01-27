@@ -1,15 +1,16 @@
 import { Button, ButtonGroup, Container } from '@mui/material';
 import { Notifications } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import { AppHeaderHavigation } from './Navigation/AppHeaderHavigation';
-import { AppHeaderSearch } from './Search/AppHeaderSearch';
-import { AppHeaderLogo } from './Logo/AppHeaderLogo';
+import { AppHeaderHavigation } from './Navigation/HeaderHavigation';
+import { AppHeaderSearch } from './Search/HeaderSearch';
+import { AppHeaderLogo } from './Logo/HeaderLogo';
+import styles from './Header.module.scss';
 
 export const AppHeader = () => (
   <>
     <Container>
-      <div className="header__wrapper">
-        <div className="header__left-side">
+      <div className={styles.header__wrapper}>
+        <div className={styles.header__left_side}>
           <AppHeaderLogo />
 
           <AppHeaderHavigation />
@@ -17,7 +18,7 @@ export const AppHeader = () => (
           <AppHeaderSearch />
         </div>
 
-        <div className="header__right-side">
+        <div className={styles.header__right_side}>
           <Button variant="text" component={Link} to="/">
             <Notifications color="primary" />
           </Button>

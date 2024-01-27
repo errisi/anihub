@@ -1,8 +1,9 @@
 import { SearchOutlined } from '@mui/icons-material';
 import { Box, InputAdornment, TextField } from '@mui/material';
+import styles from './HeaderSearch.module.scss';
 
 export const AppHeaderSearch = () => (
-  <div className="header__search">
+  <div className={styles.search}>
     <Box
       sx={{
         width: 360,

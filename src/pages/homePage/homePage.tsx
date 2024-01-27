@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import style from './homePage.module.scss';
 import {
   NewReleased,
 } from '../../components/Home/NewReleased/NewReleased';
@@ -12,8 +13,8 @@ import { useAppDispatch } from '../../store/hooks';
 import * as BestSeasonOngoingsActions from '../../features/BestSeasonOngoings';
 import * as NewReleasedActions from '../../features/NewReleased';
 import * as ReleaseCalendarActions from '../../features/ReleaseCalendar';
-import { Promo } from '../../components/Home/Promo';
-import { Welcome } from '../../components/Home/Welcome';
+import { Promo } from '../../components/Home/Promo/Promo';
+import { Welcome } from '../../components/Home/Welcome/Welcome';
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -26,7 +27,7 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <div className="home">
+    <div className={style.home}>
       <Welcome />
 
       <BestSeasonOngoings />

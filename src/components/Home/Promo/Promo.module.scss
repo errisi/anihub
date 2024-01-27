@@ -1,0 +1,13 @@
+@import '../../../styles/variables/colors.scss';
+
+.promo {
+  width: 1040px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__line {
+    color: $primary-color;
+    margin: 12px 0;
+  }
+}
