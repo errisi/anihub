@@ -8,6 +8,7 @@ import {
 import { useSearchParams } from 'react-router-dom';
 import { getSearchWith } from '../../../utils/getSearchWith';
 import { Params } from '../../../types/Params';
+import styles from './CatalogSort.module.scss';
 
 export const CatalogSort: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -28,14 +29,14 @@ export const CatalogSort: FC = () => {
 
   return (
     <>
-      <div className="catalog__header__block">
+      <div className={styles.catalog__header__block}>
         <p
-          className="catalog__header__block__title"
+          className={styles.catalog__header__block__title}
         >
           Сортировать по:
         </p>
 
-        <div className="catalog__header__block-sort">
+        <div className={styles.catalog__header__block_sort}>
           <FormControl
             variant="standard"
             fullWidth

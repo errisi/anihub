@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import styles from './Catalog.module.scss';
 import {
   CatalogCards,
 } from '../../components/Catalog/CatalogCards/CatalogCards';
@@ -57,7 +58,7 @@ export const Сatalog = () => {
 
   return (
     <>
-      <div className="catalog">
+      <div className={styles.catalog}>
         <CatalogCards animes={animes} />
         <AnimeCatalogFilter />
       </div>

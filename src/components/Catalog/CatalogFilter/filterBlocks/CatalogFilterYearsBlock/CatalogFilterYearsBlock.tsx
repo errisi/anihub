@@ -2,6 +2,7 @@ import { FC } from 'react';
 import {
   Slider,
 } from '@mui/material';
+import styles from './CatalogFilterYearsBlock.module.scss';
 
 type Props = {
   selectedYears: number[];
@@ -55,14 +56,14 @@ export const CatalogFilterYearsBlock: FC<Props> = ({
 
   return (
     <>
-      <div className="catalog__filter__block">
+      <div className={styles.catalog__filter__block}>
         <p
-          className="catalog__filter__block__title"
+          className={styles.catalog__filter__block__title}
         >
           Год Выхода
         </p>
 
-        <div className="catalog__filter__block-years">
+        <div className={styles.catalog__filter__block_years}>
           <Slider
             getAriaLabel={() => 'Temperature range'}
             min={1959}

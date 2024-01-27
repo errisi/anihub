@@ -6,6 +6,7 @@ import {
 } from '@mui/material';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import styles from './CatalogFilterGenreBlock.module.scss';
 
 type Props = {
   genresList: string[];
@@ -34,7 +35,7 @@ export const CatalogFilterGenreBlock: FC<Props> = ({
       size="small"
       value={selectedGeners}
       onChange={handleGenersSelect}
-      className="catalog__filter__field"
+      className={styles.catalog__filter__field}
       renderOption={(props, option, { selected }) => (
         <li {...props}>
           <Checkbox
@@ -52,7 +53,7 @@ export const CatalogFilterGenreBlock: FC<Props> = ({
           {...params}
           label="Выберите жанр"
           size="small"
-          className="catalog__filter__field"
+          className={styles.catalog__filter__field}
         />
       )}
       sx={{ display: 'block' }}

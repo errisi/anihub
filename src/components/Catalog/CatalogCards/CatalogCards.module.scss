@@ -1,0 +1,24 @@
+.card__catalog_grid {
+  display: grid;
+  grid-template-columns: 192px 192px 192px 192px;
+  column-gap: 20px;
+  row-gap: 26px;
+  align-items: start;
+  justify-content: start;
+  justify-items: stretch;
+}
+
+.catalog {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__title {
+    margin-bottom: 20px;
+  }
+}

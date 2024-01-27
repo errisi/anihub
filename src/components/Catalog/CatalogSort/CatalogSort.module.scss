@@ -1,0 +1,13 @@
+.catalog {
+  &__header {
+    &__block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      &_sort {
+        width: 134px;
+      }
+    }
+  }
+}

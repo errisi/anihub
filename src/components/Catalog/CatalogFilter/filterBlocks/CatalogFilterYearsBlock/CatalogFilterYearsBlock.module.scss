@@ -1,0 +1,19 @@
+.catalog {
+  &__filter {
+    &__block {
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+
+      &__title {
+        font-size: 0.95rem;
+        padding: 8px 4px;
+      }
+
+      &_years {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+}

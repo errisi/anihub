@@ -5,27 +5,28 @@ import React, {
 } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
-
 import { Button, SelectChangeEvent, Stack } from '@mui/material';
+import styles from './CatalogFilter.module.scss';
+
 import { getGenres } from '../../../api/animes';
 import {
   CatalogFilterGenreBlock,
-} from './filterBlocks/CatalogFilterGenreBlock';
+} from './filterBlocks/CatalogFilterGenreBlock/CatalogFilterGenreBlock';
 import {
   CatalogFilterTypeBlock,
-} from './filterBlocks/CatalogFilterTypeBlock';
+} from './filterBlocks/CatalogFilterTypeBlock/CatalogFilterTypeBlock';
 import {
   CatalogFilterStatusBlock,
-} from './filterBlocks/CatalogFilterStatusBlock';
+} from './filterBlocks/CatalogFilterStatusBlock/CatalogFilterStatusBlock';
 import {
   CatalogFilterYearsBlock,
-} from './filterBlocks/CatalogFilterYearsBlock';
+} from './filterBlocks/CatalogFilterYearsBlock/CatalogFilterYearsBlock';
 import {
   CatalogFilterScoreBlock,
-} from './filterBlocks/CatalogFilterScoreBlock';
+} from './filterBlocks/CatalogFilterScoreBlock/CatalogFilterScoreBlock';
 import {
   CatalogFilterRatingBlock,
-} from './filterBlocks/CatalogFilterRatingBlock';
+} from './filterBlocks/CatalogFilterRatingBlock/CatalogFilterRatingBlock';
 import { getSearchWith } from '../../../utils/getSearchWith';
 import { Params } from '../../../types/Params';
 import { Gener } from '../../../types/Gener';
@@ -93,9 +94,9 @@ export const AnimeCatalogFilter: FC = () => {
 
   return (
     <>
-      <div className="catalog__filter-wrapper">
+      <div className={styles.catalog__filter_wrapper}>
         <h2
-          className="catalog__filter-title"
+          className={styles.catalog__filter_title}
         >
           Фильтр
         </h2>
@@ -142,7 +143,7 @@ export const AnimeCatalogFilter: FC = () => {
           <Button
             variant="contained"
             fullWidth
-            className="catalog__filter__button"
+            className={styles.catalog__filter__button}
           >
             Применить
           </Button>

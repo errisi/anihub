@@ -3,6 +3,7 @@ import { Pagination } from '@mui/material';
 import { Anime } from '../../../types/Anime';
 import { CatalogSort } from '../CatalogSort/CatalogSort';
 import { AnimeCard } from '../../Card/Card';
+import styles from './CatalogCards.module.scss';
 
 type Props = {
   animes: Anime[];
@@ -10,10 +11,10 @@ type Props = {
 
 export const CatalogCards: FC<Props> = ({ animes }) => (
   <>
-    <div className="catalog__cards-wrapper">
-      <div className="catalog__header">
+    <div className={styles.catalog__cards_wrapper}>
+      <div className={styles.catalog__header}>
         <h1
-          className="catalog__title"
+          className={styles.catalog__title}
         >
           Аниме
         </h1>
@@ -21,7 +22,7 @@ export const CatalogCards: FC<Props> = ({ animes }) => (
         <CatalogSort />
       </div>
 
-      <div className="card__catalog-grid">
+      <div className={styles.card__catalog_grid}>
         {animes.map((anime) => (
           <AnimeCard
             key={anime.id}
