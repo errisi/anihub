@@ -3,6 +3,7 @@ import { Container } from '@mui/material';
 import { AppHeader } from '../Header/Header';
 import { AppFooter } from '../Footer/Footer';
 import styles from './App.module.scss';
+import ScrollButton from './ScrollTopButton/ScrollTopButton';
 
 export const App = () => (
   <div className={styles.wrap}>
@@ -14,6 +15,7 @@ export const App = () => (
       <Container>
         <Outlet />
       </Container>
+      <ScrollButton />
     </main>
 
     <footer className={styles.footer}>
