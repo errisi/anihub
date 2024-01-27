@@ -4,11 +4,15 @@
   align-items: center;
   justify-content: center;
   background-color: #000;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .main {
   background-color: #111;
   padding-bottom: 32px;
+  padding-bottom: 160px;
 }
 
 .header {
@@ -18,4 +22,9 @@
   display: grid;
   align-items: center;
   margin-bottom: 24px;
+}
+
+.wrap {
+  position: relative;
+  min-height: 100vh;
 }

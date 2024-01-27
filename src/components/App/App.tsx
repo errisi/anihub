@@ -5,7 +5,7 @@ import { AppFooter } from '../Footer/Footer';
 import styles from './App.module.scss';
 
 export const App = () => (
-  <div className="wrap">
+  <div className={styles.wrap}>
     <header className={styles.header}>
       <AppHeader />
     </header>
