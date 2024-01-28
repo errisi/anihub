@@ -4,7 +4,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Button,
-  CircularProgress,
+  LinearProgress,
   Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -48,6 +48,8 @@ export const ReleaseCalendar: FC = () => {
   } = useAppSelector((state) => state.ReleaseCalendar);
 
   const refresh = () => {
+    dispatch(ReleaseCalendarActions.set([]));
+    dispatch(ReleaseCalendarActions.setError(''));
     dispatch(ReleaseCalendarActions.init());
   };
 
@@ -76,9 +78,9 @@ export const ReleaseCalendar: FC = () => {
         Календарь релизов
       </h1>
 
-      {loading && <CircularProgress />}
+      {loading && <LinearProgress />}
 
-      {error && (
+      {error && !loading && (
         <>
           <p>
             {error}

@@ -31,7 +31,12 @@ import { getSearchWith } from '../../../utils/getSearchWith';
 import { Params } from '../../../types/Params';
 import { Gener } from '../../../types/Gener';
 
-export const AnimeCatalogFilter: FC = () => {
+type Props = {
+  update: boolean;
+  setUpdate: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const AnimeCatalogFilter: FC<Props> = ({ update, setUpdate }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [genresList, setGenresList] = useState<string[]>([]);
@@ -48,6 +53,16 @@ export const AnimeCatalogFilter: FC = () => {
         setGenresList([...error]);
       });
   }, []);
+
+  const selectedYears
+  = searchParams.getAll('season').map(Number).length > 0
+    ? searchParams.getAll('season').map(Number)
+    : [1959, 2024];
+  const selectedGenres = searchParams.getAll('genre') || [];
+  const selectedTypes = searchParams.getAll('kind') || [];
+  const selectedStatus = searchParams.get('status') || '';
+  const selectedScore = searchParams.get('score') || '';
+  const selectedRatings = searchParams.getAll('rating') || [];
 
   const [tempSelectedYears, setTempSelectedYears]
     = useState<number[]>([1959, 2024]);
@@ -91,8 +106,8 @@ export const AnimeCatalogFilter: FC = () => {
     setTempSelectedRaitings(value);
   };
 
-  const handleApplyButton = () => {
-    setSearchWith({
+  const handleApplyButton = async () => {
+    await setSearchWith({
       genre: tempSelectedGeners,
       kind: tempSelectedTypes,
       status: tempSelectedStatus,
@@ -100,7 +115,19 @@ export const AnimeCatalogFilter: FC = () => {
       score: tempSelectedScore,
       rating: tempSelectedRaitings,
     });
+
+    setUpdate((c) => !c);
   };
+
+  useEffect(() => {
+    setTempSelectedGeners(selectedGenres);
+    setTempSelectedTypes(selectedTypes);
+    setTempSelectedStatus(selectedStatus);
+    setTempSelectedYears(selectedYears);
+    setTempSelectedScore(selectedScore);
+    setTempSelectedRaitings(selectedRatings);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [update]);
 
   return (
     <>

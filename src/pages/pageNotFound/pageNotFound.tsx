@@ -13,7 +13,7 @@ export const PageNotFound = () => (
     >
       <h1>404</h1>
       <img
-        src="./../../../public/images/no-found.png"
+        src="/images/no-found.png"
         alt=""
         className={styles.image}
       />

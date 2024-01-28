@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Button, CircularProgress } from '@mui/material';
+import { Button, LinearProgress } from '@mui/material';
 import { AnimeCard } from '../../Card/Card';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import * as NewReleasedActions from '../../../features/NewReleased';
@@ -15,6 +15,8 @@ export const NewReleased: FC = () => {
   } = useAppSelector((state) => state.NewReleased);
 
   const refresh = () => {
+    dispatch(NewReleasedActions.set([]));
+    dispatch(NewReleasedActions.setError(''));
     dispatch(NewReleasedActions.init());
   };
 
@@ -24,9 +26,9 @@ export const NewReleased: FC = () => {
         Недавно вышедшие
       </h1>
 
-      {loading && <CircularProgress />}
+      {loading && <LinearProgress />}
 
-      {error && (
+      {error && !loading && (
         <>
           <p>
             {error}

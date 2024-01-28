@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { Button, LinearProgress } from '@mui/material';
 import styles from './Catalog.module.scss';
 import {
   CatalogCards,
@@ -16,9 +17,12 @@ import { getPreparedApiUrl } from '../../helpers/getPreparedApiUrl';
 
 export const Сatalog = () => {
   const [page, setPage] = useState<number>(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [updateFilter, setUpdateFilter] = useState(false);
+
   const dispatch = useAppDispatch();
 
-  const { catalogAnimes: animes } = useAppSelector(
+  const { catalogAnimes: animes, loading, error } = useAppSelector(
     (state) => state.CatalogAnimes,
   );
 
@@ -56,26 +60,68 @@ export const Сatalog = () => {
   useEffect(() => {
     setPage(0);
     dispatch(CatalogAnimesActions.set([]));
+    setHasMore(true);
 
     dispatch(CatalogAnimesActions.init(`${preparedApiUrl}&page=${page}`));
   }, [preparedApiUrl]);
 
   useEffect(() => {
-    getCatalogAnimes(`${preparedApiUrl}&page=${page}`)
-      .then((data) => (
-        dispatch(CatalogAnimesActions.set([...animes, ...data]))
-      ));
+    if (hasMore) {
+      getCatalogAnimes(`${preparedApiUrl}&page=${page}`)
+        .then((data) => {
+          const isSameLength = animes.length === animes.concat(data).length;
+
+          if (isSameLength) {
+            setHasMore(false);
+          } else {
+            dispatch(CatalogAnimesActions.set([...animes, ...data]));
+          }
+        });
+    }
   }, [page]);
+
+  const refresh = () => {
+    dispatch(CatalogAnimesActions.set([]));
+    dispatch(CatalogAnimesActions.setError(''));
+    setPage(0);
+    setHasMore(true);
+
+    dispatch(CatalogAnimesActions.init(`${preparedApiUrl}&page=${page}`));
+  };
 
   return (
     <>
-      <div className={styles.catalog}>
-        <CatalogCards
-          animes={animes}
-          setPage={setPage}
-        />
-        <AnimeCatalogFilter />
-      </div>
+      {loading && (
+        <LinearProgress />
+      )}
+
+      {error && !loading && (
+        <>
+          <p>
+            {error}
+          </p>
+          <Button
+            onClick={refresh}
+          >
+            Try Again
+          </Button>
+        </>
+      )}
+
+      {!error && !loading && (
+        <div className={styles.catalog}>
+          <CatalogCards
+            animes={animes}
+            setPage={setPage}
+            hasMore={hasMore}
+            setUpdateFilter={setUpdateFilter}
+          />
+          <AnimeCatalogFilter
+            update={updateFilter}
+            setUpdate={setUpdateFilter}
+          />
+        </div>
+      )}
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Carousel from 'nuka-carousel';
-import { Button, CircularProgress } from '@mui/material';
+import { Button, LinearProgress } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { AnimeCard } from '../../Card/Card';
@@ -19,6 +19,8 @@ export const BestSeasonOngoings: FC = () => {
   } = useAppSelector((state) => state.BestSeasonOngoings);
 
   const refresh = () => {
+    dispatch(BestSeasonOngoingsActions.set([]));
+    dispatch(BestSeasonOngoingsActions.setError(''));
     dispatch(BestSeasonOngoingsActions.init());
   };
 
@@ -60,9 +62,9 @@ export const BestSeasonOngoings: FC = () => {
         Лучшие онгоинги сезона
       </h1>
 
-      {loading && <CircularProgress />}
+      {loading && <LinearProgress />}
 
-      {error && (
+      {error && !loading && (
         <>
           <p>{error}</p>
           <Button

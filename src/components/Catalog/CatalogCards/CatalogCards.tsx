@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useEffect } from 'react';
-import { LinearProgress } from '@mui/material';
+import { Button, LinearProgress } from '@mui/material';
 import { useInView } from 'react-intersection-observer';
+import { useSearchParams } from 'react-router-dom';
 import { Anime } from '../../../types/Anime';
 import { CatalogSort } from '../CatalogSort/CatalogSort';
 import { AnimeCard } from '../../Card/Card';
@@ -10,9 +11,16 @@ import styles from './CatalogCards.module.scss';
 type Props = {
   animes: Anime[];
   setPage: React.Dispatch<React.SetStateAction<number>>;
+  hasMore: boolean;
+  setUpdateFilter: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const CatalogCards: FC<Props> = ({ animes, setPage }) => {
+export const CatalogCards: FC<Props> = ({
+  animes,
+  setPage,
+  hasMore,
+  setUpdateFilter,
+}) => {
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -21,29 +29,62 @@ export const CatalogCards: FC<Props> = ({ animes, setPage }) => {
     }
   }, [inView]);
 
+  const [, setSearchParams] = useSearchParams();
+
+  const handleResetButton = async () => {
+    setSearchParams('');
+
+    setUpdateFilter((c) => !c);
+  };
+
   return (
     <>
       <div className={styles.catalog__cards_wrapper}>
-        <div className={styles.catalog__header}>
-          <h1
-            className={styles.catalog__title}
-          >
-            Аниме
-          </h1>
+        {!!animes.length && (
+          <>
+            <div className={styles.catalog__header}>
+              <h1
+                className={styles.catalog__title}
+              >
+                Аниме
+              </h1>
 
-          <CatalogSort />
-        </div>
+              <CatalogSort />
+            </div>
 
-        <div className={styles.card__catalog_grid}>
-          {animes.map((anime) => (
-            <AnimeCard
-              key={anime.id}
-              anime={anime}
+            <div className={styles.card__catalog_grid}>
+              {animes.map((anime) => (
+                <AnimeCard
+                  key={anime.id}
+                  anime={anime}
+                />
+              ))}
+            </div>
+          </>
+        )}
+
+        {!animes.length && (
+          <div className={styles.not_found}>
+            <h3 className={styles.not_found__title}>
+              Нет ничего подходящего по заданным критериям поиска
+            </h3>
+            <img
+              src="/images/no-found.png"
+              alt=""
+              className={styles.not_found__image}
             />
-          ))}
-        </div>
+            <Button
+              variant="outlined"
+              onClick={handleResetButton}
+            >
+              Сбросить фильр
+            </Button>
+          </div>
+        )}
 
-        <LinearProgress sx={{ margin: '36px 0 0 0' }} ref={ref} />
+        {hasMore && (
+          <LinearProgress sx={{ margin: '36px 0 0 0' }} ref={ref} />
+        )}
       </div>
     </>
   );
