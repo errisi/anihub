@@ -3,6 +3,7 @@ import BestSeasonOngoingsReducer from '../features/BestSeasonOngoings';
 import NewReleasedReducer from '../features/NewReleased';
 import ReleaseCalendarReducer from '../features/ReleaseCalendar';
 import CatalogAnimesReducer from '../features/CatalogAnimes';
+import SearchAnimesReducer from '../features/SearchAnimes';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     NewReleased: NewReleasedReducer,
     ReleaseCalendar: ReleaseCalendarReducer,
     CatalogAnimes: CatalogAnimesReducer,
+    SearchAnimes: SearchAnimesReducer,
   },
 });
 

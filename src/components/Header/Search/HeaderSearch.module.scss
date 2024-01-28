@@ -1,4 +1,55 @@
+@import '../../../styles/variables/colors.scss';
+
 .search {
   min-width: 100px;
   max-width: 360px;
+  transition-duration: 0.4s;
+
+  &__box {
+    width: 360px;
+    border-radius: 0 0 6px 6px;
+    background-color: #000;
+    border-bottom: 2px solid;
+    border-left: 2px solid;
+    border-right: 2px solid;
+    border-color: $primary-color;
+    position: absolute;
+    top: 52px;
+    z-index: 999;
+    flex-direction: column;
+    display: flex;
+
+    &__line {
+      margin: 4px 0 8px 0;
+      width: 80%;
+      color: $primary-color;
+      height: 2px;
+      position: absolute;
+      left: 10%;
+    }
+
+    &__list {
+      display: flex;
+      gap: 12px;
+      flex-direction: column;
+      padding: 12px;
+
+      &__item {
+        display: flex;
+        padding: 4px 2px 2px 2px;
+        gap: 12px;
+        align-items: start;
+
+        &__image {
+          border-radius: 4px;
+        }
+
+        &__text {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+    }
+  }
 }

@@ -29,3 +29,7 @@ export const getReleaseCalendar = () => {
 export const getCatalogAnimes = (url: string) => {
   return get.request(`animes?limit=48&${url}`);
 };
+
+export const getSearchAnimes = (query: string) => {
+  return get.request(`animes?limit=4&search=${query}&order=popularity`);
+};
