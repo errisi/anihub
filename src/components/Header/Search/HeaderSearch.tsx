@@ -13,13 +13,12 @@ import { AnimeKind } from '../../../types/AnimeKind';
 
 const getSearchResult = _.debounce((value, dispatch) => {
   dispatch(SearchAnimesActions.init(value));
-}, 500);
+}, 1000);
 
 export const AppHeaderSearch = () => {
   const [query, setQuery] = useState('');
   const [isActive, setIsActive] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -28,23 +27,21 @@ export const AppHeaderSearch = () => {
   );
 
   useEffect(() => {
-    setIsSearching(true);
-
     if (query.length > 0) {
       setIsActive(true);
     }
 
     if (!query.length) {
-      setIsActive(false);
+      setTimeout(() => {
+        setIsActive(false);
+      }, 3000);
     }
 
+    dispatch(SearchAnimesActions.setLoading(true));
+    dispatch(SearchAnimesActions.setError(''));
     dispatch(SearchAnimesActions.set([]));
 
     getSearchResult(query, dispatch);
-
-    setTimeout(() => {
-      setIsSearching(false);
-    }, 1000);
   }, [dispatch, query]);
 
   useEffect(() => {
@@ -140,13 +137,13 @@ export const AppHeaderSearch = () => {
                   </div>
                 ))
               }
-              {!animes.length && !loading && !error && !isSearching && (
+              {!animes.length && !loading && !error && (
                 <p>
                   Ничего не найдено
                 </p>
               )}
 
-              {(isSearching || loading) && (
+              {(loading) && (
                 <LinearProgress />
               )}
 

@@ -31,5 +31,9 @@ export const getCatalogAnimes = (url: string) => {
 };
 
 export const getSearchAnimes = (query: string) => {
-  return get.request(`animes?limit=4&search=${query}&order=popularity`);
+  if (query) {
+    return get.request(`animes?limit=4&search=${query}&order=popularity`);
+  }
+
+  return [];
 };
