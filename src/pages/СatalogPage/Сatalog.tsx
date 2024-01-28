@@ -58,7 +58,7 @@ export const Сatalog = () => {
   );
 
   useEffect(() => {
-    setPage(0);
+    setPage(1);
     dispatch(CatalogAnimesActions.set([]));
     setHasMore(true);
 
@@ -83,7 +83,7 @@ export const Сatalog = () => {
   const refresh = () => {
     dispatch(CatalogAnimesActions.set([]));
     dispatch(CatalogAnimesActions.setError(''));
-    setPage(0);
+    setPage(1);
     setHasMore(true);
 
     dispatch(CatalogAnimesActions.init(`${preparedApiUrl}&page=${page}`));
