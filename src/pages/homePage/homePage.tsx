@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import style from './homePage.module.scss';
 import {
   NewReleased,
@@ -9,34 +8,19 @@ import {
 import {
   ReleaseCalendar,
 } from '../../components/Home/ReleaseCalendar/ReleaseCalendar';
-import { useAppDispatch } from '../../store/hooks';
-import * as BestSeasonOngoingsActions from '../../features/BestSeasonOngoings';
-import * as NewReleasedActions from '../../features/NewReleased';
-import * as ReleaseCalendarActions from '../../features/ReleaseCalendar';
 import { Promo } from '../../components/Home/Promo/Promo';
 import { Welcome } from '../../components/Home/Welcome/Welcome';
 
-export const HomePage = () => {
-  const dispatch = useAppDispatch();
+export const HomePage = () => (
+  <div className={style.home}>
+    <Welcome />
 
-  useEffect(() => {
-    dispatch(BestSeasonOngoingsActions.init());
-    dispatch(NewReleasedActions.init());
-    dispatch(ReleaseCalendarActions.init());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    <BestSeasonOngoings />
 
-  return (
-    <div className={style.home}>
-      <Welcome />
+    <ReleaseCalendar />
 
-      <BestSeasonOngoings />
+    <NewReleased />
 
-      <ReleaseCalendar />
-
-      <NewReleased />
-
-      <Promo />
-    </div>
-  );
-};
+    <Promo />
+  </div>
+);
