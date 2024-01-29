@@ -6,9 +6,7 @@ import styles from './Catalog.module.scss';
 import {
   CatalogCards,
 } from '../../components/Catalog/CatalogCards/CatalogCards';
-import {
-  AnimeCatalogFilter,
-} from '../../components/Catalog/CatalogFilter';
+import { AnimeCatalogFilter } from '../../components/Catalog/CatalogFilter';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import * as CatalogAnimesActions from '../../features/CatalogAnimes';
 import { Gener } from '../../types/Gener';
@@ -22,15 +20,16 @@ export const Сatalog = () => {
 
   const dispatch = useAppDispatch();
 
-  const { catalogAnimes: animes, loading, error } = useAppSelector(
-    (state) => state.CatalogAnimes,
-  );
+  const {
+    catalogAnimes: animes,
+    loading,
+    error,
+  } = useAppSelector((state) => state.CatalogAnimes);
 
   const [genres, setGenres] = useState<Gener[]>([]);
 
   useEffect(() => {
-    getGenres()
-      .then(setGenres);
+    getGenres().then(setGenres);
   }, []);
 
   const [searchParams] = useSearchParams();
@@ -67,16 +66,15 @@ export const Сatalog = () => {
 
   useEffect(() => {
     if (hasMore) {
-      getCatalogAnimes(`${preparedApiUrl}&page=${page}`)
-        .then((data) => {
-          const isSameLength = animes.length === animes.concat(data).length;
+      getCatalogAnimes(`${preparedApiUrl}&page=${page}`).then((data) => {
+        const isSameLength = animes.length === animes.concat(data).length;
 
-          if (isSameLength) {
-            setHasMore(false);
-          } else {
-            dispatch(CatalogAnimesActions.set([...animes, ...data]));
-          }
-        });
+        if (isSameLength) {
+          setHasMore(false);
+        } else {
+          dispatch(CatalogAnimesActions.set([...animes, ...data]));
+        }
+      });
     }
   }, [page]);
 
@@ -91,20 +89,12 @@ export const Сatalog = () => {
 
   return (
     <>
-      {loading && (
-        <LinearProgress />
-      )}
+      {loading && <LinearProgress />}
 
       {error && !loading && (
         <>
-          <p>
-            {error}
-          </p>
-          <Button
-            onClick={refresh}
-          >
-            Try Again
-          </Button>
+          <p>{error}</p>
+          <Button onClick={refresh}>Try Again</Button>
         </>
       )}
 
