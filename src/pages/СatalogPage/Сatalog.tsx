@@ -17,7 +17,7 @@ import { getPreparedApiUrl } from '../../helpers/getPreparedApiUrl';
 
 export const Сatalog = () => {
   const [page, setPage] = useState<number>(1);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
   const [updateFilter, setUpdateFilter] = useState(false);
 
   const dispatch = useAppDispatch();

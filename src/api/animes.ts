@@ -37,3 +37,7 @@ export const getSearchAnimes = (query: string) => {
 
   return [];
 };
+
+export const getAnimeById = (id: number) => {
+  return get.request(`animes/${id}`);
+};

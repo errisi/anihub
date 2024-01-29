@@ -1,6 +1,6 @@
 import { AnimeKind } from '../types/AnimeKind';
 
-export const returnAnimeKind = (kind: AnimeKind) => {
+export const getAnimeKind = (kind: AnimeKind) => {
   switch (kind) {
     case AnimeKind.TV:
       return 'ТВ-Сериал';
@@ -18,6 +18,6 @@ export const returnAnimeKind = (kind: AnimeKind) => {
       return 'Фильм';
 
     default:
-      return '';
+      return 'Другое';
   }
 };

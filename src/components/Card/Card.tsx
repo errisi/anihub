@@ -1,8 +1,11 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { Anime } from '../../types/Anime';
-import { returnAnimeKind } from '../../helpers/returnAnimeKind';
+import { getAnimeKind } from '../../helpers/getAnimeKind';
 import { AnimeKind } from '../../types/AnimeKind';
 import style from './Card.module.scss';
+import { getAnimeStatus } from '../../helpers/getAnimeStatus';
+import { AnimeStatus } from '../../types/AnimeStatus';
 
 type Props = {
   anime: Anime;
@@ -10,7 +13,7 @@ type Props = {
 
 export const AnimeCard: FC<Props> = ({ anime }) => (
   <div className={style.card}>
-    <div className={style.card__image__wrapper}>
+    <Link to={`../anime/${anime.id}`} className={style.card__image__wrapper}>
       <img
         className={style.card__image__wrapper__item}
         src={`https://shikimori.one:${anime.image.original}`}
@@ -29,10 +32,10 @@ export const AnimeCard: FC<Props> = ({ anime }) => (
         </div>
 
         <div className={style.card__image__wrapper__item__overlay__kind}>
-          <p>{`${returnAnimeKind(anime.kind as AnimeKind) || ''}`}</p>
+          <p>{`${getAnimeKind(anime.kind as AnimeKind) || ''}`}</p>
         </div>
       </div>
-    </div>
+    </Link>
 
     <p className={style.card__title}>
       {anime.russian.length < 35
@@ -42,7 +45,7 @@ export const AnimeCard: FC<Props> = ({ anime }) => (
     <p className={style.card__additional}>
       <p>{anime.aired_on.split('-').splice(0, 1)}</p>
       <p className={style.card__additional__status}>
-        {anime.status === 'ongoing' ? 'Онгоинг' : 'Вышел'}
+        {getAnimeStatus(anime.status as AnimeStatus)}
       </p>
     </p>
   </div>

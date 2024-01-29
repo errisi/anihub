@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { SearchOutlined } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
 import {
@@ -8,7 +9,7 @@ import * as _ from 'lodash';
 import styles from './HeaderSearch.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import * as SearchAnimesActions from '../../../features/SearchAnimes';
-import { returnAnimeKind } from '../../../helpers/returnAnimeKind';
+import { getAnimeKind } from '../../../helpers/getAnimeKind';
 import { AnimeKind } from '../../../types/AnimeKind';
 
 const getSearchResult = _.debounce((value, dispatch) => {
@@ -50,6 +51,12 @@ export const AppHeaderSearch = () => {
     }
   }, [isActive]);
 
+  const handleOnBlur = () => {
+    setTimeout(() => {
+      setIsActive(false);
+    }, 300);
+  };
+
   return (
     <div className={styles.search}>
       <Box
@@ -61,7 +68,7 @@ export const AppHeaderSearch = () => {
           fullWidth
           focused={isActive || isFocused}
           onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onBlur={handleOnBlur}
           label="Поиск аниме"
           variant="outlined"
           size="small"
@@ -112,26 +119,30 @@ export const AppHeaderSearch = () => {
                 && !error
                 && animes.map((anime) => (
                   <div className={styles.search__box__list__item}>
-                    <img
-                      src={`https://shikimori.one:${anime.image.x48}`}
-                      alt="anime"
-                      className={styles.search__box__list__item__image}
-                    />
+                    <Link to={`../anime/${anime.id}`}>
+                      <img
+                        src={`https://shikimori.one:${anime.image.x48}`}
+                        alt="anime"
+                        className={styles.search__box__list__item__image}
+                      />
+                    </Link>
 
                     <div className={styles.search__box__list__item__text}>
-                      <p className={
-                        styles.search__box__list__item__text__title
-                      }
+                      <Link
+                        to={`../anime/${anime.id}`}
+                        className={
+                          styles.search__box__list__item__text__title
+                        }
                       >
                         {anime.russian}
-                      </p>
+                      </Link>
 
                       <p
                         className={
                           styles.search__box__list__item__text__description
                         }
                       >
-                        {`${anime.aired_on.split('-').splice(0, 1)} / ${returnAnimeKind(anime.kind as AnimeKind) || ''}`}
+                        {`${anime.aired_on.split('-').splice(0, 1)} / ${getAnimeKind(anime.kind as AnimeKind) || ''}`}
                       </p>
                     </div>
                   </div>

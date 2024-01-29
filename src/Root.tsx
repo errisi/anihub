@@ -7,6 +7,7 @@ import { PageNotFound } from './pages/pageNotFound/pageNotFound';
 import { App } from './components/App/App';
 import { theme } from './store/theme';
 import store from './store/store';
+import { AnimePage } from './pages/animePage/animePage';
 
 export const Root = () => (
   <Provider store={store}>
@@ -15,7 +16,12 @@ export const Root = () => (
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<HomePage />} />
-            <Route path="anime" element={<Сatalog />} />
+
+            <Route path="anime/">
+              <Route index element={<Сatalog />} />
+              <Route path=":animeId" element={<AnimePage />} />
+            </Route>
+
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>

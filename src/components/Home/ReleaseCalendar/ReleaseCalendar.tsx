@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Accordion,
   AccordionDetails,
@@ -120,15 +121,17 @@ export const ReleaseCalendar: FC = () => {
                         className={styles.release__table}
                       >
                         <div className={styles.release__table__left_side}>
-                          <img
-                            src={`https://shikimori.one${release.anime.image.x48}`}
-                            alt="anime"
-                            className={styles.release__table__image}
-                          />
+                          <Link to={`../anime/${release.anime.id}`}>
+                            <img
+                              src={`https://shikimori.one${release.anime.image.x48}`}
+                              alt="anime"
+                              className={styles.release__table__image}
+                            />
+                          </Link>
 
-                          <div className="release__table__next-episode">
+                          <Link to={`../anime/${release.anime.id}`} className="release__table__next-episode">
                             <p>{release.anime.russian}</p>
-                          </div>
+                          </Link>
                         </div>
 
                         <div className={styles.release__table__right_side}>
