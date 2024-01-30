@@ -4,6 +4,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
+    position: sticky;
+    top: 12px;
 
     &_title {
       margin-bottom: 16px;

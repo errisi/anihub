@@ -130,7 +130,7 @@ export const AnimeCatalogFilter: FC<Props> = ({ update, setUpdate }) => {
   }, [update]);
 
   return (
-    <>
+    <div className={styles.catalog__filter}>
       <div className={styles.catalog__filter_wrapper}>
         <h2
           className={styles.catalog__filter_title}
@@ -188,6 +188,6 @@ export const AnimeCatalogFilter: FC<Props> = ({ update, setUpdate }) => {
         </Stack>
 
       </div>
-    </>
+    </div>
   );
 };
