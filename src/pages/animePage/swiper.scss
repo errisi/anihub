@@ -1,0 +1,17 @@
+
+.swiper {
+  grid-column: 1/-1;
+  position: static;
+  padding: 8px 12px;
+  min-width: 1054px;
+  display: flex;
+  gap: 24px;
+}
+
+.swiper-slide {
+  width: fit-content;
+}
+
+.swiper-slide-blank {
+  display: none;
+}
