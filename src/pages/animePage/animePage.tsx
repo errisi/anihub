@@ -276,6 +276,9 @@ export const AnimePage = () => {
                 )}
               </section>
             </div>
+            <div className={styles.anime__info__score}>
+              {anime.score}
+            </div>
           </div>
           <hr className={styles.anime__line} />
 
@@ -299,6 +302,16 @@ export const AnimePage = () => {
               <hr className={styles.anime__line} />
             </section>
           )}
+
+          <div className="player">
+            <Box
+              sx={{
+                width: '100%',
+                height: 486,
+                bgcolor: 'white',
+              }}
+            />
+          </div>
         </>
       )}
     </div>

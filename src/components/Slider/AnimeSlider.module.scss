@@ -1,0 +1,17 @@
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+
+  &__back {
+    position: absolute;
+    bottom: 200px;
+    right: 80px;
+  }
+
+  &__forward {
+    position: absolute;
+    bottom: 200px;
+    left: 80px;
+  }
+}
