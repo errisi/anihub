@@ -1,0 +1,32 @@
+.anime {
+  &__screenshots__title {
+    margin-bottom: 12px;
+  }
+
+  &__slider {
+    margin-bottom: 26px;
+
+    &__buttons {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      z-index: 10;
+      height: 0;
+      margin-bottom: 16px;
+
+      &__back {
+        position: absolute;
+        bottom: 140px;
+        right: 80px;
+        height: 36px;
+      }
+
+      &__forward {
+        position: absolute;
+        bottom: 140px;
+        left: 80px;
+        height: 36px;
+      }
+    }
+  }
+}

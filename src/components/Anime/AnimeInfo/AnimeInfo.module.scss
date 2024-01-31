@@ -1,0 +1,63 @@
+@import '../../../styles/variables/colors.scss';
+
+.anime {
+  &__info {
+    display: flex;
+    align-items: start;
+    padding: 16px;
+    gap: 30px;
+
+    &__left {
+      max-width: 225px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+
+      &__image {
+        border-radius: 10px;
+      }
+    }
+
+    &__right {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      padding: 0 20px 20px 20px;
+
+      &__title_eng {
+        color: $text-secondary;
+        margin-bottom: 26px;
+      }
+
+      &__description {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: start;
+
+        &__item {
+          display: flex;
+          justify-content: space-between;
+
+          &__title {
+            color: $text-placeholder;
+            width: 240px;
+          }
+
+          &__value_imp {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+
+    &__score {
+      font-size: 1.4rem;
+      border-radius: 10px;
+      border: 1px solid $primary-color;
+      padding: 6px 10px;
+    }
+  }
+}

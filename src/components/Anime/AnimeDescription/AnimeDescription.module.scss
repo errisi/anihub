@@ -1,0 +1,19 @@
+@import '../../../styles/variables/colors.scss';
+
+.anime {
+  &__description {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+
+    &__text {
+      text-align: justify;
+      margin-bottom: 10px;
+    }
+
+    &__line {
+      color: $primary-color;
+    }
+  }
+}

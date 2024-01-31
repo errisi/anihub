@@ -41,3 +41,11 @@ export const getSearchAnimes = (query: string) => {
 export const getAnimeById = (id: number) => {
   return get.request(`animes/${id}`);
 };
+
+export const getAnimeRelatedById = (id: number) => {
+  return get.request(`animes/${id}/related`);
+};
+
+export const getAnimeSimilarById = (id: number) => {
+  return get.request(`animes/${id}/similar`);
+};
