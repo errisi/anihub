@@ -2,23 +2,23 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './animePage.module.scss';
-import {
-  AnimeDescription as AnimeDescriptionType,
-} from '../../types/AnimeDescription';
+import { AnimeDescription as Description } from '../../types/AnimeDescription';
 import {
   getAnimeById,
-  // getAnimeRelatedById,
+  getAnimeRelatedById,
   // getAnimeSimilarById,
 } from '../../api/animes';
 import { AnimeInfo } from '../../components/Anime/AnimeInfo';
 import { AnimeDescription } from '../../components/Anime/AnimeDescription';
 import { AnimeScreenshots } from '../../components/Anime/AnimeScreenshots';
 import { AnimePlayer } from '../../components/Anime/AnimePlayer';
+import { AnimeRelated as Related } from '../../types/AnimeRelated';
+import { AnimeRelated } from '../../components/Anime/AnimeRelated/AnimeRelated';
 
 export const AnimePage = () => {
   const { animeId } = useParams();
-  const [anime, setAnime] = useState<AnimeDescriptionType | null>(null);
-  // const [related, setRelated] = useState<AnimeDescriptionType | null>(null);
+  const [anime, setAnime] = useState<Description | null>(null);
+  const [related, setRelated] = useState<Related[]>([]);
   // const [similar, setSimilar] = useState<AnimeDescriptionType | null>(null);
   const [selectedCollection, setSelectedCollection] = useState<string>('');
   const collections = ['Нравится', 'Приключения'];
@@ -30,7 +30,7 @@ export const AnimePage = () => {
 
   useEffect(() => {
     getAnimeById(Number(animeId)).then(setAnime);
-    // getAnimeRelatedById(Number(animeId)).then(setRelated);
+    getAnimeRelatedById(Number(animeId)).then(setRelated);
     // getAnimeSimilarById(Number(animeId)).then(setSimilar);
   }, [animeId]);
 
@@ -57,6 +57,10 @@ export const AnimePage = () => {
               <AnimeScreenshots anime={anime} />
               <hr className={styles.anime__line} />
             </>
+          )}
+
+          {!!related && (
+            <AnimeRelated related={related} />
           )}
 
           <AnimePlayer anime={anime} />

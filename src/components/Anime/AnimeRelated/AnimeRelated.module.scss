@@ -1,11 +1,10 @@
-@import '../../styles/variables/colors.scss';
+@import '../../../styles/variables/colors.scss';
+
+.related__title {
+  margin-bottom: 16px;
+}
 
 .anime {
-  &__line {
-    color: $primary-color;
-    margin-bottom: 16px;
-  }
-
   &__related {
     display: flex;
     flex-wrap: wrap;
