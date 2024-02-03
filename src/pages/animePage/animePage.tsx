@@ -59,7 +59,7 @@ export const AnimePage = () => {
             </>
           )}
 
-          {!!related && (
+          {!!related.filter((r) => r.anime).length && (
             <>
               <AnimeRelated related={related} />
               <hr className={styles.anime__line} />
