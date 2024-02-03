@@ -60,7 +60,10 @@ export const AnimePage = () => {
           )}
 
           {!!related && (
-            <AnimeRelated related={related} />
+            <>
+              <AnimeRelated related={related} />
+              <hr className={styles.anime__line} />
+            </>
           )}
 
           <AnimePlayer anime={anime} />
