@@ -54,6 +54,7 @@ export const AppHeaderSearch = () => {
   const handleOnBlur = () => {
     setTimeout(() => {
       setIsActive(false);
+      setIsFocused(false);
     }, 300);
   };
 
