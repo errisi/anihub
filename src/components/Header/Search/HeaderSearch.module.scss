@@ -1,12 +1,10 @@
 @import '../../../styles/variables/colors.scss';
 
 .search {
-  min-width: 100px;
-  max-width: 360px;
   transition-duration: 0.4s;
 
   &__box {
-    width: 360px;
+    width: 100%;
     border-radius: 0 0 6px 6px;
     background-color: #000;
     border-bottom: 2px solid;

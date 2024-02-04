@@ -1,0 +1,13 @@
+@import '../variables/sizes.scss';
+
+@mixin onTablet {
+  @media (max-width: $max-width-tablet) {
+    @content;
+  }
+}
+
+@mixin onPhone {
+  @media (max-width: $max-width-phone) {
+    @content;
+  }
+}

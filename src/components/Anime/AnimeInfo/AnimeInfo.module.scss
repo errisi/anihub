@@ -67,6 +67,13 @@
         gap: 16px;
         align-items: start;
 
+        &__next_episode {
+          display: flex;
+          justify-content: space-between;
+          border: 1px $primary-color;
+          border-style: solid none;
+        }
+
         &__item {
           display: flex;
           justify-content: space-between;

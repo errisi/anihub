@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
-import { Container } from '@mui/material';
 import { useEffect } from 'react';
+import { Container } from '@mui/material';
 import { AppHeader } from '../Header/Header';
 import { AppFooter } from '../Footer/Footer';
 import styles from './App.module.scss';
@@ -17,7 +17,7 @@ export const App = () => {
     dispatch(BestSeasonOngoingsActions.init());
     dispatch(NewReleasedActions.init());
     dispatch(ReleaseCalendarActions.init());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

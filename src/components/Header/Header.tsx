@@ -1,39 +1,30 @@
-import { Button, ButtonGroup, Container } from '@mui/material';
-import { Notifications } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
-import { AppHeaderHavigation } from './Navigation/HeaderHavigation';
-import { AppHeaderSearch } from './Search/HeaderSearch';
-import { AppHeaderLogo } from './Logo/HeaderLogo';
-import styles from './Header.module.scss';
+import { useEffect, useState } from 'react';
+import { DesktopHeader } from './Desktop/DesktopHeader';
+import { TabletHeader } from './Tablet/TabletHeader';
+import { PhoneHeader } from './Phone/PhoneHeader';
 
-export const AppHeader = () => (
-  <>
-    <Container>
-      <div className={styles.header__wrapper}>
-        <div className={styles.header__left_side}>
-          <AppHeaderLogo />
+export const AppHeader = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-          <AppHeaderHavigation />
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
 
-          <AppHeaderSearch />
-        </div>
+    window.addEventListener('resize', handleResize);
 
-        <div className={styles.header__right_side}>
-          <Button variant="text" component={Link} to="/">
-            <Notifications color="primary" />
-          </Button>
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
-          <ButtonGroup>
-            <Button variant="outlined" component={Link} to="/">
-              Войти
-            </Button>
-
-            <Button variant="contained" component={Link} to="/">
-              Регистрация
-            </Button>
-          </ButtonGroup>
-        </div>
-      </div>
-    </Container>
-  </>
-);
+  return (
+    <>
+      {windowWidth >= 1300 && <DesktopHeader />}
+      {windowWidth < 1300 && windowWidth >= 640 && (
+        <TabletHeader windowWidth={windowWidth} />
+      )}
+      {windowWidth < 640 && <PhoneHeader />}
+    </>
+  );
+};

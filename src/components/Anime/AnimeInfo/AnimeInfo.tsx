@@ -107,14 +107,16 @@ export const AnimeInfo: FC<Props> = ({
 
         <section className={styles.anime__info__right__description}>
           {!!anime.next_episode_at && (
-            <div className={styles.anime__info__right__description__item}>
+            <div
+              className={styles.anime__info__right__description__next_episode}
+            >
               <p
                 className={styles.anime__info__right__description__item__title}
               >
                 <Box
                   sx={{
-                    borderTop: 1,
-                    borderBottom: 1,
+                    // borderTop: 1,
+                    // borderBottom: 1,
                     borderColor: '#e91e63',
                     display: 'flex',
                     'align-items': 'center',
@@ -131,8 +133,8 @@ export const AnimeInfo: FC<Props> = ({
               >
                 <Box
                   sx={{
-                    borderTop: 1,
-                    borderBottom: 1,
+                    // borderTop: 1,
+                    // borderBottom: 1,
                     height: '34px',
                     width: '250px',
                     borderColor: '#e91e63',

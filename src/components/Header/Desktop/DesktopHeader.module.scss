@@ -1,0 +1,26 @@
+.header {
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__left_side {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  &__right_side {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  &__search {
+    width: 360px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+}

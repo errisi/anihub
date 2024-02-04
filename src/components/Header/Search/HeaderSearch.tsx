@@ -2,7 +2,11 @@ import { Link } from 'react-router-dom';
 import { SearchOutlined } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
 import {
-  Box, InputAdornment, LinearProgress, Slide, TextField,
+  Box,
+  InputAdornment,
+  LinearProgress,
+  Slide,
+  TextField,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import * as _ from 'lodash';
@@ -23,9 +27,11 @@ export const AppHeaderSearch = () => {
 
   const dispatch = useAppDispatch();
 
-  const { SearchAnimes: animes, loading, error } = useAppSelector(
-    (state) => state.SearchAnimes,
-  );
+  const {
+    SearchAnimes: animes,
+    loading,
+    error,
+  } = useAppSelector((state) => state.SearchAnimes);
 
   useEffect(() => {
     if (query.length > 0) {
@@ -60,11 +66,7 @@ export const AppHeaderSearch = () => {
 
   return (
     <div className={styles.search}>
-      <Box
-        sx={{
-          width: 360,
-        }}
-      >
+      <Box>
         <TextField
           fullWidth
           focused={isActive || isFocused}
@@ -75,9 +77,9 @@ export const AppHeaderSearch = () => {
           size="small"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          onClick={() => (
-            query.length > 0 ? setIsActive(true) : setIsActive(false)
-          )}
+          onClick={
+            () => (query.length > 0 ? setIsActive(true) : setIsActive(false))
+          }
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -105,17 +107,12 @@ export const AppHeaderSearch = () => {
           }}
         />
 
-        <Slide
-          in={isActive}
-        >
-          <Box
-            className={styles.search__box}
-          >
+        <Slide in={isActive}>
+          <Box className={styles.search__box}>
             <hr className={styles.search__box__line} />
 
             <div className={styles.search__box__list}>
-              {
-                animes.length > 0
+              {animes.length > 0
                 && !loading
                 && !error
                 && animes.map((anime) => (
@@ -131,9 +128,7 @@ export const AppHeaderSearch = () => {
                     <div className={styles.search__box__list__item__text}>
                       <Link
                         to={`../anime/${anime.id}`}
-                        className={
-                          styles.search__box__list__item__text__title
-                        }
+                        className={styles.search__box__list__item__text__title}
                       >
                         {anime.russian}
                       </Link>
@@ -143,29 +138,21 @@ export const AppHeaderSearch = () => {
                           styles.search__box__list__item__text__description
                         }
                       >
-                        {`${anime.aired_on.split('-').splice(0, 1)} / ${getAnimeKind(anime.kind as AnimeKind) || ''}`}
+                        {`${anime.aired_on.split('-').splice(0, 1)} / ${
+                          getAnimeKind(anime.kind as AnimeKind) || ''
+                        }`}
                       </p>
                     </div>
                   </div>
-                ))
-              }
-              {!animes.length && !loading && !error && (
-                <p>
-                  Ничего не найдено
-                </p>
-              )}
+                ))}
+              {!animes.length && !loading && !error && <p>Ничего не найдено</p>}
 
-              {(loading) && (
-                <LinearProgress />
-              )}
+              {loading && <LinearProgress />}
 
-              {error && !loading && (
-                <p>{error}</p>
-              )}
+              {error && !loading && <p>{error}</p>}
             </div>
           </Box>
         </Slide>
-
       </Box>
     </div>
   );

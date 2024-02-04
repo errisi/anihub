@@ -38,6 +38,7 @@ export const AnimeSlider: FC<Props> = ({ animes }) => {
           1200: { slidesPerGroup: 5 },
         }}
         onSwiper={setSwiperRef}
+        className="swiperAnimes"
       >
         {animes.map((anime) => (
           <>

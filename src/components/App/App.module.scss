@@ -1,3 +1,5 @@
+@import '../../styles/mixins/responsive.scss';
+
 .footer {
   min-height: 120px;
   display: flex;
@@ -22,6 +24,10 @@
   display: grid;
   align-items: center;
   margin-bottom: 24px;
+
+  @include onPhone {
+  min-height: 32px;
+  }
 }
 
 .wrap {

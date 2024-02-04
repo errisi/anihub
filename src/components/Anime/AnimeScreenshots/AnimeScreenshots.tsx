@@ -83,6 +83,7 @@ export const AnimeScreenshots: FC<Props> = ({ anime }) => {
               1200: { slidesPerGroup: 1 },
             }}
             onSwiper={setSwiperRef}
+            className="swiperScreenshots"
           >
             <>
               {anime.screenshots?.length && (
