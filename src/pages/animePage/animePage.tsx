@@ -74,6 +74,8 @@ export const AnimePage = () => {
 
           <AnimePlayer anime={anime} />
           <hr className={styles.anime__line} />
+
+          <h2>Комментарии</h2>
         </>
       )}
     </div>
