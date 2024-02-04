@@ -25,8 +25,13 @@ export const AnimeScreenshots: FC<Props> = ({ anime }) => {
     if (swiperRef && swiperRef.slides.length < 4) {
       setIsBeginning(true);
       setIsEnd(true);
+
+      return;
     }
-  }, [swiperRef, anime]);
+
+    setIsBeginning(true);
+    setIsEnd(false);
+  }, [swiperRef, anime, anime.id]);
 
   const handleBack = useCallback(() => {
     swiperRef?.slidePrev();
