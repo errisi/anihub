@@ -92,6 +92,14 @@
     padding-bottom: 0;
   }
 
+  &__details {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 72px;
+  }
+
   &__additional {
     margin: 0;
     padding: 0;

@@ -38,16 +38,18 @@ export const AnimeCard: FC<Props> = ({ anime, to }) => (
       </div>
     </Link>
 
-    <p className={style.card__title}>
-      {anime.russian.length < 35
-        ? anime.russian
-        : `${anime.russian.split('').slice(0, 35).join('')}...`}
-    </p>
-    <p className={style.card__additional}>
-      <p>{anime.aired_on.split('-').splice(0, 1)}</p>
-      <p className={style.card__additional__status}>
-        {getAnimeStatus(anime.status as AnimeStatus)}
+    <div className={style.card__details}>
+      <p className={style.card__title}>
+        {anime.russian.length < 35
+          ? anime.russian
+          : `${anime.russian.split('').slice(0, 35).join('')}...`}
       </p>
-    </p>
+      <p className={style.card__additional}>
+        <p>{anime.aired_on.split('-').splice(0, 1)}</p>
+        <p className={style.card__additional__status}>
+          {getAnimeStatus(anime.status as AnimeStatus)}
+        </p>
+      </p>
+    </div>
   </div>
 );

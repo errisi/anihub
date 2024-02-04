@@ -1,0 +1,27 @@
+@import '../../styles/variables/colors.scss';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 1.05rem;
+
+  &__list {
+    list-style: inside;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__line {
+    color: $primary-color;
+  }
+}
+
+li::marker {
+  color: $primary-color;
+}
+
+p {
+  line-height: 1.6;
+}

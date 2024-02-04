@@ -1,3 +1,5 @@
+@import '../../styles/variables/colors.scss';
+
 .footer {
   &__wrapper {
     position: relative;
@@ -18,13 +20,16 @@
     &__item {
       color: aliceblue;
       text-decoration: none;
+      background-color: rgba(#fff, 0);
+      border: 0;
       border-bottom: 1px #e91e626d solid;
+      font-size: medium;
       padding: 4px;
       transition: all 0.2s;
     }
 
     &__item:hover {
-      border-bottom: 1px #e91e63 solid;
+      border-bottom: 1px $primary-color solid;
     }
   }
 
@@ -33,5 +38,39 @@
     position: absolute;
     bottom: -32px;
     right: 4px;
+  }
+}
+
+.contacts {
+  position: absolute;
+  top: -120px;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  border-radius: 10px;
+  display: flex;
+  // flex-direction: column;
+  justify-content: start;
+  padding: 20px;
+  gap: 6px;
+
+  &__item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    &:not(:last-child)::after {
+      content: '|';
+      color: $primary-color;
+    }
+
+    &__icon {
+      height: 26px;
+
+      &_22 {
+        height: 22px;
+      }
+    }
   }
 }

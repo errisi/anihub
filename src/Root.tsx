@@ -8,6 +8,9 @@ import { App } from './components/App/App';
 import { theme } from './store/theme';
 import store from './store/store';
 import { AnimePage } from './pages/animePage/animePage';
+import { TermsPage } from './pages/termsPage/termsPage';
+import { ForOwnersPage } from './pages/forOwnersPage/forOwnersPage';
+import { PrivacyPage } from './pages/privacyPage/privacyPage';
 
 export const Root = () => (
   <Provider store={store}>
@@ -21,6 +24,10 @@ export const Root = () => (
               <Route index element={<Сatalog />} />
               <Route path=":animeId" element={<AnimePage />} />
             </Route>
+
+            <Route path="terms/" element={<TermsPage />} />
+            <Route path="owners/" element={<ForOwnersPage />} />
+            <Route path="privacy/" element={<PrivacyPage />} />
 
             <Route path="*" element={<PageNotFound />} />
           </Route>
