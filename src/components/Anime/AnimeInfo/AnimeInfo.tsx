@@ -1,10 +1,13 @@
 import { FC } from 'react';
 import {
   Box,
+  Button,
   FormControl,
+  IconButton,
   MenuItem,
   Select,
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import moment from 'moment-timezone';
 import 'moment/dist/locale/ru';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
@@ -14,18 +17,28 @@ import { getAnimeKind } from '../../../helpers/getAnimeKind';
 import { AnimeKind } from '../../../types/AnimeKind';
 import { getAnimeStatus } from '../../../helpers/getAnimeStatus';
 import { AnimeStatus } from '../../../types/AnimeStatus';
+import { Anime } from '../../../types/Anime';
+import { AnimeCard } from '../../Card';
 
 type Props = {
   anime: AnimeDescription;
   collections: string[];
   setSelectedCollection: React.Dispatch<React.SetStateAction<string>>;
+  similar: Anime[];
+  isSimilarOpen: boolean;
+  setIsSimilarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const AnimeInfo: FC<Props> = ({
   anime,
   collections,
   setSelectedCollection,
+  similar,
+  isSimilarOpen,
+  setIsSimilarOpen,
 }) => {
+  const handleSimilarButton = () => setIsSimilarOpen((c) => !c);
+
   function formatReleaseTime(releaseTime: string) {
     const parsedTime = moment(releaseTime);
 
@@ -62,6 +75,31 @@ export const AnimeInfo: FC<Props> = ({
             ))}
           </Select>
         </FormControl>
+        <Button fullWidth variant="contained" onClick={handleSimilarButton}>
+          Похожие аниме
+        </Button>
+        {isSimilarOpen && (
+          <div className={styles.anime__info__similar}>
+            <IconButton
+              onClick={handleSimilarButton}
+              sx={{
+                position: 'absolute',
+                top: 24,
+                right: '18%',
+              }}
+            >
+              <CloseIcon color="primary" fontSize="large" />
+            </IconButton>
+            <div className={styles.anime__info__similar__content}>
+              {(similar.length > 25 ? similar.splice(0, 25) : similar).map(
+                (a) => (
+                  <AnimeCard to="../../" anime={a} />
+                ),
+              )}
+              {!similar.length && <h2>К сожалению похожих аниме не найдено</h2>}
+            </div>
+          </div>
+        )}
       </div>
       <div className={styles.anime__info__right}>
         <h1 className="anime__title">{anime?.russian}</h1>

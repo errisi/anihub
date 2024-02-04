@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Accordion,
@@ -53,6 +53,15 @@ export const ReleaseCalendar: FC = () => {
     dispatch(ReleaseCalendarActions.setError(''));
     dispatch(ReleaseCalendarActions.init());
   };
+
+  useEffect(() => {
+    if (error && !loading) {
+      setTimeout(() => {
+        refresh();
+      }, 1000);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error, loading]);
 
   function filterReleasesByDay(calendarArr: Calendar[], targetDay: number) {
     const currentDate = new Date();

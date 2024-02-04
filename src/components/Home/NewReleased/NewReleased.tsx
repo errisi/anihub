@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Button, LinearProgress } from '@mui/material';
 import { AnimeCard } from '../../Card/Card';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
@@ -19,6 +19,15 @@ export const NewReleased: FC = () => {
     dispatch(NewReleasedActions.setError(''));
     dispatch(NewReleasedActions.init());
   };
+
+  useEffect(() => {
+    if (error && !loading) {
+      setTimeout(() => {
+        refresh();
+      }, 1000);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error, loading]);
 
   return (
     <div className={styles.home__block}>
@@ -45,6 +54,7 @@ export const NewReleased: FC = () => {
         <div className={styles.home__card__grid}>
           {animes.map((anime) => (
             <AnimeCard
+              to="../"
               key={anime.id}
               anime={anime}
             />

@@ -6,7 +6,7 @@ import { AnimeDescription as Description } from '../../types/AnimeDescription';
 import {
   getAnimeById,
   getAnimeRelatedById,
-  // getAnimeSimilarById,
+  getAnimeSimilarById,
 } from '../../api/animes';
 import { AnimeInfo } from '../../components/Anime/AnimeInfo';
 import { AnimeDescription } from '../../components/Anime/AnimeDescription';
@@ -14,12 +14,14 @@ import { AnimeScreenshots } from '../../components/Anime/AnimeScreenshots';
 import { AnimePlayer } from '../../components/Anime/AnimePlayer';
 import { AnimeRelated as Related } from '../../types/AnimeRelated';
 import { AnimeRelated } from '../../components/Anime/AnimeRelated/AnimeRelated';
+import { Anime } from '../../types/Anime';
 
 export const AnimePage = () => {
   const { animeId } = useParams();
   const [anime, setAnime] = useState<Description | null>(null);
   const [related, setRelated] = useState<Related[]>([]);
-  // const [similar, setSimilar] = useState<AnimeDescriptionType | null>(null);
+  const [similar, setSimilar] = useState<Anime[]>([]);
+  const [isSimilarOpen, setIsSimilarOpen] = useState(false);
   const [selectedCollection, setSelectedCollection] = useState<string>('');
   const collections = ['Нравится', 'Приключения'];
 
@@ -31,7 +33,8 @@ export const AnimePage = () => {
   useEffect(() => {
     getAnimeById(Number(animeId)).then(setAnime);
     getAnimeRelatedById(Number(animeId)).then(setRelated);
-    // getAnimeSimilarById(Number(animeId)).then(setSimilar);
+    getAnimeSimilarById(Number(animeId)).then(setSimilar);
+    setIsSimilarOpen(false);
   }, [animeId]);
 
   return (
@@ -42,6 +45,9 @@ export const AnimePage = () => {
             anime={anime}
             collections={collections}
             setSelectedCollection={setSelectedCollection}
+            similar={similar}
+            isSimilarOpen={isSimilarOpen}
+            setIsSimilarOpen={setIsSimilarOpen}
           />
           <hr className={styles.anime__line} />
 

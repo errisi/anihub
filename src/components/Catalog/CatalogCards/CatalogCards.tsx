@@ -55,6 +55,7 @@ export const CatalogCards: FC<Props> = ({
             <div className={styles.card__catalog_grid}>
               {animes.map((anime) => (
                 <AnimeCard
+                  to="../"
                   key={anime.id}
                   anime={anime}
                 />

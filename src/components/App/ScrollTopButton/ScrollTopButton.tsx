@@ -34,7 +34,7 @@ const ScrollButton = () => {
         bottom: '30px',
         height: '50px',
         width: '50px',
-        'z-index': 1,
+        'z-index': 50,
       }}
     >
       <KeyboardArrowUpIcon color="primary" fontSize="large" />

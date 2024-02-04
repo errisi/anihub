@@ -9,11 +9,12 @@ import { AnimeStatus } from '../../types/AnimeStatus';
 
 type Props = {
   anime: Anime;
+  to: string;
 };
 
-export const AnimeCard: FC<Props> = ({ anime }) => (
+export const AnimeCard: FC<Props> = ({ anime, to }) => (
   <div className={style.card}>
-    <Link to={`../anime/${anime.id}`} className={style.card__image__wrapper}>
+    <Link to={`${to}/anime/${anime.id}`} className={style.card__image__wrapper}>
       <img
         className={style.card__image__wrapper__item}
         src={`https://shikimori.one:${anime.image.original}`}

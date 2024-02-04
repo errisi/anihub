@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Button, LinearProgress } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import * as BestSeasonOngoingsActions
@@ -20,6 +20,15 @@ export const BestSeasonOngoings: FC = () => {
     dispatch(BestSeasonOngoingsActions.setError(''));
     dispatch(BestSeasonOngoingsActions.init());
   };
+
+  useEffect(() => {
+    if (error && !loading) {
+      setTimeout(() => {
+        refresh();
+      }, 1000);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error, loading]);
 
   return (
     <div className={styles.home__block}>

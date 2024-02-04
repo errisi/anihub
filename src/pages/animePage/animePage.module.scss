@@ -5,33 +5,4 @@
     color: $primary-color;
     margin-bottom: 16px;
   }
-
-  &__related {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    width: 100%;
-    margin-bottom: 16px;
-
-    &__item {
-      display: flex;
-      width: 250px;
-
-      &__img {
-        border-radius:6px;
-      }
-
-      &__text {
-        padding: 0 6px;
-        &__title {
-          font-size: 1rem;
-        }
-
-        &__type {
-          font-size: 0.9rem;
-          color: $text-secondary;
-        }
-      }
-    }
-  }
 }
