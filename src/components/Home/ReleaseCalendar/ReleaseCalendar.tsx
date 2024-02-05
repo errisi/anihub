@@ -19,28 +19,36 @@ import styles from './ReleaseCalendar.module.scss';
 export const ReleaseCalendar: FC = () => {
   const dispatch = useAppDispatch();
 
-  const daysOfTheWeek = [{
-    dayName: 'Понедельник',
-    dayNumber: 1,
-  }, {
-    dayName: 'Вторник',
-    dayNumber: 2,
-  }, {
-    dayName: 'Среда',
-    dayNumber: 3,
-  }, {
-    dayName: 'Четверг',
-    dayNumber: 4,
-  }, {
-    dayName: 'Пятница',
-    dayNumber: 5,
-  }, {
-    dayName: 'Суббота',
-    dayNumber: 6,
-  }, {
-    dayName: 'Воскресенье',
-    dayNumber: 0,
-  }];
+  const daysOfTheWeek = [
+    {
+      dayName: 'Понедельник',
+      dayNumber: 1,
+    },
+    {
+      dayName: 'Вторник',
+      dayNumber: 2,
+    },
+    {
+      dayName: 'Среда',
+      dayNumber: 3,
+    },
+    {
+      dayName: 'Четверг',
+      dayNumber: 4,
+    },
+    {
+      dayName: 'Пятница',
+      dayNumber: 5,
+    },
+    {
+      dayName: 'Суббота',
+      dayNumber: 6,
+    },
+    {
+      dayName: 'Воскресенье',
+      dayNumber: 0,
+    },
+  ];
 
   const {
     releaseCalendar: data,
@@ -60,18 +68,17 @@ export const ReleaseCalendar: FC = () => {
         refresh();
       }, 1000);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, loading]);
 
   function filterReleasesByDay(calendarArr: Calendar[], targetDay: number) {
     const currentDate = new Date();
 
-    return calendarArr
-      .filter((release) => {
-        const releaseDate = new Date(release.next_episode_at);
+    return calendarArr.filter((release) => {
+      const releaseDate = new Date(release.next_episode_at);
 
-        return releaseDate.getDay() === targetDay && releaseDate >= currentDate;
-      });
+      return releaseDate.getDay() === targetDay && releaseDate >= currentDate;
+    });
   }
 
   function formatReleaseTime(releaseTime: string) {
@@ -92,14 +99,8 @@ export const ReleaseCalendar: FC = () => {
 
       {error && !loading && (
         <>
-          <p>
-            {error}
-          </p>
-          <Button
-            onClick={refresh}
-          >
-            Try Again
-          </Button>
+          <p>{error}</p>
+          <Button onClick={refresh}>Try Again</Button>
         </>
       )}
 
@@ -116,9 +117,7 @@ export const ReleaseCalendar: FC = () => {
                   aria-controls="panel1-content"
                   id="panel1-header"
                 >
-                  <Typography
-                    className={styles.release__title}
-                  >
+                  <Typography className={styles.release__title}>
                     {day.dayName}
                   </Typography>
                 </AccordionSummary>
@@ -138,7 +137,10 @@ export const ReleaseCalendar: FC = () => {
                             />
                           </Link>
 
-                          <Link to={`../anime/${release.anime.id}`} className="release__table__next-episode">
+                          <Link
+                            to={`../anime/${release.anime.id}`}
+                            className="release__table__next-episode"
+                          >
                             <p>{release.anime.russian}</p>
                           </Link>
                         </div>
@@ -149,9 +151,7 @@ export const ReleaseCalendar: FC = () => {
                           </div>
 
                           <div className={styles.release__table__time}>
-                            <p>
-                              {formatReleaseTime(release.next_episode_at)}
-                            </p>
+                            <p>{formatReleaseTime(release.next_episode_at)}</p>
                           </div>
                         </div>
                       </div>

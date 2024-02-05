@@ -4,10 +4,14 @@ html {
   background-color: $background-color;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   color: $text-primary;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 * {

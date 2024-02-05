@@ -1,21 +1,60 @@
+@import '../../../styles/mixins/responsive.scss';
+
 .home__block {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: 1064px;
+  justify-content: start;
+  align-items: start;
 
-  &__title-new-relised {
+  @media (max-width: 1064px) {
+    width: 852px;
+  }
+
+  @media (max-width: 840px) {
+    width: 640px;
+  }
+
+  @include onPhone {
+    width: 470px;
+  }
+
+  @media (max-width: 460px) {
+    width: 312px;
+  }
+
+  &__title_new_relised {
     font-size: 1.7rem;
+    width: fit-content;
     padding-bottom: 12px;
   }
 
   .home__card__grid {
     display: grid;
-    grid-template-columns: 192px 192px 192px 192px 192px;
+    width: 100%;
+    grid-template-columns: repeat(5, 192px);
     column-gap: 20px;
     row-gap: 26px;
     align-items: start;
     justify-content: center;
     justify-items: stretch;
+
+    @media (max-width: 1064px) {
+      grid-template-columns: repeat(4, 192px);
+    }
+
+    @media (max-width: 840px) {
+      grid-template-columns: repeat(3, 192px);
+    }
+
+    @include onPhone {
+      grid-template-columns: repeat(3, 138px);
+    }
+
+    @media (max-width: 460px) {
+      grid-template-columns: repeat(2, 138px);
+    }
   }
 }
 

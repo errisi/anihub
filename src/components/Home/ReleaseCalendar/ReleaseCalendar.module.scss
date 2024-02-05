@@ -10,12 +10,32 @@
 }
 
 .releases__wrapper {
-  width: 100%;
+  width: 1064px;
+
+  @media (max-width: 1064px) {
+    width: 852px;
+  }
+
+  @media (max-width: 840px) {
+    width: 640px;
+  }
+
+  @include onPhone {
+    width: 470px;
+  }
+
+  @media (max-width: 460px) {
+    width: 312px;
+  }
 }
 
 .release {
   &__title {
     color: $primary-color;
+  }
+
+  &__main {
+    width: 1040px;
   }
 
   &__table {
