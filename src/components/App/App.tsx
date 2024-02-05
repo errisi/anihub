@@ -22,9 +22,7 @@ export const App = () => {
 
   return (
     <div className={styles.wrap}>
-      <header className={styles.header}>
-        <AppHeader />
-      </header>
+      <AppHeader />
 
       <main className={styles.main}>
         <Container>

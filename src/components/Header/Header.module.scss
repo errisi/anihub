@@ -1,18 +1,20 @@
+@import '../../styles/mixins/responsive.scss';
+
 .header {
-  &__wrapper {
-    display: flex;
-    justify-content: space-between;
+  background-color: #000;
+  position: relative;
+  min-height: 72px;
+  display: grid;
+  align-items: center;
+  margin-bottom: 24px;
+
+  @include onTablet {
+    min-height: 62px;
+    max-height: 62px;
   }
 
-  &__left_side {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-  }
-
-  &__right_side {
-    display: flex;
-    align-items: center;
-    gap: 32px;
+  @include onPhone {
+    min-height: 32px;
+    max-height: 54px;
   }
 }

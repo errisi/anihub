@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Collapse, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
@@ -9,9 +9,18 @@ import NotificationsOutlinedIcon
 import { AppHeaderLogo } from '../Logo/HeaderLogo';
 import styles from './PhoneHeader.module.scss';
 import { PhoneHeaderNavigation } from './Navigation/PhoneHeaderNavigation';
+import { AppHeaderSearch } from '../Search/HeaderSearch';
 
-export const PhoneHeader = () => {
-  const [isMenuOpened, setIsMenuOpened] = useState(true);
+type Props = {
+  isSearchOpened: boolean;
+  setIsSearchOpened: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const PhoneHeader: FC<Props> = ({
+  isSearchOpened,
+  setIsSearchOpened,
+}) => {
+  const [isMenuOpened, setIsMenuOpened] = useState(false);
 
   useEffect(() => {
     if (isMenuOpened) {
@@ -43,8 +52,14 @@ export const PhoneHeader = () => {
             <AppHeaderLogo />
           </div>
 
+          {isSearchOpened && (
+            <div className={styles.header__search}>
+              <AppHeaderSearch type="standard" />
+            </div>
+          )}
+
           <div className={styles.header__right_side}>
-            <IconButton>
+            <IconButton onClick={() => setIsSearchOpened((c) => !c)}>
               <SearchIcon color="primary" />
             </IconButton>
             <IconButton>

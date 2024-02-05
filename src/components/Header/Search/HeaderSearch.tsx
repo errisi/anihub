@@ -7,8 +7,9 @@ import {
   LinearProgress,
   Slide,
   TextField,
+  TextFieldVariants,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import * as _ from 'lodash';
 import styles from './HeaderSearch.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
@@ -20,7 +21,11 @@ const getSearchResult = _.debounce((value, dispatch) => {
   dispatch(SearchAnimesActions.init(value));
 }, 1000);
 
-export const AppHeaderSearch = () => {
+type Props = {
+  type?: string;
+};
+
+export const AppHeaderSearch: FC<Props> = ({ type = 'outlined' }) => {
   const [query, setQuery] = useState('');
   const [isActive, setIsActive] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -73,7 +78,7 @@ export const AppHeaderSearch = () => {
           onFocus={() => setIsFocused(true)}
           onBlur={handleOnBlur}
           label="Поиск аниме"
-          variant="outlined"
+          variant={type as TextFieldVariants}
           size="small"
           value={query}
           onChange={(e) => setQuery(e.target.value)}

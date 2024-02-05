@@ -1,4 +1,5 @@
 @import '../../../styles/variables/colors.scss';
+@import '../../../styles/mixins/responsive.scss';
 
 .search {
   transition-duration: 0.4s;
@@ -17,6 +18,20 @@
     flex-direction: column;
     display: flex;
 
+    @include onTablet {
+      top: 37px;
+      background-color: #000;
+    }
+
+    @include onSmallTablet {
+      background-color: $background-color;
+    }
+
+    @include onPhone {
+      top: 45px;
+      background-color: $background-color;
+    }
+
     &__line {
       margin: 4px 0 8px 0;
       width: 80%;
@@ -24,6 +39,10 @@
       height: 2px;
       position: absolute;
       left: 10%;
+
+      @include onPhone {
+        display: none;
+      }
     }
 
     &__list {
