@@ -1,5 +1,6 @@
 @import '../../../styles/variables/colors.scss';
 @import '../../../styles/variables/normalize.scss';
+@import '../../../styles/mixins/responsive.scss';
 
 .home__block {
   &__title_relise_calendar {
@@ -9,7 +10,7 @@
 }
 
 .releases__wrapper {
-  width: 1040px;
+  width: 100%;
 }
 
 .release {
@@ -23,6 +24,15 @@
     align-items: center;
     padding-bottom: 10px;
 
+    @include onPhone {
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+      width: 100%;
+      padding-top: 16px;
+      border-bottom: 2px solid $primary-color;
+    }
+
     &__image {
       border-radius: 12%;
     }
@@ -30,13 +40,21 @@
     &__left_side {
       display: flex;
       align-items: center;
-      gap: 24px
+      gap: 24px;
+
+      @include onPhone {
+        gap: 10px;
+      }
     }
 
     &__right_side {
       display: flex;
       flex-direction: column;
       align-items: center;
+
+      @include onPhone {
+        width: 100%;
+      }
     }
 
     &__time {
@@ -47,5 +65,15 @@
 
   &__table:last-child {
     padding-bottom: 0;
+
+    @include onPhone {
+      border-bottom: none;
+    }
+  }
+
+  &__table:first-child {
+    @include onPhone {
+      padding-top: 0;
+    }
   }
 }
