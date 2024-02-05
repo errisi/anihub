@@ -1,6 +1,8 @@
+@import '../../../styles/mixins/responsive.scss';
+
 .home__block {
   &__title_best_ongoings {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     position: relative;
     left: 18px;
     margin-bottom: 12px;
@@ -15,6 +17,26 @@
   &__wrapper {
     width: 1064px;
     height: 354px;
+
+    @include onTablet {
+      width: 1064px;
+    }
+
+    @media (max-width: 1064px) {
+      width: 840px;
+    }
+
+    @media (max-width: 840px) {
+      width: 640px;
+    }
+
+    @include onPhone {
+      width: 460px;
+    }
+
+    @media (max-width: 460px) {
+      width: 320px;
+    }
   }
 
   &__slide {

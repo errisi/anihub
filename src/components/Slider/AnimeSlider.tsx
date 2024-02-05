@@ -34,8 +34,8 @@ export const AnimeSlider: FC<Props> = ({ animes }) => {
         slidesPerView="auto"
         breakpoints={{
           320: { slidesPerGroup: 2 },
-          640: { slidesPerGroup: 4 },
-          1200: { slidesPerGroup: 5 },
+          640: { slidesPerGroup: 3 },
+          1100: { slidesPerGroup: 5 },
         }}
         onSwiper={setSwiperRef}
         className="swiperAnimes"

@@ -1,4 +1,5 @@
 @import '../../styles/variables/colors.scss';
+@import '../../styles/mixins/responsive.scss';
 
 .card {
   width: 192px;
@@ -6,12 +7,16 @@
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
 
+  @include onPhone {
+    width: 138px;
+    height: 212px;
+  }
+
   &:hover &__image__wrapper__item {
     transform: scale(1.04);
   }
 
-  &:hover
-    &__image__wrapper__item__overlay {
+  &:hover &__image__wrapper__item__overlay {
     visibility: visible;
     transform: scale(1.04);
     opacity: 80%;
@@ -24,6 +29,7 @@
 
   &__image__wrapper {
     display: block;
+    object-fit: cover;
     border-radius: 10px;
     position: relative;
     transition-duration: 0.4s;
@@ -36,6 +42,10 @@
       height: 258px;
       border-radius: 10px;
       transition: all 0.2s;
+
+      @include onPhone {
+        height: 182px;
+      }
 
       &__overlay {
         position: absolute;

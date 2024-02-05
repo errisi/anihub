@@ -1,12 +1,17 @@
+@import '../../styles/mixins/responsive.scss';
 
 .swiperAnimes {
   grid-column: 1/-1;
   position: static;
   padding: 8px 12px;
-  min-width: 1054px;
   display: flex;
   height: 354px;
   gap: 24px;
+
+  @include onPhone {
+    width: 100%;
+    padding: 8px;
+  }
 }
 
 .swiper-slide {

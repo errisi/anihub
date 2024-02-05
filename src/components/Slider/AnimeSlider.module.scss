@@ -1,3 +1,5 @@
+@import '../../styles/mixins/responsive.scss';
+
 .buttons {
   display: flex;
   justify-content: space-between;
@@ -7,11 +9,29 @@
     position: absolute;
     bottom: 200px;
     right: 80px;
+
+    @include onTablet {
+      right: 0px;
+    }
   }
 
   &__forward {
     position: absolute;
     bottom: 200px;
     left: 80px;
+
+    @include onTablet {
+      left: 0px;
+    }
+  }
+
+  @include onTablet {
+    bottom: 54%;
+    justify-content: end;
+    gap: 20px;
+  }
+
+  @include onPhone {
+    display: none;
   }
 }
