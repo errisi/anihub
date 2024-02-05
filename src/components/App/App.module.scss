@@ -26,7 +26,8 @@
   margin-bottom: 24px;
 
   @include onPhone {
-  min-height: 32px;
+    min-height: 32px;
+    max-height: 54px;
   }
 }
 

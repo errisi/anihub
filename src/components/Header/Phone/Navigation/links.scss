@@ -1,0 +1,5 @@
+@import '../../../../styles/variables/colors.scss';
+
+.links .active {
+  background-color: $text-primary !important;
+}
