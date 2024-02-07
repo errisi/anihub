@@ -5,7 +5,10 @@ import React, {
 } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
-import { Button, SelectChangeEvent, Stack } from '@mui/material';
+import {
+  Button, IconButton, SelectChangeEvent, Stack,
+} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import styles from './CatalogFilter.module.scss';
 
 import { getGenres } from '../../../api/animes';
@@ -30,13 +33,21 @@ import {
 import { getSearchWith } from '../../../utils/getSearchWith';
 import { Params } from '../../../types/Params';
 import { Gener } from '../../../types/Gener';
+import { CatalogSort } from '../CatalogSort';
 
 type Props = {
   update: boolean;
   setUpdate: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsFilterOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  windowWidth?: number;
 };
 
-export const AnimeCatalogFilter: FC<Props> = ({ update, setUpdate }) => {
+export const AnimeCatalogFilter: FC<Props> = ({
+  update,
+  setUpdate,
+  setIsFilterOpened,
+  windowWidth,
+}) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [genresList, setGenresList] = useState<string[]>([]);
@@ -138,6 +149,13 @@ export const AnimeCatalogFilter: FC<Props> = ({ update, setUpdate }) => {
           Фильтр
         </h2>
 
+        <IconButton
+          onClick={() => setIsFilterOpened((c) => !c)}
+          className={styles.catalog__filter__close}
+        >
+          <CloseIcon color="primary" />
+        </IconButton>
+
         <Stack
           spacing={3}
           sx={{ width: 300 }}
@@ -146,6 +164,10 @@ export const AnimeCatalogFilter: FC<Props> = ({ update, setUpdate }) => {
             selectedYears={tempSelectedYears}
             handleYearsSelect={handleYearsSelect}
           />
+
+          {windowWidth && windowWidth < 1200 && (
+            <CatalogSort windowWidth={windowWidth} />
+          )}
 
           <CatalogFilterGenreBlock
             genresList={genresList}

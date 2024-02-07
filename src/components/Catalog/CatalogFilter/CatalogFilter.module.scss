@@ -9,6 +9,20 @@
 
     &_title {
       margin-bottom: 16px;
+
+      @media (max-width: 1200px) {
+        display: none;
+      }
+    }
+
+    &__close {
+      display: none !important;
+
+      @media (max-width: 1200px) {
+        display: inline-flex !important;
+        position: absolute !important;
+        right: 4px;
+      }
     }
 
     &__block {
@@ -41,7 +55,6 @@
       &__button {
         width: 300px;
       }
-
     }
 
     &__field {

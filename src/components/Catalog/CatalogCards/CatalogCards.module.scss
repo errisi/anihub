@@ -1,27 +1,85 @@
 @import '../../../styles/variables/colors.scss';
+@import '../../../styles/mixins/responsive.scss';
 
 .card__catalog_grid {
   display: grid;
-  grid-template-columns: 192px 192px 192px 192px;
+  grid-template-columns: repeat(4, 192px);
   column-gap: 20px;
   row-gap: 26px;
   align-items: start;
   justify-content: start;
   justify-items: stretch;
+
+  @media (max-width: 840px) {
+    grid-template-columns: repeat(3, 192px);
+  }
+
+  @include onPhone {
+    grid-template-columns: repeat(3, 138px);
+  }
+
+  @media (max-width: 460px) {
+    grid-template-columns: repeat(2, 138px);
+  }
 }
 
 .catalog {
   display: flex;
   justify-content: space-between;
+  justify-content: baseline;
   align-items: start;
+
+  @include onPhone {
+    justify-content: baseline;
+  }
 
   &__header {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px;
   }
 
-  &__title {
-    margin-bottom: 20px;
+  &__filter_button {
+    display: none !important;
+
+    @media (max-width: 1200px) {
+      display: inline-flex !important;
+    }
+  }
+}
+
+.menu {
+  position: fixed;
+  top: 62px;
+  right: 0;
+  bottom: 0;
+  background-color: $background-color;
+  width: 320px;
+  max-height: 100vh;
+  z-index: 10;
+  padding: 4px 0;
+
+  @include onPhone {
+    top: 54px;
+  }
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+  }
+
+  &__under {
+    position: fixed;
+    top: 54px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #1f1f1f;
+    opacity: 50%;
+    z-index: 9;
+    border: 0;
   }
 }
 
@@ -32,13 +90,27 @@
   justify-content: right;
   gap: 2rem;
 
+  @include onPhone {
+
+  }
+
   &__title {
     border: 1px solid $secondary-color;
     border-radius: 10px;
     padding: 10px 16px;
+
+    @include onPhone {
+      border-left: 0;
+      border-right: 0;
+      border-radius: 0;
+    }
   }
 
   &__image {
     border-radius: 10px;
+
+    @include onPhone {
+      max-width: 320px;
+    }
   }
 }

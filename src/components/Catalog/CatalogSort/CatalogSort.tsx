@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import {
   FormControl,
+  InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
@@ -10,7 +11,11 @@ import { getSearchWith } from '../../../utils/getSearchWith';
 import { Params } from '../../../types/Params';
 import styles from './CatalogSort.module.scss';
 
-export const CatalogSort: FC = () => {
+type Props = {
+  windowWidth: number;
+};
+
+export const CatalogSort: FC<Props> = ({ windowWidth }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const ordersList = ['Рейтингу', 'Популярности', 'Названию', 'Дате выхода'];
@@ -22,38 +27,32 @@ export const CatalogSort: FC = () => {
     setSearchParams(search);
   }
 
-  const handleOrderSelect
-  = (event: SelectChangeEvent) => {
+  const handleOrderSelect = (event: SelectChangeEvent) => {
     setSearchWith({ order: event.target.value as string });
   };
 
   return (
     <>
       <div className={styles.catalog__header__block}>
-        <p
-          className={styles.catalog__header__block__title}
-        >
-          Сортировать по:
-        </p>
+        <p className={styles.catalog__header__block__title}>Сортировать по:</p>
 
         <div className={styles.catalog__header__block_sort}>
-          <FormControl
-            variant="standard"
-            fullWidth
-            size="small"
-          >
+          <FormControl fullWidth size="small">
+            {windowWidth < 1200 && (
+              <InputLabel id="demo-simple-select-label">
+                Сортировать по
+              </InputLabel>
+            )}
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={selectedOrder}
-              label="Выберите статус"
+              label={windowWidth < 1200 ? 'Сортировать по' : ''}
               onChange={handleOrderSelect}
+              variant={windowWidth < 1200 ? 'outlined' : 'standard'}
             >
-              {ordersList.map(status => (
-                <MenuItem
-                  key={status}
-                  value={status}
-                >
+              {ordersList.map((status) => (
+                <MenuItem key={status} value={status}>
                   {status}
                 </MenuItem>
               ))}

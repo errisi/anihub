@@ -2,4 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: start;
+
+  @media (max-width: 1200px) {
+    justify-content: center;
+  }
 }

@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Button, LinearProgress } from '@mui/material';
 import styles from './Catalog.module.scss';
-import {
-  CatalogCards,
-} from '../../components/Catalog/CatalogCards/CatalogCards';
+import { CatalogCards }
+  from '../../components/Catalog/CatalogCards/CatalogCards';
 import { AnimeCatalogFilter } from '../../components/Catalog/CatalogFilter';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import * as CatalogAnimesActions from '../../features/CatalogAnimes';
@@ -17,6 +16,22 @@ export const Сatalog = () => {
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState(false);
   const [updateFilter, setUpdateFilter] = useState(false);
+  const [isFilterOpened, setIsFilterOpened] = useState(false);
+
+  useEffect(() => {
+    if (isFilterOpened) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.body.style.overflow = 'scroll';
+    };
+  }, [isFilterOpened]);
 
   const dispatch = useAppDispatch();
 
@@ -87,6 +102,20 @@ export const Сatalog = () => {
     dispatch(CatalogAnimesActions.init(`${preparedApiUrl}&page=${page}`));
   };
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <>
       {loading && <LinearProgress />}
@@ -105,11 +134,19 @@ export const Сatalog = () => {
             setPage={setPage}
             hasMore={hasMore}
             setUpdateFilter={setUpdateFilter}
+            isFilterOpened={isFilterOpened}
+            setIsFilterOpened={setIsFilterOpened}
+            updateFilter={updateFilter}
+            windowWidth={windowWidth}
           />
-          <AnimeCatalogFilter
-            update={updateFilter}
-            setUpdate={setUpdateFilter}
-          />
+
+          {windowWidth >= 1200 && (
+            <AnimeCatalogFilter
+              update={updateFilter}
+              setUpdate={setUpdateFilter}
+              setIsFilterOpened={setIsFilterOpened}
+            />
+          )}
         </div>
       )}
     </>
