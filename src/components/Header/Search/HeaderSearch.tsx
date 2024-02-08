@@ -117,7 +117,7 @@ export const AppHeaderSearch: FC<Props> = ({ type = 'outlined' }) => {
             <hr className={styles.search__box__line} />
 
             <div className={styles.search__box__list}>
-              {animes.length > 0
+              {!!animes.length
                 && !loading
                 && !error
                 && animes.map((anime) => (
@@ -138,15 +138,17 @@ export const AppHeaderSearch: FC<Props> = ({ type = 'outlined' }) => {
                         {anime.russian}
                       </Link>
 
-                      <p
-                        className={
-                          styles.search__box__list__item__text__description
-                        }
-                      >
-                        {`${anime.aired_on.split('-').splice(0, 1)} / ${
-                          getAnimeKind(anime.kind as AnimeKind) || ''
-                        }`}
-                      </p>
+                      {anime.aired_on && (
+                        <p
+                          className={
+                            styles.search__box__list__item__text__description
+                          }
+                        >
+                          {`${anime.aired_on.split('-').splice(0, 1)} / ${
+                            getAnimeKind(anime.kind as AnimeKind) || ''
+                          }`}
+                        </p>
+                      )}
                     </div>
                   </div>
                 ))}

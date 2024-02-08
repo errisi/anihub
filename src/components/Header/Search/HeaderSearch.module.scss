@@ -13,15 +13,10 @@
     border-right: 2px solid;
     border-color: $primary-color;
     position: absolute;
-    top: 52px;
+    top: 37px;
     z-index: 999;
     flex-direction: column;
     display: flex;
-
-    @include onTablet {
-      top: 37px;
-      background-color: #000;
-    }
 
     @include onSmallTablet {
       background-color: $background-color;
