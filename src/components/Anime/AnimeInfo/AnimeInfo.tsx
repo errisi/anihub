@@ -81,12 +81,8 @@ export const AnimeInfo: FC<Props> = ({
         {isSimilarOpen && (
           <div className={styles.anime__info__similar}>
             <IconButton
+              className={styles.anime__info__similar__close}
               onClick={handleSimilarButton}
-              sx={{
-                position: 'absolute',
-                top: 24,
-                right: '18%',
-              }}
             >
               <CloseIcon color="primary" fontSize="large" />
             </IconButton>
@@ -115,8 +111,6 @@ export const AnimeInfo: FC<Props> = ({
               >
                 <Box
                   sx={{
-                    // borderTop: 1,
-                    // borderBottom: 1,
                     borderColor: '#e91e63',
                     display: 'flex',
                     'align-items': 'center',

@@ -24,7 +24,7 @@ export const AppHeader = () => {
     <>
       <header
         className={styles.header}
-        style={{ marginBottom: isSearchOpened ? '50px' : '24px' }}
+        style={{ marginBottom: isSearchOpened ? '58px' : '24px' }}
       >
         {windowWidth >= 1300 && <DesktopHeader />}
         {windowWidth < 1300 && windowWidth >= 640 && (

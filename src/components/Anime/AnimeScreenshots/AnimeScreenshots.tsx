@@ -78,14 +78,14 @@ export const AnimeScreenshots: FC<Props> = ({ anime }) => {
             slidesOffsetAfter={0}
             slidesPerView="auto"
             breakpoints={{
-              320: { slidesPerGroup: 2 },
-              640: { slidesPerGroup: 3 },
-              1200: { slidesPerGroup: 1 },
+              320: { slidesPerGroup: 1 },
+              640: { slidesPerGroup: 2 },
+              1200: { slidesPerGroup: 3 },
             }}
             onSwiper={setSwiperRef}
             className="swiperScreenshots"
           >
-            <>
+            <div className={styles.anime__screenshots__slider}>
               {anime.screenshots?.length && (
                 <>
                   {Object.values(anime.screenshots).map((screenshot, i) => (
@@ -116,7 +116,7 @@ export const AnimeScreenshots: FC<Props> = ({ anime }) => {
                   ))}
                 </>
               )}
-            </>
+            </div>
           </Swiper>
           <div className={styles.anime__slider__buttons}>
             {isBeginning ? (
