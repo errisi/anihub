@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Button, ButtonGroup, Container } from '@mui/material';
 import { Notifications } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
@@ -6,7 +7,15 @@ import { AppHeaderLogo } from '../Logo/HeaderLogo';
 import { AppHeaderHavigation } from '../Navigation/HeaderHavigation';
 import { AppHeaderSearch } from '../Search/HeaderSearch';
 
-export const DesktopHeader = () => (
+type Props = {
+  handleAuthMenuOpenAuth: () => void;
+  handleAuthMenuOpenRegister: () => void;
+};
+
+export const DesktopHeader: FC<Props> = ({
+  handleAuthMenuOpenAuth,
+  handleAuthMenuOpenRegister,
+}) => (
   <Container>
     <div className={styles.header__wrapper}>
       <div className={styles.header__left_side}>
@@ -25,11 +34,11 @@ export const DesktopHeader = () => (
         </Button>
 
         <ButtonGroup>
-          <Button variant="outlined" component={Link} to="/">
+          <Button variant="outlined" onClick={handleAuthMenuOpenAuth}>
             Войти
           </Button>
 
-          <Button variant="contained" component={Link} to="/">
+          <Button variant="contained" onClick={handleAuthMenuOpenRegister}>
             Регистрация
           </Button>
         </ButtonGroup>
