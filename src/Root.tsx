@@ -11,6 +11,8 @@ import { AnimePage } from './pages/animePage/animePage';
 import { TermsPage } from './pages/termsPage/termsPage';
 import { ForOwnersPage } from './pages/forOwnersPage/forOwnersPage';
 import { PrivacyPage } from './pages/privacyPage/privacyPage';
+import { AccountActivationPage }
+  from './pages/accountActivationPage/accountActivationPage';
 
 export const Root = () => (
   <Provider store={store}>
@@ -24,6 +26,11 @@ export const Root = () => (
               <Route index element={<Сatalog />} />
               <Route path=":animeId" element={<AnimePage />} />
             </Route>
+
+            <Route
+              path="activate/:activationToken"
+              element={<AccountActivationPage />}
+            />
 
             <Route path="terms/" element={<TermsPage />} />
             <Route path="owners/" element={<ForOwnersPage />} />

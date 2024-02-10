@@ -16,7 +16,7 @@ import { DesktopHeader } from './Desktop/DesktopHeader';
 import { TabletHeader } from './Tablet/TabletHeader';
 import { PhoneHeader } from './Phone/PhoneHeader';
 import styles from './Header.module.scss';
-import { register } from '../../api/server';
+import { register, auth } from '../../api/server';
 
 export const AppHeader = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -44,6 +44,13 @@ export const AppHeader = () => {
   ) => {
     e.preventDefault();
     await register(login, email, password);
+  };
+
+  const handleAuth = async (
+    e: FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    e.preventDefault();
+    await auth(email, password);
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -116,7 +123,7 @@ export const AppHeader = () => {
               {currentAuthMenuType === 'auth' && (
                 <form
                   className={styles.header__auth__form}
-                  onSubmit={(e) => handleRegister(e)}
+                  onSubmit={(e) => handleAuth(e)}
                 >
                   <h2 className={styles.header__auth__title}>Авторизация</h2>
                   <div className={styles.header__auth__content}>
@@ -126,6 +133,8 @@ export const AppHeader = () => {
                       label="Введите email"
                       type="email"
                       autoComplete="current-email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                     <FormControl variant="outlined">
                       <InputLabel htmlFor="outlined-adornment-password">
@@ -135,6 +144,8 @@ export const AppHeader = () => {
                         required
                         id="outlined-adornment-password"
                         type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         endAdornment={(
                           <InputAdornment position="end">
                             <IconButton
@@ -172,7 +183,7 @@ export const AppHeader = () => {
                     </Button>
                     <Button
                       variant="contained"
-                      onClick={handleAuthMenuOpenAuth}
+                      onClick={handleAuth}
                     >
                       Войти
                     </Button>
