@@ -44,7 +44,7 @@ export const AnimeSlider: FC<Props> = ({ animes }) => {
           <>
             {anime && (
               <SwiperSlide key={anime.id}>
-                <AnimeCard to="../" anime={anime} />
+                <AnimeCard key={anime.id} to="../" anime={anime} />
               </SwiperSlide>
             )}
           </>

@@ -16,9 +16,13 @@ import { DesktopHeader } from './Desktop/DesktopHeader';
 import { TabletHeader } from './Tablet/TabletHeader';
 import { PhoneHeader } from './Phone/PhoneHeader';
 import styles from './Header.module.scss';
-import { register, auth } from '../../api/server';
+import { register } from '../../api/server';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import * as UserActions from '../../features/User';
 
 export const AppHeader = () => {
+  const dispatch = useAppDispatch();
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isSearchOpened, setIsSearchOpened] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -46,11 +50,21 @@ export const AppHeader = () => {
     await register(login, email, password);
   };
 
+  const {
+    user,
+    // loading,
+    // error,
+  } = useAppSelector((state) => state.User);
+
   const handleAuth = async (
     e: FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
   ) => {
     e.preventDefault();
-    await auth(email, password);
+
+    dispatch(UserActions.init({ email, password }));
+
+    // eslint-disable-next-line no-console
+    console.log(user);
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -83,6 +97,7 @@ export const AppHeader = () => {
           <DesktopHeader
             handleAuthMenuOpenAuth={handleAuthMenuOpenAuth}
             handleAuthMenuOpenRegister={handleAuthMenuOpenRegister}
+            user={user}
           />
         )}
         {windowWidth < 1300 && windowWidth >= 640 && (

@@ -28,18 +28,14 @@ export const activate = async (token: string) => {
 };
 
 export const auth = async (email: string, password: string) => {
-  // eslint-disable-next-line no-console
-  console.log([email, password]);
   try {
     const response = await axios.post(`${BASE_URL}/users/login`, {
       email,
       password,
     });
 
-    // eslint-disable-next-line no-console
-    console.log(response.data);
+    return response.data;
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
+    throw new Error(`Authentication failed, this is what the server says: ${error}`);
   }
 };

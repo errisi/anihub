@@ -6,15 +6,18 @@ import styles from './DesktopHeader.module.scss';
 import { AppHeaderLogo } from '../Logo/HeaderLogo';
 import { AppHeaderHavigation } from '../Navigation/HeaderHavigation';
 import { AppHeaderSearch } from '../Search/HeaderSearch';
+import { User } from '../../../types/User';
 
 type Props = {
   handleAuthMenuOpenAuth: () => void;
   handleAuthMenuOpenRegister: () => void;
+  user: User;
 };
 
 export const DesktopHeader: FC<Props> = ({
   handleAuthMenuOpenAuth,
   handleAuthMenuOpenRegister,
+  user,
 }) => (
   <Container>
     <div className={styles.header__wrapper}>
@@ -33,15 +36,20 @@ export const DesktopHeader: FC<Props> = ({
           <Notifications color="primary" />
         </Button>
 
-        <ButtonGroup>
-          <Button variant="outlined" onClick={handleAuthMenuOpenAuth}>
-            Войти
-          </Button>
+        {!user.user.name && (
+          <ButtonGroup>
+            <Button variant="outlined" onClick={handleAuthMenuOpenAuth}>
+              Войти
+            </Button>
 
-          <Button variant="contained" onClick={handleAuthMenuOpenRegister}>
-            Регистрация
-          </Button>
-        </ButtonGroup>
+            <Button variant="contained" onClick={handleAuthMenuOpenRegister}>
+              Регистрация
+            </Button>
+          </ButtonGroup>
+        )}
+        {user.user.name && (
+          <p>{user.user.name}</p>
+        )}
       </div>
     </div>
   </Container>
