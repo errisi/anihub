@@ -21,5 +21,6 @@ export interface User {
       period: string | null;
     };
     activationToken: string | null;
+    refreshToken: string | null;
   };
 }

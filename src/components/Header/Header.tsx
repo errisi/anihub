@@ -16,9 +16,9 @@ import { DesktopHeader } from './Desktop/DesktopHeader';
 import { TabletHeader } from './Tablet/TabletHeader';
 import { PhoneHeader } from './Phone/PhoneHeader';
 import styles from './Header.module.scss';
-import { register } from '../../api/server';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import * as UserActions from '../../features/User';
+import { authService } from '../../services/authService';
 
 export const AppHeader = () => {
   const dispatch = useAppDispatch();
@@ -32,6 +32,7 @@ export const AppHeader = () => {
   const [login, setLogin] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userActionsActive, setUserActionsActive] = useState(false);
 
   const handleAuthMenuOpenAuth = () => {
     setIsAuthMenuOpened(true);
@@ -47,7 +48,11 @@ export const AppHeader = () => {
     e: FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
   ) => {
     e.preventDefault();
-    await register(login, email, password);
+    await authService.register(login, email, password);
+
+    dispatch(UserActions.init({ email, password }));
+
+    setIsAuthMenuOpened(false);
   };
 
   const {
@@ -62,6 +67,8 @@ export const AppHeader = () => {
     e.preventDefault();
 
     dispatch(UserActions.init({ email, password }));
+
+    setIsAuthMenuOpened(false);
 
     // eslint-disable-next-line no-console
     console.log(user);
@@ -98,6 +105,8 @@ export const AppHeader = () => {
             handleAuthMenuOpenAuth={handleAuthMenuOpenAuth}
             handleAuthMenuOpenRegister={handleAuthMenuOpenRegister}
             user={user}
+            userActionsActive={userActionsActive}
+            setUserActionsActive={setUserActionsActive}
           />
         )}
         {windowWidth < 1300 && windowWidth >= 640 && (
@@ -196,10 +205,7 @@ export const AppHeader = () => {
                     >
                       Регистрация
                     </Button>
-                    <Button
-                      variant="contained"
-                      onClick={handleAuth}
-                    >
+                    <Button variant="contained" onClick={handleAuth}>
                       Войти
                     </Button>
                   </ButtonGroup>

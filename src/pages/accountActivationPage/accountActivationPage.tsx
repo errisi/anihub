@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { LinearProgress } from '@mui/material';
-import { activate } from '../../api/server';
 import styles from './accountActivationPage.module.scss';
+import { authService } from '../../services/authService';
 
 export const AccountActivationPage = () => {
   const { activationToken } = useParams();
@@ -13,7 +13,7 @@ export const AccountActivationPage = () => {
   useEffect(() => {
     if (activationToken) {
       setIsLoading(true);
-      activate(activationToken)
+      authService.activate(activationToken)
         .then(() => setIsAccountActive(true))
         .catch((e) => setError(`
           Что-то пошло не так, вот что говорит наш сервер: ${e}.

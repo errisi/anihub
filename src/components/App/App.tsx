@@ -9,6 +9,7 @@ import { useAppDispatch } from '../../store/hooks';
 import * as BestSeasonOngoingsActions from '../../features/BestSeasonOngoings';
 import * as NewReleasedActions from '../../features/NewReleased';
 import * as ReleaseCalendarActions from '../../features/ReleaseCalendar';
+import * as UserActions from '../../features/User';
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -17,6 +18,7 @@ export const App = () => {
     dispatch(BestSeasonOngoingsActions.init());
     dispatch(NewReleasedActions.init());
     dispatch(ReleaseCalendarActions.init());
+    dispatch(UserActions.checkAuth());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

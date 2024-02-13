@@ -1,5 +1,7 @@
 import { FC } from 'react';
-import { Button, ButtonGroup, Container } from '@mui/material';
+import {
+  Button, ButtonGroup, Collapse, Container,
+} from '@mui/material';
 import { Notifications } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import styles from './DesktopHeader.module.scss';
@@ -7,17 +9,22 @@ import { AppHeaderLogo } from '../Logo/HeaderLogo';
 import { AppHeaderHavigation } from '../Navigation/HeaderHavigation';
 import { AppHeaderSearch } from '../Search/HeaderSearch';
 import { User } from '../../../types/User';
+import { UserActions } from '../Actions/Actions';
 
 type Props = {
   handleAuthMenuOpenAuth: () => void;
   handleAuthMenuOpenRegister: () => void;
   user: User;
+  userActionsActive: boolean;
+  setUserActionsActive: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const DesktopHeader: FC<Props> = ({
   handleAuthMenuOpenAuth,
   handleAuthMenuOpenRegister,
   user,
+  userActionsActive,
+  setUserActionsActive,
 }) => (
   <Container>
     <div className={styles.header__wrapper}>
@@ -48,7 +55,24 @@ export const DesktopHeader: FC<Props> = ({
           </ButtonGroup>
         )}
         {user.user.name && (
-          <p>{user.user.name}</p>
+          <div>
+            <Button
+              className={styles.header__user}
+              sx={{ textTransform: 'none' }}
+              onClick={() => setUserActionsActive((c) => !c)}
+            >
+              <img
+                src={user.user.avatar}
+                className={styles.header__user__avatar}
+                alt="avatar"
+              />
+              <p>{user.user.name}</p>
+            </Button>
+
+            <Collapse in={userActionsActive}>
+              <UserActions />
+            </Collapse>
+          </div>
         )}
       </div>
     </div>
