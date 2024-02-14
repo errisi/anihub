@@ -18,26 +18,6 @@
     gap: 32px;
   }
 
-  &__user {
-    width: max-content !important;
-    min-width: 150px !important;
-    position: relative !important;
-
-    &__block {
-      display: flex;
-      align-items: column;
-      gap: 12px;
-
-      &__avatar {
-        height: 54px;
-        width: 54px;
-        border: 2px solid $primary-color;
-        border-radius: 50%;
-      }
-    }
-  }
-
-
   &__search {
     width: 360px;
     position: absolute;

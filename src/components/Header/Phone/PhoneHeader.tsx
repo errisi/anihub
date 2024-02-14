@@ -10,15 +10,25 @@ import { AppHeaderLogo } from '../Logo/HeaderLogo';
 import styles from './PhoneHeader.module.scss';
 import { PhoneHeaderNavigation } from './Navigation/PhoneHeaderNavigation';
 import { AppHeaderSearch } from '../Search/HeaderSearch';
+import { User } from '../../../types/User';
+import { Auth } from '../Auth/Auth';
 
 type Props = {
   isSearchOpened: boolean;
   setIsSearchOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  handleAuthMenuOpenAuth: () => void;
+  user: User | null;
+  isUserActionsActive: boolean;
+  setIsUserActionsActive: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const PhoneHeader: FC<Props> = ({
   isSearchOpened,
   setIsSearchOpened,
+  handleAuthMenuOpenAuth,
+  user,
+  isUserActionsActive,
+  setIsUserActionsActive,
 }) => {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
@@ -65,9 +75,20 @@ export const PhoneHeader: FC<Props> = ({
             <IconButton>
               <NotificationsOutlinedIcon color="primary" />
             </IconButton>
-            <IconButton>
-              <AccountCircleTwoToneIcon color="primary" />
-            </IconButton>
+
+            {!user && (
+              <IconButton onClick={() => handleAuthMenuOpenAuth()}>
+                <AccountCircleTwoToneIcon color="primary" />
+              </IconButton>
+            )}
+
+            {user && (
+              <Auth
+                user={user}
+                isUserActionsActive={isUserActionsActive}
+                setIsUserActionsActive={setIsUserActionsActive}
+              />
+            )}
           </div>
         </div>
       </div>

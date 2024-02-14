@@ -8,17 +8,27 @@ import { AppHeaderLogo } from '../Logo/HeaderLogo';
 import { AppHeaderHavigation } from '../Navigation/HeaderHavigation';
 import { AppHeaderSearch } from '../Search/HeaderSearch';
 import styles from './TabletHeader.module.scss';
+import { User } from '../../../types/User';
+import { Auth } from '../Auth/Auth';
 
 type Props = {
   windowWidth: number;
   isSearchOpened: boolean;
   setIsSearchOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  handleAuthMenuOpenAuth: () => void;
+  user: User | null;
+  isUserActionsActive: boolean;
+  setIsUserActionsActive: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const TabletHeader: FC<Props> = ({
   windowWidth,
   isSearchOpened,
   setIsSearchOpened,
+  handleAuthMenuOpenAuth,
+  user,
+  isUserActionsActive,
+  setIsUserActionsActive,
 }) => (
   <div className="header">
     <div className={styles.header__wrapper}>
@@ -33,7 +43,7 @@ export const TabletHeader: FC<Props> = ({
         </div>
       )}
 
-      {isSearchOpened && (windowWidth < 1100) && (
+      {isSearchOpened && windowWidth < 1100 && (
         <div className={styles.header__search_s}>
           <AppHeaderSearch />
         </div>
@@ -48,9 +58,20 @@ export const TabletHeader: FC<Props> = ({
         <Button variant="text" component={Link} to="/">
           <Notifications color="primary" />
         </Button>
-        <IconButton>
-          <AccountCircleTwoToneIcon color="primary" fontSize="large" />
-        </IconButton>
+
+        {!user && (
+          <IconButton onClick={() => handleAuthMenuOpenAuth()}>
+            <AccountCircleTwoToneIcon color="primary" fontSize="large" />
+          </IconButton>
+        )}
+
+        {user && (
+          <Auth
+            user={user}
+            isUserActionsActive={isUserActionsActive}
+            setIsUserActionsActive={setIsUserActionsActive}
+          />
+        )}
       </div>
     </div>
   </div>

@@ -1,0 +1,38 @@
+@import '../../../styles/variables/colors.scss';
+@import '../../../styles/mixins/responsive.scss';
+
+.header {
+  &__user {
+    width: max-content !important;
+    min-width: 150px !important;
+    position: relative !important;
+
+    @include onPhone {
+      min-width: 50px !important;
+    }
+
+    &__block {
+      display: flex;
+      align-items: column;
+      gap: 12px;
+
+      &__avatar {
+        height: 54px;
+        width: 54px;
+        border: 2px solid $primary-color;
+        border-radius: 50%;
+        object-fit: cover;
+
+        @include onPhone {
+          height: 40px;
+          width: 40px;
+        }
+
+        @include onTablet {
+          height: 50px;
+          width: 50px;
+        }
+      }
+    }
+  }
+}

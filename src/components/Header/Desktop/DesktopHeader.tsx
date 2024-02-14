@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import {
-  Button, ButtonGroup, Container, FormControl,
+  Button, ButtonGroup, Container,
 } from '@mui/material';
-import Collapse from '@mui/material/Collapse';
 import { Notifications } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import styles from './DesktopHeader.module.scss';
@@ -10,7 +9,7 @@ import { AppHeaderLogo } from '../Logo/HeaderLogo';
 import { AppHeaderHavigation } from '../Navigation/HeaderHavigation';
 import { AppHeaderSearch } from '../Search/HeaderSearch';
 import { User } from '../../../types/User';
-import { UserActions } from '../Actions/Actions';
+import { Auth } from '../Auth/Auth';
 
 type Props = {
   handleAuthMenuOpenAuth: () => void;
@@ -57,32 +56,12 @@ export const DesktopHeader: FC<Props> = ({
         )}
         {user && (
           <>
-            {user.user.name && (
-              <FormControl
-                className={styles.header__user}
-                onBlur={() => setIsUserActionsActive(false)}
-              >
-                <Button
-                  className={styles.header__user__block}
-                  sx={{ textTransform: 'none' }}
-                  onClick={() => setIsUserActionsActive((c) => !c)}
-                  fullWidth
-                >
-                  <img
-                    src={user.user.avatar}
-                    className={styles.header__user__block__avatar}
-                    alt="avatar"
-                  />
-                  <p>{user.user.name}</p>
-                </Button>
-
-                <Collapse
-                  in={isUserActionsActive}
-                  onBlur={() => setIsUserActionsActive((c) => !c)}
-                >
-                  <UserActions />
-                </Collapse>
-              </FormControl>
+            {user && (
+              <Auth
+                user={user}
+                isUserActionsActive={isUserActionsActive}
+                setIsUserActionsActive={setIsUserActionsActive}
+              />
             )}
           </>
         )}

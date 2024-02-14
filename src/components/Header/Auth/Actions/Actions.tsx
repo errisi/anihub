@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import styles from './Actions.module.scss';
-import { useAppDispatch } from '../../../store/hooks';
-import * as UserDispatchActions from '../../../features/User';
+import { useAppDispatch } from '../../../../store/hooks';
+import * as UserDispatchActions from '../../../../features/User';
 
 export const UserActions = () => {
   const dispatch = useAppDispatch();
