@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import {
-  Button, ButtonGroup, Collapse, Container,
+  Button, ButtonGroup, Container, FormControl,
 } from '@mui/material';
+import Collapse from '@mui/material/Collapse';
 import { Notifications } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import styles from './DesktopHeader.module.scss';
@@ -15,16 +16,16 @@ type Props = {
   handleAuthMenuOpenAuth: () => void;
   handleAuthMenuOpenRegister: () => void;
   user: User;
-  userActionsActive: boolean;
-  setUserActionsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  isUserActionsActive: boolean;
+  setIsUserActionsActive: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const DesktopHeader: FC<Props> = ({
   handleAuthMenuOpenAuth,
   handleAuthMenuOpenRegister,
   user,
-  userActionsActive,
-  setUserActionsActive,
+  isUserActionsActive,
+  setIsUserActionsActive,
 }) => (
   <Container>
     <div className={styles.header__wrapper}>
@@ -55,24 +56,31 @@ export const DesktopHeader: FC<Props> = ({
           </ButtonGroup>
         )}
         {user.user.name && (
-          <div>
+          <FormControl
+            className={styles.header__user}
+            onBlur={() => setIsUserActionsActive(false)}
+          >
             <Button
-              className={styles.header__user}
+              className={styles.header__user__block}
               sx={{ textTransform: 'none' }}
-              onClick={() => setUserActionsActive((c) => !c)}
+              onClick={() => setIsUserActionsActive((c) => !c)}
+              fullWidth
             >
               <img
                 src={user.user.avatar}
-                className={styles.header__user__avatar}
+                className={styles.header__user__block__avatar}
                 alt="avatar"
               />
               <p>{user.user.name}</p>
             </Button>
 
-            <Collapse in={userActionsActive}>
+            <Collapse
+              in={isUserActionsActive}
+              onBlur={() => setIsUserActionsActive((c) => !c)}
+            >
               <UserActions />
             </Collapse>
-          </div>
+          </FormControl>
         )}
       </div>
     </div>

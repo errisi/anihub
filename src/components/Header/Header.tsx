@@ -32,7 +32,7 @@ export const AppHeader = () => {
   const [login, setLogin] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userActionsActive, setUserActionsActive] = useState(false);
+  const [isUserActionsActive, setIsUserActionsActive] = useState(false);
 
   const handleAuthMenuOpenAuth = () => {
     setIsAuthMenuOpened(true);
@@ -105,8 +105,8 @@ export const AppHeader = () => {
             handleAuthMenuOpenAuth={handleAuthMenuOpenAuth}
             handleAuthMenuOpenRegister={handleAuthMenuOpenRegister}
             user={user}
-            userActionsActive={userActionsActive}
-            setUserActionsActive={setUserActionsActive}
+            isUserActionsActive={isUserActionsActive}
+            setIsUserActionsActive={setIsUserActionsActive}
           />
         )}
         {windowWidth < 1300 && windowWidth >= 640 && (
