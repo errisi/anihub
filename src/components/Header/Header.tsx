@@ -50,7 +50,8 @@ export const AppHeader = () => {
     e.preventDefault();
     await authService.register(login, email, password);
 
-    dispatch(UserActions.init({ email, password }));
+    await dispatch(UserActions.init({ email, password }));
+    dispatch(UserActions.checkAuth());
 
     setIsAuthMenuOpened(false);
   };
@@ -66,7 +67,8 @@ export const AppHeader = () => {
   ) => {
     e.preventDefault();
 
-    dispatch(UserActions.init({ email, password }));
+    await dispatch(UserActions.init({ email, password }));
+    dispatch(UserActions.checkAuth());
 
     setIsAuthMenuOpened(false);
 

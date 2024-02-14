@@ -5,38 +5,14 @@ import { authService } from '../services/authService';
 import { accessTokenService } from '../services/accessTokenService';
 
 type UserState = {
-  user: User;
+  user: User | null;
   loading: boolean;
   error: string;
   checked: boolean;
 };
 
 const initialState: UserState = {
-  user: {
-    accessToken: '',
-    user: {
-      id: 0,
-      name: '',
-      email: '',
-      age: null,
-      sex: 'm',
-      about: null,
-      role: {
-        current: 'user',
-        period: null,
-      },
-      friends: [],
-      achievements: [],
-      avatar: '',
-      wallpaper: '',
-      status: {
-        current: 'blocked',
-        period: null,
-      },
-      activationToken: null,
-      refreshToken: null,
-    },
-  },
+  user: null,
   loading: false,
   error: '',
   checked: false,
@@ -71,6 +47,13 @@ export const checkAuth = createAsyncThunk(
   },
 );
 
+export const logout = createAsyncThunk('user/logout', async () => {
+  await authService.logout();
+  accessTokenService.remove();
+
+  return null;
+});
+
 const UserSlice = createSlice({
   name: 'User',
   initialState,
@@ -94,7 +77,10 @@ const UserSlice = createSlice({
     });
 
     builder.addCase(init.fulfilled, (state, action) => {
-      state.user.user = action.payload;
+      if (state.user) {
+        state.user.user = action.payload;
+      }
+
       state.loading = false;
     });
 
@@ -118,10 +104,22 @@ const UserSlice = createSlice({
       state.error = action.payload as string;
       state.checked = true;
     });
+
+    builder.addCase(logout.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(logout.fulfilled, (state) => {
+      state.user = null; // Reset user state to null after logout
+      state.loading = false;
+    });
+
+    builder.addCase(logout.rejected, (state, action) => {
+      state.loading = false;
+      state.error = `Logout failed: ${action.error.message}`;
+    });
   },
 });
 
 export default UserSlice.reducer;
-export const {
-  set, setLoading, setError,
-} = UserSlice.actions;
+export const { set, setLoading, setError } = UserSlice.actions;

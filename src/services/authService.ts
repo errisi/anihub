@@ -13,7 +13,7 @@ async function login(email: string, password: string) {
 }
 
 async function logout() {
-  return authClient.post('/logout');
+  return authClient.post('/users/logout');
 }
 
 async function activate(activationToken: string) {

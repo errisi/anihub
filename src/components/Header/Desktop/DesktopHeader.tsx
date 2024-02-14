@@ -15,7 +15,7 @@ import { UserActions } from '../Actions/Actions';
 type Props = {
   handleAuthMenuOpenAuth: () => void;
   handleAuthMenuOpenRegister: () => void;
-  user: User;
+  user: User | null;
   isUserActionsActive: boolean;
   setIsUserActionsActive: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -44,7 +44,7 @@ export const DesktopHeader: FC<Props> = ({
           <Notifications color="primary" />
         </Button>
 
-        {!user.user.name && (
+        {!user && (
           <ButtonGroup>
             <Button variant="outlined" onClick={handleAuthMenuOpenAuth}>
               Войти
@@ -55,32 +55,36 @@ export const DesktopHeader: FC<Props> = ({
             </Button>
           </ButtonGroup>
         )}
-        {user.user.name && (
-          <FormControl
-            className={styles.header__user}
-            onBlur={() => setIsUserActionsActive(false)}
-          >
-            <Button
-              className={styles.header__user__block}
-              sx={{ textTransform: 'none' }}
-              onClick={() => setIsUserActionsActive((c) => !c)}
-              fullWidth
-            >
-              <img
-                src={user.user.avatar}
-                className={styles.header__user__block__avatar}
-                alt="avatar"
-              />
-              <p>{user.user.name}</p>
-            </Button>
+        {user && (
+          <>
+            {user.user.name && (
+              <FormControl
+                className={styles.header__user}
+                onBlur={() => setIsUserActionsActive(false)}
+              >
+                <Button
+                  className={styles.header__user__block}
+                  sx={{ textTransform: 'none' }}
+                  onClick={() => setIsUserActionsActive((c) => !c)}
+                  fullWidth
+                >
+                  <img
+                    src={user.user.avatar}
+                    className={styles.header__user__block__avatar}
+                    alt="avatar"
+                  />
+                  <p>{user.user.name}</p>
+                </Button>
 
-            <Collapse
-              in={isUserActionsActive}
-              onBlur={() => setIsUserActionsActive((c) => !c)}
-            >
-              <UserActions />
-            </Collapse>
-          </FormControl>
+                <Collapse
+                  in={isUserActionsActive}
+                  onBlur={() => setIsUserActionsActive((c) => !c)}
+                >
+                  <UserActions />
+                </Collapse>
+              </FormControl>
+            )}
+          </>
         )}
       </div>
     </div>
