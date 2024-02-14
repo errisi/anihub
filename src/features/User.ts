@@ -102,6 +102,22 @@ const UserSlice = createSlice({
       state.loading = false;
       state.error = `There was an error loading, this is what our server says: ${action.payload}`;
     });
+
+    builder.addCase(checkAuth.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(checkAuth.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.loading = false;
+      state.checked = true;
+    });
+
+    builder.addCase(checkAuth.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload as string;
+      state.checked = true;
+    });
   },
 });
 
