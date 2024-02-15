@@ -1,56 +1,61 @@
-&__auth {
-  position: fixed;
-  top: -25%;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  margin: auto;
-  width: fit-content;
-  height: fit-content;
-  background-color: #000;
-  border: 1px solid $primary-color;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #000;
-  z-index: 60;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+@import '../../../../styles/variables/colors.scss';
+@import '../../../../styles/mixins/responsive.scss';
 
-  &__form {
-    display: flex;
-    flex-direction: column;
-    align-items: center
-  }
-
-  &__under {
+.header {
+  &__auth {
     position: fixed;
-    width: 100%;
-    height: 200%;
-    opacity: 50%;
-    z-index: 59;
+    top: -25%;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
     background-color: #000;
-  }
-
-  &__title {
-    padding-top: 16px;
-  }
-
-  &__close {
-    position: absolute !important;
-    top: 12px;
-    right: 6px;
-  }
-
-  &__content {
+    border: 1px solid $primary-color;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #000;
+    z-index: 60;
     display: flex;
     flex-direction: column;
-    width: 300px;
-    gap: 16px;
-    padding: 16px;
+    align-items: center;
 
-    &__buttons {
-      max-width: 300px;
+    &__form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__under {
+      position: fixed;
+      width: 100%;
+      height: 200%;
+      opacity: 50%;
+      z-index: 59;
+      background-color: #000;
+    }
+
+    &__title {
+      padding-top: 16px;
+    }
+
+    &__close {
+      position: absolute !important;
+      top: 12px;
+      right: 6px;
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      gap: 16px;
       padding: 16px;
+
+      &__buttons {
+        max-width: 300px;
+        padding: 16px;
+      }
     }
   }
 }
