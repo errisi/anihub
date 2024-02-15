@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import * as UserActions from '../../features/User';
 import { authService } from '../../services/authService';
 import { AuthMenu } from './Auth/AuthMenu/AuthMenu';
+import { SettingsMenu } from './SettingsMenu/SettingsMenu';
 
 export const AppHeader = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +22,7 @@ export const AppHeader = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isUserActionsActive, setIsUserActionsActive] = useState(false);
+  const [isSettingsMenuOpened, setIsSettingsMenuOpened] = useState(false);
 
   const handleAuthMenuOpenAuth = () => {
     setIsAuthMenuOpened(true);
@@ -97,6 +99,7 @@ export const AppHeader = () => {
             user={user}
             isUserActionsActive={isUserActionsActive}
             setIsUserActionsActive={setIsUserActionsActive}
+            setIsSettingsMenuOpened={setIsSettingsMenuOpened}
           />
         )}
         {windowWidth < 1300 && windowWidth >= 640 && (
@@ -108,6 +111,7 @@ export const AppHeader = () => {
             user={user}
             isUserActionsActive={isUserActionsActive}
             setIsUserActionsActive={setIsUserActionsActive}
+            setIsSettingsMenuOpened={setIsSettingsMenuOpened}
           />
         )}
         {windowWidth < 640 && (
@@ -118,6 +122,7 @@ export const AppHeader = () => {
             user={user}
             isUserActionsActive={isUserActionsActive}
             setIsUserActionsActive={setIsUserActionsActive}
+            setIsSettingsMenuOpened={setIsSettingsMenuOpened}
           />
         )}
 
@@ -138,6 +143,13 @@ export const AppHeader = () => {
             setLogin={setLogin}
             handleClickShowPassword={handleClickShowPassword}
             handleMouseDownPassword={handleMouseDownPassword}
+          />
+        )}
+
+        {isSettingsMenuOpened && user && (
+          <SettingsMenu
+            setIsSettingsMenuOpened={setIsSettingsMenuOpened}
+            user={user}
           />
         )}
       </header>

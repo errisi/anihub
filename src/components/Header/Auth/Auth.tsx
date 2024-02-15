@@ -8,12 +8,14 @@ type Props = {
   user: User;
   isUserActionsActive: boolean;
   setIsUserActionsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsSettingsMenuOpened: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const Auth: FC<Props> = ({
   user,
   isUserActionsActive,
   setIsUserActionsActive,
+  setIsSettingsMenuOpened,
 }) => {
   return (
     <FormControl
@@ -27,18 +29,20 @@ export const Auth: FC<Props> = ({
         fullWidth
       >
         <img
-          src={user.user.avatar}
+          src={user.avatar}
           className={styles.header__user__block__avatar}
           alt="avatar"
         />
-        <p>{user.user.name}</p>
+        <p>{user.name}</p>
       </Button>
 
       <Collapse
         in={isUserActionsActive}
         onBlur={() => setIsUserActionsActive((c) => !c)}
       >
-        <UserActions />
+        <UserActions
+          setIsSettingsMenuOpened={setIsSettingsMenuOpened}
+        />
       </Collapse>
     </FormControl>
   );

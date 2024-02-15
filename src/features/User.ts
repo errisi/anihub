@@ -3,12 +3,14 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { User } from '../types/User';
 import { authService } from '../services/authService';
 import { accessTokenService } from '../services/accessTokenService';
+import { UserData } from '../types/UserData';
 
 type UserState = {
   user: User | null;
   loading: boolean;
   error: string;
   checked: boolean;
+  accessToken: string | null;
 };
 
 const initialState: UserState = {
@@ -16,18 +18,18 @@ const initialState: UserState = {
   loading: false,
   error: '',
   checked: false,
+  accessToken: null,
 };
 
 export const init = createAsyncThunk(
   'user/fetch',
   async ({ email, password }: { email: string; password: string }) => {
     const result = await authService.login(email, password);
+    const data = result as unknown as UserData;
 
-    const user = result as unknown as User;
+    accessTokenService.save(data.accessToken);
 
-    accessTokenService.save(user.accessToken);
-
-    return user.user;
+    return data;
   },
 );
 
@@ -36,11 +38,11 @@ export const checkAuth = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const result = await authService.refresh();
-      const user = result as unknown as User;
+      const data = result as unknown as UserData;
 
-      accessTokenService.save(user.accessToken);
+      accessTokenService.save(data.accessToken);
 
-      return user;
+      return data;
     } catch (error) {
       return rejectWithValue('User is not authenticated');
     }
@@ -70,6 +72,9 @@ const UserSlice = createSlice({
     setChecked: (state, action: PayloadAction<boolean>) => {
       state.checked = action.payload;
     },
+    updateUser: (state, action: PayloadAction<User>) => {
+      state.user = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(init.pending, (state) => {
@@ -77,10 +82,8 @@ const UserSlice = createSlice({
     });
 
     builder.addCase(init.fulfilled, (state, action) => {
-      if (state.user) {
-        state.user.user = action.payload;
-      }
-
+      state.user = action.payload.user;
+      state.accessToken = action.payload.accessToken;
       state.loading = false;
     });
 
@@ -94,7 +97,8 @@ const UserSlice = createSlice({
     });
 
     builder.addCase(checkAuth.fulfilled, (state, action) => {
-      state.user = action.payload;
+      state.user = action.payload.user;
+      state.accessToken = action.payload.accessToken;
       state.loading = false;
       state.checked = true;
     });
@@ -110,7 +114,8 @@ const UserSlice = createSlice({
     });
 
     builder.addCase(logout.fulfilled, (state) => {
-      state.user = null; // Reset user state to null after logout
+      state.user = null;
+      state.accessToken = null;
       state.loading = false;
     });
 
@@ -122,4 +127,6 @@ const UserSlice = createSlice({
 });
 
 export default UserSlice.reducer;
-export const { set, setLoading, setError } = UserSlice.actions;
+export const {
+  set, setLoading, setError, setChecked, updateUser,
+} = UserSlice.actions;

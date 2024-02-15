@@ -20,6 +20,7 @@ type Props = {
   user: User | null;
   isUserActionsActive: boolean;
   setIsUserActionsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsSettingsMenuOpened: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const PhoneHeader: FC<Props> = ({
@@ -29,6 +30,7 @@ export const PhoneHeader: FC<Props> = ({
   user,
   isUserActionsActive,
   setIsUserActionsActive,
+  setIsSettingsMenuOpened,
 }) => {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
@@ -87,6 +89,7 @@ export const PhoneHeader: FC<Props> = ({
                 user={user}
                 isUserActionsActive={isUserActionsActive}
                 setIsUserActionsActive={setIsUserActionsActive}
+                setIsSettingsMenuOpened={setIsSettingsMenuOpened}
               />
             )}
           </div>

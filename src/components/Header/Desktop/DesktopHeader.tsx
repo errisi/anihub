@@ -17,6 +17,7 @@ type Props = {
   user: User | null;
   isUserActionsActive: boolean;
   setIsUserActionsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsSettingsMenuOpened: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const DesktopHeader: FC<Props> = ({
@@ -25,6 +26,7 @@ export const DesktopHeader: FC<Props> = ({
   user,
   isUserActionsActive,
   setIsUserActionsActive,
+  setIsSettingsMenuOpened,
 }) => (
   <Container>
     <div className={styles.header__wrapper}>
@@ -61,6 +63,7 @@ export const DesktopHeader: FC<Props> = ({
                 user={user}
                 isUserActionsActive={isUserActionsActive}
                 setIsUserActionsActive={setIsUserActionsActive}
+                setIsSettingsMenuOpened={setIsSettingsMenuOpened}
               />
             )}
           </>

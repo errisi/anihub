@@ -1,0 +1,67 @@
+@import '../../../styles/variables/colors.scss';
+
+.settings {
+  position: fixed;
+  top: -25%;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  background-color: #000;
+  border: 1px solid $primary-color;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__under {
+    position: fixed;
+    width: 100%;
+    height: 200%;
+    opacity: 50%;
+    z-index: 59;
+    background-color: #000;
+  }
+
+  &__title {
+    padding-top: 16px;
+  }
+
+  &__avatar {
+    margin: 12px 0 4px 0;
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid $primary-color;
+  }
+
+  &__close {
+    position: absolute !important;
+    top: 12px;
+    right: 6px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 16px;
+    padding: 16px;
+
+    &__buttons {
+      max-width: 300px;
+      padding: 16px;
+    }
+  }
+}

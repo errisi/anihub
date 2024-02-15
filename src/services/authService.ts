@@ -1,4 +1,5 @@
 import { authClient } from '../http/authClient';
+// eslint-disable-next-line import/no-cycle
 
 async function register(name: string, email: string, password: string) {
   return authClient.post('/users/register', {

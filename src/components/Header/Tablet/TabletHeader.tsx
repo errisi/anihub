@@ -19,6 +19,7 @@ type Props = {
   user: User | null;
   isUserActionsActive: boolean;
   setIsUserActionsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsSettingsMenuOpened: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const TabletHeader: FC<Props> = ({
@@ -29,6 +30,7 @@ export const TabletHeader: FC<Props> = ({
   user,
   isUserActionsActive,
   setIsUserActionsActive,
+  setIsSettingsMenuOpened,
 }) => (
   <div className="header">
     <div className={styles.header__wrapper}>
@@ -70,6 +72,7 @@ export const TabletHeader: FC<Props> = ({
             user={user}
             isUserActionsActive={isUserActionsActive}
             setIsUserActionsActive={setIsUserActionsActive}
+            setIsSettingsMenuOpened={setIsSettingsMenuOpened}
           />
         )}
       </div>
