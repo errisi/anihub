@@ -23,14 +23,29 @@
         border-radius: 50%;
         object-fit: cover;
 
+        @include onTablet {
+          height: 50px;
+          width: 50px;
+        }
+
         @include onPhone {
           height: 40px;
           width: 40px;
         }
+      }
+
+      &__title {
+        max-width: 134px;
+        white-space: nowrap;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
 
         @include onTablet {
-          height: 50px;
-          width: 50px;
+          max-width: 88px;
+        }
+
+        @include onPhone {
+          display: none;
         }
       }
     }

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import { Notifications } from '@mui/icons-material';
-import { Button, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { AppHeaderLogo } from '../Logo/HeaderLogo';
 import { AppHeaderHavigation } from '../Navigation/HeaderHavigation';
@@ -57,9 +57,9 @@ export const TabletHeader: FC<Props> = ({
             <SearchIcon color="primary" />
           </IconButton>
         )}
-        <Button variant="text" component={Link} to="/">
+        <IconButton component={Link} to="/">
           <Notifications color="primary" />
-        </Button>
+        </IconButton>
 
         {!user && (
           <IconButton onClick={() => handleAuthMenuOpenAuth()}>

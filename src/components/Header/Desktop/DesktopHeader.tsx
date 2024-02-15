@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import {
-  Button, ButtonGroup, Container,
+  Button, ButtonGroup, Container, IconButton,
 } from '@mui/material';
 import { Notifications } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
@@ -41,9 +41,9 @@ export const DesktopHeader: FC<Props> = ({
       </div>
 
       <div className={styles.header__right_side}>
-        <Button variant="text" component={Link} to="/">
+        <IconButton component={Link} to="/">
           <Notifications color="primary" />
-        </Button>
+        </IconButton>
 
         {!user && (
           <ButtonGroup>

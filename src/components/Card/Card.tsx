@@ -45,7 +45,7 @@ export const AnimeCard: FC<Props> = ({ anime, to }) => (
           : `${anime.russian.split('').slice(0, 35).join('')}...`}
       </p>
       <p className={style.card__additional}>
-        <p>{anime.aired_on.split('-').splice(0, 1)}</p>
+        {!!anime.aired_on && <p>{anime.aired_on.split('-').splice(0, 1)}</p>}
         <p className={style.card__additional__status}>
           {getAnimeStatus(anime.status as AnimeStatus)}
         </p>

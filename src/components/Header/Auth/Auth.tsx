@@ -33,16 +33,16 @@ export const Auth: FC<Props> = ({
           className={styles.header__user__block__avatar}
           alt="avatar"
         />
-        <p>{user.name}</p>
+        <p className={styles.header__user__block__title}>
+          {user.name}
+        </p>
       </Button>
 
       <Collapse
         in={isUserActionsActive}
         onBlur={() => setIsUserActionsActive((c) => !c)}
       >
-        <UserActions
-          setIsSettingsMenuOpened={setIsSettingsMenuOpened}
-        />
+        <UserActions setIsSettingsMenuOpened={setIsSettingsMenuOpened} />
       </Collapse>
     </FormControl>
   );

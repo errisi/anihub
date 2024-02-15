@@ -12,13 +12,14 @@
   border-top: none;
   width: 100%;
   min-width: 150px;
+  
+  @include onTablet {
+    top: 62px;
+  }
 
   @include onPhone {
     top: 52px;
     right: 0;
   }
 
-  @include onTablet {
-    top: 62px;
-  }
 }
