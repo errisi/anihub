@@ -29,9 +29,9 @@ export const Auth: FC<Props> = ({
         fullWidth
       >
         <img
-          src={user.avatar}
+          src={user.avatar || 'images/not-found-avatar.jpg'}
           className={styles.header__user__block__avatar}
-          alt="avatar"
+          alt=""
         />
         <p className={styles.header__user__block__title}>
           {user.name}

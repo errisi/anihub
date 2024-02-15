@@ -30,7 +30,8 @@ export const SettingsMenu: FC<Props> = ({ setIsSettingsMenuOpened, user }) => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [avatar, setAvatar] = useState<File | null>(null);
-  const [avatarURL, setAvatarURL] = useState(`${user.avatar}`);
+  const [avatarURL, setAvatarURL]
+    = useState(user.avatar || 'images/not-found-avatar.jpg');
 
   const dispatch = useAppDispatch();
 
@@ -125,7 +126,7 @@ export const SettingsMenu: FC<Props> = ({ setIsSettingsMenuOpened, user }) => {
           <h2 className={styles.settings__title}>Настройки</h2>
           <img
             src={avatarURL}
-            alt="avatar"
+            alt=""
             className={styles.settings__avatar}
           />
           <Button variant="text" component="label">
