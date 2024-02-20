@@ -5,6 +5,7 @@ import { PhoneHeader } from './Phone/PhoneHeader';
 import styles from './Header.module.scss';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import * as UserActions from '../../features/User';
+import * as NotificationsActions from '../../features/Notifications';
 import { authService } from '../../services/authService';
 import { AuthMenu } from './Auth/AuthMenu/AuthMenu';
 import { SettingsMenu } from './SettingsMenu/SettingsMenu';
@@ -23,6 +24,8 @@ export const AppHeader = () => {
   const [password, setPassword] = useState('');
   const [isUserActionsActive, setIsUserActionsActive] = useState(false);
   const [isSettingsMenuOpened, setIsSettingsMenuOpened] = useState(false);
+  const [isNotificationsMenuOpened, setIsNotificationsMenuOpened]
+    = useState(false);
 
   const handleAuthMenuOpenAuth = () => {
     setIsAuthMenuOpened(true);
@@ -51,6 +54,25 @@ export const AppHeader = () => {
     // loading,
     // error,
   } = useAppSelector((state) => state.User);
+
+  const {
+    notifications,
+    // loading,
+    // error,
+  } = useAppSelector((state) => state.Notifications);
+
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    if (user) {
+      dispatch(NotificationsActions.init(user.id));
+
+      const intervalId = setInterval(() => {
+        dispatch(NotificationsActions.init(user.id));
+      }, 60000);
+
+      return () => clearInterval(intervalId);
+    }
+  }, [dispatch, notifications.length, user]);
 
   const handleAuth = async (
     e: FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
@@ -100,6 +122,9 @@ export const AppHeader = () => {
             isUserActionsActive={isUserActionsActive}
             setIsUserActionsActive={setIsUserActionsActive}
             setIsSettingsMenuOpened={setIsSettingsMenuOpened}
+            isNotificationsMenuOpened={isNotificationsMenuOpened}
+            setIsNotificationsMenuOpened={setIsNotificationsMenuOpened}
+            notifications={notifications}
           />
         )}
         {windowWidth < 1300 && windowWidth >= 640 && (

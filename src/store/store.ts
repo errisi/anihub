@@ -5,6 +5,7 @@ import ReleaseCalendarReducer from '../features/ReleaseCalendar';
 import CatalogAnimesReducer from '../features/CatalogAnimes';
 import SearchAnimesReducer from '../features/SearchAnimes';
 import UserReducer from '../features/User';
+import NotificationsReducer from '../features/Notifications';
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     CatalogAnimes: CatalogAnimesReducer,
     SearchAnimes: SearchAnimesReducer,
     User: UserReducer,
+    Notifications: NotificationsReducer,
   },
 });
 

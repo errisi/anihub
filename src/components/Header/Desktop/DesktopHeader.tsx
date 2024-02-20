@@ -1,15 +1,20 @@
 import { FC } from 'react';
 import {
-  Button, ButtonGroup, Container, IconButton,
+  Badge,
+  Button,
+  ButtonGroup,
+  Container,
+  IconButton,
 } from '@mui/material';
 import { Notifications } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
 import styles from './DesktopHeader.module.scss';
 import { AppHeaderLogo } from '../Logo/HeaderLogo';
 import { AppHeaderHavigation } from '../Navigation/HeaderHavigation';
 import { AppHeaderSearch } from '../Search/HeaderSearch';
 import { User } from '../../../types/User';
 import { Auth } from '../Auth/Auth';
+import { HeaderNotifications } from '../Notifications/Notifications';
+import { Notification } from '../../../types/Notification';
 
 type Props = {
   handleAuthMenuOpenAuth: () => void;
@@ -18,6 +23,9 @@ type Props = {
   isUserActionsActive: boolean;
   setIsUserActionsActive: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSettingsMenuOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  isNotificationsMenuOpened: boolean;
+  setIsNotificationsMenuOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  notifications: Notification[];
 };
 
 export const DesktopHeader: FC<Props> = ({
@@ -27,6 +35,9 @@ export const DesktopHeader: FC<Props> = ({
   isUserActionsActive,
   setIsUserActionsActive,
   setIsSettingsMenuOpened,
+  isNotificationsMenuOpened,
+  setIsNotificationsMenuOpened,
+  notifications,
 }) => (
   <Container>
     <div className={styles.header__wrapper}>
@@ -41,9 +52,22 @@ export const DesktopHeader: FC<Props> = ({
       </div>
 
       <div className={styles.header__right_side}>
-        <IconButton component={Link} to="/">
-          <Notifications color="primary" />
+        <IconButton onClick={() => setIsNotificationsMenuOpened((c) => !c)}>
+          <Badge
+            badgeContent={
+              notifications.filter((n) => n.status === 'not viewed').length
+            }
+            color="primary"
+          >
+            <Notifications color="primary" />
+          </Badge>
         </IconButton>
+
+        {!!user && isNotificationsMenuOpened && (
+          <HeaderNotifications
+            setIsNotificationsMenuOpened={setIsNotificationsMenuOpened}
+          />
+        )}
 
         {!user && (
           <ButtonGroup>
