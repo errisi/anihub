@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Collapse, IconButton } from '@mui/material';
+import { Badge, Collapse, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import SearchIcon from '@mui/icons-material/Search';
@@ -12,6 +12,8 @@ import { PhoneHeaderNavigation } from './Navigation/PhoneHeaderNavigation';
 import { AppHeaderSearch } from '../Search/HeaderSearch';
 import { User } from '../../../types/User';
 import { Auth } from '../Auth/Auth';
+import { Notification } from '../../../types/Notification';
+import { HeaderNotifications } from '../Notifications/Notifications';
 
 type Props = {
   isSearchOpened: boolean;
@@ -21,6 +23,9 @@ type Props = {
   isUserActionsActive: boolean;
   setIsUserActionsActive: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSettingsMenuOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  isNotificationsMenuOpened: boolean;
+  setIsNotificationsMenuOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  notifications: Notification[];
 };
 
 export const PhoneHeader: FC<Props> = ({
@@ -31,6 +36,9 @@ export const PhoneHeader: FC<Props> = ({
   isUserActionsActive,
   setIsUserActionsActive,
   setIsSettingsMenuOpened,
+  isNotificationsMenuOpened,
+  setIsNotificationsMenuOpened,
+  notifications,
 }) => {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
@@ -74,9 +82,30 @@ export const PhoneHeader: FC<Props> = ({
             <IconButton onClick={() => setIsSearchOpened((c) => !c)}>
               <SearchIcon color="primary" />
             </IconButton>
-            <IconButton>
-              <NotificationsOutlinedIcon color="primary" />
-            </IconButton>
+
+            {!!user && (
+              <IconButton
+                onClick={() => setIsNotificationsMenuOpened((c) => !c)}
+              >
+                <Badge
+                  badgeContent={
+                    notifications
+                      ? notifications.filter((n) => n.status === 'not viewed')
+                        .length
+                      : 0
+                  }
+                  color="primary"
+                >
+                  <NotificationsOutlinedIcon color="primary" />
+                </Badge>
+              </IconButton>
+            )}
+
+            {!!user && isNotificationsMenuOpened && (
+              <HeaderNotifications
+                setIsNotificationsMenuOpened={setIsNotificationsMenuOpened}
+              />
+            )}
 
             {!user && (
               <IconButton onClick={() => handleAuthMenuOpenAuth()}>
@@ -101,7 +130,7 @@ export const PhoneHeader: FC<Props> = ({
         className={styles.menu}
         in={isMenuOpened}
       >
-        <PhoneHeaderNavigation />
+        <PhoneHeaderNavigation setIsMenuOpened={setIsMenuOpened} />
       </Collapse>
       {isMenuOpened && (
         <button

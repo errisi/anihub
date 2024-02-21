@@ -52,6 +52,19 @@ export const AppFooter: FC = () => {
                 >
                   <CloseIcon color="primary" fontSize="small" />
                 </IconButton>
+
+                <div
+                  aria-label="under"
+                  className={styles.contacts__under}
+                  onClick={() => setIsContactsOpen(false)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === 'Space') {
+                      setIsContactsOpen(false);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                />
               </div>
             </Fade>
             <Link to="/terms" className={styles.footer__links__item}>

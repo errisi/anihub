@@ -25,7 +25,7 @@ export const AppHeader = () => {
   const [isUserActionsActive, setIsUserActionsActive] = useState(false);
   const [isSettingsMenuOpened, setIsSettingsMenuOpened] = useState(false);
   const [isNotificationsMenuOpened, setIsNotificationsMenuOpened]
-    = useState(false);
+  = useState(false);
 
   const handleAuthMenuOpenAuth = () => {
     setIsAuthMenuOpened(true);
@@ -137,6 +137,9 @@ export const AppHeader = () => {
             isUserActionsActive={isUserActionsActive}
             setIsUserActionsActive={setIsUserActionsActive}
             setIsSettingsMenuOpened={setIsSettingsMenuOpened}
+            isNotificationsMenuOpened={isNotificationsMenuOpened}
+            setIsNotificationsMenuOpened={setIsNotificationsMenuOpened}
+            notifications={notifications}
           />
         )}
         {windowWidth < 640 && (
@@ -148,6 +151,9 @@ export const AppHeader = () => {
             isUserActionsActive={isUserActionsActive}
             setIsUserActionsActive={setIsUserActionsActive}
             setIsSettingsMenuOpened={setIsSettingsMenuOpened}
+            isNotificationsMenuOpened={isNotificationsMenuOpened}
+            setIsNotificationsMenuOpened={setIsNotificationsMenuOpened}
+            notifications={notifications}
           />
         )}
 

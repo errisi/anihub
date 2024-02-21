@@ -7,6 +7,7 @@ import {
   MenuItem,
   Select,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import moment from 'moment-timezone';
 import 'moment/dist/locale/ru';
@@ -46,6 +47,30 @@ export const AnimeInfo: FC<Props> = ({
 
     return parsedTime.tz(userTimezone).locale('ru').format('D MMM HH:mm');
   }
+
+  const GenresLinksComponent = () => {
+    if (!anime || !anime.genres) {
+      return null;
+    }
+
+    return anime.genres.map((genre, index) => (
+      <>
+        {anime.genres && (
+          <>
+            <Link
+              className={
+                styles.anime__info__right__description__item__value_imp
+              }
+              to={`../../anime?genre=${encodeURIComponent(genre.russian)}`}
+            >
+              {genre.russian}
+            </Link>
+            {index !== anime.genres.length - 1 && ', '}
+          </>
+        )}
+      </>
+    ));
+  };
 
   return (
     <div className={styles.anime__info}>
@@ -94,6 +119,19 @@ export const AnimeInfo: FC<Props> = ({
               )}
               {!similar.length && <h2>К сожалению похожих аниме не найдено</h2>}
             </div>
+
+            <div
+              aria-label="under"
+              className={styles.anime__info__similar__under}
+              onClick={() => setIsSimilarOpen(false)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === 'Space') {
+                  setIsSimilarOpen(false);
+                }
+              }}
+              role="button"
+              tabIndex={0}
+            />
           </div>
         )}
       </div>
@@ -199,7 +237,7 @@ export const AnimeInfo: FC<Props> = ({
                   styles.anime__info__right__description__item__value_imp
                 }
               >
-                {anime.genres.map((g) => g.russian).join(', ')}
+                <GenresLinksComponent />
               </p>
             </div>
           )}

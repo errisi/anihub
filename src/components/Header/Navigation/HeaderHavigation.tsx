@@ -27,7 +27,7 @@ export const AppHeaderHavigation = () => (
         </Button>
       </li>
 
-      <li className={styles.nav__item}>
+      {/* <li className={styles.nav__item}>
         <Button
           variant="text"
           component={NavLink}
@@ -36,7 +36,7 @@ export const AppHeaderHavigation = () => (
         >
           Подборки
         </Button>
-      </li>
+      </li> */}
     </ul>
   </nav>
 );

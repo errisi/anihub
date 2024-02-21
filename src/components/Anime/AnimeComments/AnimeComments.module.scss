@@ -72,6 +72,9 @@
         &__avatar {
           height: 50px;
           width: 50px;
+          min-width: 50px;
+          min-height: 50px;
+          object-fit: cover;
           border-radius: 50%;
           border: 1.8px solid $primary-color;
         }

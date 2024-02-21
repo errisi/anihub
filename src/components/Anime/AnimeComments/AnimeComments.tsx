@@ -360,25 +360,27 @@ export const AnimeComments: FC<Props> = ({ anime }) => {
                           ))}
                       </>
                     )}
-                    <FormControl fullWidth>
-                      <OutlinedInput
-                        fullWidth
-                        multiline
-                        id="outlined-adornment-password"
-                        value={commentRepledQuery}
-                        onChange={(e) => setCommentRepledQuery(e.target.value)}
-                        endAdornment={(
-                          <InputAdornment position="end">
-                            <Button
-                              aria-label="toggle password visibility"
-                              onClick={() => handleOnRepliePost(c.comment.id)}
-                            >
-                              <SendIcon color="primary" />
-                            </Button>
-                          </InputAdornment>
-                        )}
-                      />
-                    </FormControl>
+                    {!!user && (
+                      <FormControl fullWidth>
+                        <OutlinedInput
+                          fullWidth
+                          multiline
+                          id="outlined-adornment-password"
+                          value={commentRepledQuery}
+                          onChange={(e) => setCommentRepledQuery(e.target.value)}
+                          endAdornment={(
+                            <InputAdornment position="end">
+                              <Button
+                                aria-label="toggle password visibility"
+                                onClick={() => handleOnRepliePost(c.comment.id)}
+                              >
+                                <SendIcon color="primary" />
+                              </Button>
+                            </InputAdornment>
+                          )}
+                        />
+                      </FormControl>
+                    )}
                   </div>
                 )}
               </div>

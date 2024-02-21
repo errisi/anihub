@@ -52,16 +52,18 @@ export const DesktopHeader: FC<Props> = ({
       </div>
 
       <div className={styles.header__right_side}>
-        <IconButton onClick={() => setIsNotificationsMenuOpened((c) => !c)}>
-          <Badge
-            badgeContent={
-              notifications.filter((n) => n.status === 'not viewed').length
-            }
-            color="primary"
-          >
-            <Notifications color="primary" />
-          </Badge>
-        </IconButton>
+        {!!user && (
+          <IconButton onClick={() => setIsNotificationsMenuOpened((c) => !c)}>
+            <Badge
+              badgeContent={
+                notifications.filter((n) => n.status === 'not viewed').length
+              }
+              color="primary"
+            >
+              <Notifications color="primary" />
+            </Badge>
+          </IconButton>
+        )}
 
         {!!user && isNotificationsMenuOpened && (
           <HeaderNotifications

@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@mui/material';
 import { HomePage } from './pages/homePage/homePage';
@@ -11,8 +16,9 @@ import { AnimePage } from './pages/animePage/animePage';
 import { TermsPage } from './pages/termsPage/termsPage';
 import { ForOwnersPage } from './pages/forOwnersPage/forOwnersPage';
 import { PrivacyPage } from './pages/privacyPage/privacyPage';
-import { AccountActivationPage }
-  from './pages/accountActivationPage/accountActivationPage';
+import {
+  AccountActivationPage,
+} from './pages/accountActivationPage/accountActivationPage';
 import 'react-dotenv';
 
 export const Root = () => (
@@ -22,6 +28,7 @@ export const Root = () => (
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<HomePage />} />
+            <Route path="anihub" element={<Navigate to="/" />} />
 
             <Route path="anime/">
               <Route index element={<Сatalog />} />

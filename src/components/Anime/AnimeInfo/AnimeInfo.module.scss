@@ -31,10 +31,8 @@
       top: 72px;
       left: 0;
       right: 0;
-      z-index: 56;
       width: 100%;
       height: 100%;
-      background-color: rgba(#000000, 70%);
       display: flex;
       justify-content: center;
 
@@ -46,7 +44,18 @@
         top: 54px;
       }
 
+      &__under {
+        z-index: 55;
+        background-color: rgba(#000000, 70%);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
       &__content {
+        z-index: 56;
         padding: 40px 20px;
         width: fit-content;
         height: fit-content;
@@ -81,6 +90,7 @@
       &__close {
         position: absolute !important;
         left: 78% !important;
+        z-index: 57;
 
         @include onTablet {
           position: absolute !important;
@@ -141,6 +151,9 @@
           }
 
           &__value_imp {
+            overflow-wrap: break-word;
+            text-wrap: wrap;
+            max-width: 240px;
             color: $primary-color;
           }
         }
