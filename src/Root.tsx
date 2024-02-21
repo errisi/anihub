@@ -13,6 +13,7 @@ import { ForOwnersPage } from './pages/forOwnersPage/forOwnersPage';
 import { PrivacyPage } from './pages/privacyPage/privacyPage';
 import { AccountActivationPage }
   from './pages/accountActivationPage/accountActivationPage';
+import 'react-dotenv';
 
 export const Root = () => (
   <Provider store={store}>

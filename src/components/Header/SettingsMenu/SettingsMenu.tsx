@@ -54,7 +54,7 @@ export const SettingsMenu: FC<Props> = ({ setIsSettingsMenuOpened, user }) => {
       formData.append('file', avatar);
 
       await axios.patch(
-        `http://localhost:3005/users/${user.id}/update-avatar`,
+        `${import.meta.env.VITE_API_URL}/users/${user.id}/update-avatar`,
         formData,
         {
           headers: {
@@ -64,7 +64,7 @@ export const SettingsMenu: FC<Props> = ({ setIsSettingsMenuOpened, user }) => {
       );
     }
 
-    await axios.patch(`http://localhost:3005/users/${user.id}/`, {
+    await axios.patch(`${import.meta.env.VITE_API_URL}/users/${user.id}/`, {
       name: login !== user.name ? login : '',
       email: email !== user.email ? email : '',
       password,
