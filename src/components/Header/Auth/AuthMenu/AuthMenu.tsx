@@ -230,7 +230,7 @@ export const AuthMenu: FC<Props> = ({
                 variant="contained"
                 onClick={handleRegister}
                 type="submit"
-                disabled={!!(emailDitry || emailError)}
+                disabled={!!emailError}
               >
                 Регистрация
               </Button>
