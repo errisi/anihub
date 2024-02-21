@@ -33,7 +33,13 @@ export const AppFooter: FC = () => {
                     alt=""
                     className={styles.contacts__item__icon_22}
                   />
-                  <a href="https://t.me/errisi">Telegram</a>
+                  <a
+                    href="https://t.me/errisi"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Telegram
+                  </a>
                 </div>
                 <div className={styles.contacts__item}>
                   <img
@@ -41,7 +47,13 @@ export const AppFooter: FC = () => {
                     alt=""
                     className={styles.contacts__item__icon}
                   />
-                  <a href="mailto:support@anihub.icu">support@anihub.icu</a>
+                  <a
+                    href="mailto:support@anihub.icu"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    support@anihub.icu
+                  </a>
                 </div>
                 <IconButton
                   onClick={() => setIsContactsOpen(false)}
@@ -52,21 +64,22 @@ export const AppFooter: FC = () => {
                 >
                   <CloseIcon color="primary" fontSize="small" />
                 </IconButton>
-
-                <div
-                  aria-label="under"
-                  className={styles.contacts__under}
-                  onClick={() => setIsContactsOpen(false)}
-                  onKeyDown={(event) => {
-                    if (event.key === 'Enter' || event.key === 'Space') {
-                      setIsContactsOpen(false);
-                    }
-                  }}
-                  role="button"
-                  tabIndex={0}
-                />
               </div>
             </Fade>
+            {isContactsOpen && (
+              <div
+                aria-label="under"
+                className={styles.contacts__under}
+                onClick={() => setIsContactsOpen(false)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === 'Space') {
+                    setIsContactsOpen(false);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+              />
+            )}
             <Link to="/terms" className={styles.footer__links__item}>
               Соглашение
             </Link>

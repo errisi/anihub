@@ -80,7 +80,7 @@ export const AnimeInfo: FC<Props> = ({
           alt=""
           className={styles.anime__info__left__image}
         />
-        <FormControl fullWidth size="small">
+        <FormControl fullWidth size="small" sx={{ display: 'none' }}>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"

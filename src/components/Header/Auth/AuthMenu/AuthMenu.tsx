@@ -1,4 +1,4 @@
-import { FC, FormEvent } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Button,
@@ -53,6 +53,28 @@ export const AuthMenu: FC<Props> = ({
   handleClickShowPassword,
   handleMouseDownPassword,
 }) => {
+  const [emailDitry, setEmailDitry] = useState(false);
+  const [emailError, setEmailError] = useState('Email не может быть пустым');
+
+  const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    const re = new RegExp(
+      // eslint-disable-next-line @typescript-eslint/quotes
+      `^(([^<>()[\\]\\.,;:\\s@\\"]+(\\.[^<>()[\\]\\.,;:\\s@\\"]+)*)|(\\".+\\"))@(([^<>()[\\]\\.,;:\\s@\\"]+\\.)+[^<>()[\\]\\.,;:\\s@\\"]{2,})$`,
+      'i',
+    );
+
+    if (!re.test(String(e.target.value).toLowerCase())) {
+      setEmailError('Некорректный Email');
+    } else {
+      setEmailError('');
+    }
+  };
+
+  const onEmailBlur = () => {
+    setEmailDitry(true);
+  };
+
   return (
     <>
       <div
@@ -88,7 +110,10 @@ export const AuthMenu: FC<Props> = ({
                 type="email"
                 autoComplete="current-email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onBlur={onEmailBlur}
+                error={!!(emailDitry && emailError)}
+                helperText={emailDitry ? emailError : ''}
+                onChange={handleQueryChange}
               />
               <FormControl variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">
@@ -128,7 +153,11 @@ export const AuthMenu: FC<Props> = ({
               <Button variant="outlined" onClick={handleAuthMenuOpenRegister}>
                 Регистрация
               </Button>
-              <Button variant="contained" onClick={handleAuth}>
+              <Button
+                variant="contained"
+                onClick={handleAuth}
+                disabled={!!(emailDitry || emailError)}
+              >
                 Войти
               </Button>
             </ButtonGroup>
@@ -157,7 +186,10 @@ export const AuthMenu: FC<Props> = ({
                 type="email"
                 autoComplete="current-email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onBlur={onEmailBlur}
+                onChange={handleQueryChange}
+                error={emailDitry}
+                helperText={emailDitry ? emailError : ''}
               />
               <FormControl variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">
@@ -198,6 +230,7 @@ export const AuthMenu: FC<Props> = ({
                 variant="contained"
                 onClick={handleRegister}
                 type="submit"
+                disabled={!!(emailDitry || emailError)}
               >
                 Регистрация
               </Button>

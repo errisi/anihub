@@ -75,6 +75,7 @@
   display: flex;
   justify-content: start;
   padding: 20px;
+  z-index: 11;
   gap: 6px;
 
   @include onPhone {
