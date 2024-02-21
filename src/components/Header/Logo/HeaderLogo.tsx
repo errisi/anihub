@@ -4,7 +4,7 @@ import styles from './HeaderLogo.module.scss';
 export const AppHeaderLogo = () => (
   <Link to="/">
     <img
-      src="../../../public/images/logo.svg"
+      src="./images/logo.svg"
       alt="logo"
       className={styles.logo}
     />
