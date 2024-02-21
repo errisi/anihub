@@ -15,6 +15,8 @@ import { AnimePlayer } from '../../components/Anime/AnimePlayer';
 import { AnimeRelated as Related } from '../../types/AnimeRelated';
 import { AnimeRelated } from '../../components/Anime/AnimeRelated/AnimeRelated';
 import { Anime } from '../../types/Anime';
+import { AnimeComments }
+  from '../../components/Anime/AnimeComments/AnimeComments';
 
 export const AnimePage = () => {
   const { animeId } = useParams();
@@ -75,7 +77,7 @@ export const AnimePage = () => {
           <AnimePlayer anime={anime} />
           <hr className={styles.anime__line} />
 
-          <h2>Комментарии</h2>
+          {anime && <AnimeComments anime={anime} />}
         </>
       )}
     </div>
