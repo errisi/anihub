@@ -156,7 +156,7 @@ export const AuthMenu: FC<Props> = ({
               <Button
                 variant="contained"
                 onClick={handleAuth}
-                disabled={!!(emailDitry || emailError)}
+                disabled={!!emailError}
               >
                 Войти
               </Button>
