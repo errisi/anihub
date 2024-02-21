@@ -104,7 +104,7 @@ export const CatalogCards: FC<Props> = ({
               Нет ничего подходящего по заданным критериям поиска
             </h3>
             <img
-              src="/images/no-found.png"
+              src="./images/no-found.png"
               alt=""
               className={styles.not_found__image}
             />

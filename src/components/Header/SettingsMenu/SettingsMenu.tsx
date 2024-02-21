@@ -31,7 +31,7 @@ export const SettingsMenu: FC<Props> = ({ setIsSettingsMenuOpened, user }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [avatar, setAvatar] = useState<File | null>(null);
   const [avatarURL, setAvatarURL]
-    = useState(user.avatar || 'images/not-found-avatar.jpg');
+    = useState(user.avatar || './images/not-found-avatar.jpg');
 
   const dispatch = useAppDispatch();
 

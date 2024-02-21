@@ -29,7 +29,7 @@ export const AppFooter: FC = () => {
               <div>
                 <div className={styles.contacts__item}>
                   <img
-                    src="/telegram.svg"
+                    src="./telegram.svg"
                     alt=""
                     className={styles.contacts__item__icon_22}
                   />
@@ -37,7 +37,7 @@ export const AppFooter: FC = () => {
                 </div>
                 <div className={styles.contacts__item}>
                   <img
-                    src="/mail.svg"
+                    src="./mail.svg"
                     alt=""
                     className={styles.contacts__item__icon}
                   />
