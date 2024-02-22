@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { Button, LinearProgress } from '@mui/material';
+import { Box, Button, Skeleton } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import * as BestSeasonOngoingsActions
   from '../../../features/BestSeasonOngoings';
@@ -27,7 +27,7 @@ export const BestSeasonOngoings: FC = () => {
         refresh();
       }, 1000);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, loading]);
 
   return (
@@ -36,12 +36,28 @@ export const BestSeasonOngoings: FC = () => {
         Лучшие онгоинги сезона
       </h1>
 
-      {loading && <LinearProgress />}
+      {loading && (
+        <Skeleton
+          sx={{ bgcolor: 'grey.900' }}
+          variant="rectangular"
+          className={styles.home__carousel__wrapper}
+          height={354}
+        />
+      )}
 
       {error && !loading && (
         <>
-          <p>{error}</p>
-          <Button onClick={refresh}>Try Again</Button>
+          <Box
+            sx={{ bgcolor: 'grey.900' }}
+            className={styles.home__carousel__wrapper}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            flexDirection="column"
+          >
+            <p>{error}</p>
+            <Button onClick={refresh}>Try Again</Button>
+          </Box>
         </>
       )}
 

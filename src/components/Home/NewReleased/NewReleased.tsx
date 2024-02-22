@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { Button, LinearProgress } from '@mui/material';
+import { Box, Button, Skeleton } from '@mui/material';
 import { AnimeCard } from '../../Card/Card';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import * as NewReleasedActions from '../../../features/NewReleased';
@@ -26,7 +26,7 @@ export const NewReleased: FC = () => {
         refresh();
       }, 1000);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, loading]);
 
   return (
@@ -35,29 +35,35 @@ export const NewReleased: FC = () => {
         Недавно вышедшие
       </h1>
 
-      {loading && <LinearProgress />}
+      {loading && (
+        <Skeleton
+          sx={{ bgcolor: 'grey.900' }}
+          height={354}
+          variant="rectangular"
+          className={styles.home__block}
+        />
+      )}
 
       {error && !loading && (
         <>
-          <p>
-            {error}
-          </p>
-          <Button
-            onClick={refresh}
+          <Box
+            sx={{ bgcolor: 'grey.900' }}
+            className={styles.home__block}
+            height={354}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
           >
-            Try Again
-          </Button>
+            <p>{error}</p>
+            <Button onClick={refresh}>Try Again</Button>
+          </Box>
         </>
       )}
 
       {!loading && !error && (
         <div className={styles.home__card__grid}>
           {animes.map((anime) => (
-            <AnimeCard
-              to="../"
-              key={anime.id}
-              anime={anime}
-            />
+            <AnimeCard to="../" key={anime.id} anime={anime} />
           ))}
         </div>
       )}

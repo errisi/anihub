@@ -4,6 +4,7 @@ import {
   Button,
   ButtonGroup,
   FormControl,
+  FormHelperText,
   IconButton,
   InputAdornment,
   InputLabel,
@@ -55,8 +56,14 @@ export const AuthMenu: FC<Props> = ({
 }) => {
   const [emailDitry, setEmailDitry] = useState(false);
   const [emailError, setEmailError] = useState('Email не может быть пустым');
+  const [passwordDitry, setPasswordDitry] = useState(false);
+  const [passwordError, setPasswordError] = useState(
+    'Пароль не может быть пустым',
+  );
+  const [loginDitry, setLoginDitry] = useState(false);
+  const [loginError, setLoginError] = useState('Логин не может быть пустым');
 
-  const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
     const re = new RegExp(
       // eslint-disable-next-line @typescript-eslint/quotes
@@ -71,8 +78,56 @@ export const AuthMenu: FC<Props> = ({
     }
   };
 
-  const onEmailBlur = () => {
-    setEmailDitry(true);
+  const handlePasswordChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setPassword(e.target.value);
+
+    if (e.target.value.length < 8) {
+      setPasswordError('Пароль должен быть длиннее 8 символов');
+    } else {
+      setPasswordError('');
+    }
+  };
+
+  const handleLoginChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setLogin(e.target.value);
+    const re = new RegExp(
+      '^[a-zA-Z0-9](_(?!(\\.|_))|\\.(?!(_|\\.))|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$',
+    );
+
+    if (!re.test(String(e.target.value).toLowerCase())) {
+      setLoginError(
+        e.target.value.length > 4
+          ? 'Логин содержит запрещенные символы'
+          : 'Логин слишком короткий',
+      );
+    } else {
+      setLoginError('');
+    }
+  };
+
+  const handleOnBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>,
+  ) => {
+    switch (e.target.name) {
+      case 'email':
+        setEmailDitry(true);
+        break;
+
+      case 'password':
+        setPasswordDitry(true);
+        break;
+
+      case 'login':
+        setLoginDitry(true);
+        break;
+
+      default:
+        break;
+    }
   };
 
   return (
@@ -110,10 +165,9 @@ export const AuthMenu: FC<Props> = ({
                 type="email"
                 autoComplete="current-email"
                 value={email}
-                onBlur={onEmailBlur}
-                error={!!(emailDitry && emailError)}
-                helperText={emailDitry ? emailError : ''}
-                onChange={handleQueryChange}
+                name="email"
+                onBlur={(e) => handleOnBlur(e)}
+                onChange={handleEmailChange}
               />
               <FormControl variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">
@@ -124,7 +178,9 @@ export const AuthMenu: FC<Props> = ({
                   id="outlined-adornment-password"
                   type={showPassword ? 'text' : 'password'}
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  name="password"
+                  onBlur={(e) => handleOnBlur(e)}
+                  onChange={(e) => handlePasswordChange(e)}
                   endAdornment={(
                     <InputAdornment position="end">
                       <IconButton
@@ -156,7 +212,7 @@ export const AuthMenu: FC<Props> = ({
               <Button
                 variant="contained"
                 onClick={handleAuth}
-                disabled={!!emailError}
+                disabled={!!emailError || !!passwordError}
               >
                 Войти
               </Button>
@@ -175,9 +231,13 @@ export const AuthMenu: FC<Props> = ({
                 id="outlined-login-input"
                 required
                 label="Введите логин"
+                name="login"
                 autoComplete="username"
                 value={login}
-                onChange={(e) => setLogin(e.target.value)}
+                onBlur={(e) => handleOnBlur(e)}
+                error={!!(loginDitry && loginError)}
+                helperText={loginDitry ? loginError : ''}
+                onChange={(e) => handleLoginChange(e)}
               />
               <TextField
                 id="outlined-email-input"
@@ -186,9 +246,10 @@ export const AuthMenu: FC<Props> = ({
                 type="email"
                 autoComplete="current-email"
                 value={email}
-                onBlur={onEmailBlur}
-                onChange={handleQueryChange}
-                error={emailDitry}
+                name="email"
+                onBlur={(e) => handleOnBlur(e)}
+                onChange={handleEmailChange}
+                error={!!(emailDitry && emailError)}
                 helperText={emailDitry ? emailError : ''}
               />
               <FormControl variant="outlined">
@@ -199,9 +260,12 @@ export const AuthMenu: FC<Props> = ({
                   id="outlined-adornment-password"
                   required
                   type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  onBlur={(e) => handleOnBlur(e)}
                   label="Введите пароль"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => handlePasswordChange(e)}
+                  error={!!(passwordDitry && passwordError)}
                   endAdornment={(
                     <InputAdornment position="end">
                       <IconButton
@@ -215,6 +279,11 @@ export const AuthMenu: FC<Props> = ({
                     </InputAdornment>
                   )}
                 />
+                {!!passwordDitry && (
+                  <FormHelperText error id="username-error">
+                    {passwordError}
+                  </FormHelperText>
+                )}
               </FormControl>
             </div>
 
@@ -230,7 +299,7 @@ export const AuthMenu: FC<Props> = ({
                 variant="contained"
                 onClick={handleRegister}
                 type="submit"
-                disabled={!!emailError}
+                disabled={!!emailError || !!passwordError || !!loginError}
               >
                 Регистрация
               </Button>

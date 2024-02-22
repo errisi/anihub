@@ -4,8 +4,9 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Box,
   Button,
-  LinearProgress,
+  Skeleton,
   Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -95,12 +96,29 @@ export const ReleaseCalendar: FC = () => {
         Календарь релизов
       </h1>
 
-      {loading && <LinearProgress />}
+      {loading && (
+        <Skeleton
+          sx={{ bgcolor: 'grey.900' }}
+          variant="rectangular"
+          height={336}
+          className={styles.releases__wrapper}
+        />
+      )}
 
       {error && !loading && (
         <>
-          <p>{error}</p>
-          <Button onClick={refresh}>Try Again</Button>
+          <Box
+            sx={{ bgcolor: 'grey.900' }}
+            className={styles.releases__wrapper}
+            height={336}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            flexDirection="column"
+          >
+            <p>{error}</p>
+            <Button onClick={refresh}>Try Again</Button>
+          </Box>
         </>
       )}
 
