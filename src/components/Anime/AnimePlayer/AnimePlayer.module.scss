@@ -1,8 +1,18 @@
-.anime {
+@import '../../../styles/mixins/responsive.scss';
 
+.anime {
   &__player {
     &__title {
       margin-bottom: 16px;
+    }
+
+    &__content {
+      height: 586px;
+      width: 100%;
+
+      @include onPhone {
+        height: 300px;
+      }
     }
   }
 }
