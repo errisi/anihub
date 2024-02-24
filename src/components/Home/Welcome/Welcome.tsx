@@ -8,7 +8,7 @@ export const Welcome = () => (
     <h2 className={styles.welcome__title}>
       Добро пожаловать на AniHub
       <br />
-      Приятного простотра!
+      Приятного просмотра!
     </h2>
     <hr
       className={styles.welcome__line}
