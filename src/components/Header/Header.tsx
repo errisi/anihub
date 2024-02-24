@@ -25,7 +25,8 @@ export const AppHeader = () => {
   const [isUserActionsActive, setIsUserActionsActive] = useState(false);
   const [isSettingsMenuOpened, setIsSettingsMenuOpened] = useState(false);
   const [isNotificationsMenuOpened, setIsNotificationsMenuOpened]
-  = useState(false);
+    = useState(false);
+  const [registerError, setRegisterError] = useState('');
 
   const handleAuthMenuOpenAuth = () => {
     setIsAuthMenuOpened(true);
@@ -41,18 +42,23 @@ export const AppHeader = () => {
     e: FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
   ) => {
     e.preventDefault();
-    await authService.register(login, email, password);
+    try {
+      await authService.register(login, email, password);
 
-    await dispatch(UserActions.init({ email, password }));
-    dispatch(UserActions.checkAuth());
-
-    setIsAuthMenuOpened(false);
+      await dispatch(UserActions.init({ email, password }));
+      dispatch(UserActions.checkAuth());
+      setIsAuthMenuOpened(false);
+      setRegisterError('');
+    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setRegisterError(`${(error as any).response.data.message}`);
+    }
   };
 
   const {
     user,
     // loading,
-    // error,
+    error,
   } = useAppSelector((state) => state.User);
 
   const {
@@ -78,14 +84,12 @@ export const AppHeader = () => {
     e: FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
   ) => {
     e.preventDefault();
+    const result = await dispatch(UserActions.init({ email, password }));
 
-    await dispatch(UserActions.init({ email, password }));
-    dispatch(UserActions.checkAuth());
-
-    setIsAuthMenuOpened(false);
-
-    // eslint-disable-next-line no-console
-    console.log(user);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if (!(result as any).error) {
+      setIsAuthMenuOpened(false);
+    }
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -174,6 +178,8 @@ export const AppHeader = () => {
             setLogin={setLogin}
             handleClickShowPassword={handleClickShowPassword}
             handleMouseDownPassword={handleMouseDownPassword}
+            registerError={registerError}
+            authError={error}
           />
         )}
 

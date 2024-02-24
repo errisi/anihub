@@ -42,6 +42,7 @@
       height: 258px;
       border-radius: 10px;
       transition: all 0.2s;
+      object-fit: cover;
 
       @include onPhone {
         height: 182px;

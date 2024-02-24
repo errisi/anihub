@@ -40,12 +40,24 @@
     justify-content: center;
     justify-items: stretch;
 
+    & > :last-child {
+      display: none;
+    }
+
     @media (max-width: 1064px) {
       grid-template-columns: repeat(4, 192px);
+
+      & > :last-child {
+        display: block;
+      }
     }
 
     @media (max-width: 840px) {
       grid-template-columns: repeat(3, 192px);
+
+      & > :last-child {
+        display: none;
+      }
     }
 
     @include onPhone {
@@ -54,7 +66,10 @@
 
     @media (max-width: 460px) {
       grid-template-columns: repeat(2, 138px);
+
+      & > :last-child {
+        display: block;
+      }
     }
   }
 }
-

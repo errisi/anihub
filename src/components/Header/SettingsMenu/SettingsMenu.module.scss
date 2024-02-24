@@ -2,10 +2,9 @@
 
 .settings {
   position: fixed;
-  top: -25%;
+  top: 100px;
   right: 0;
   left: 0;
-  bottom: 0;
   margin: auto;
   width: fit-content;
   height: fit-content;
@@ -17,6 +16,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  &__error {
+    color: $primary-color;
+    border: 1px solid $primary-color;
+    padding: 0 8px;
+    border-left: none;
+    border-right: none;
+  }
 
   &__form {
     display: flex;
@@ -58,6 +65,7 @@
     width: 300px;
     gap: 16px;
     padding: 16px;
+    text-align: center;
 
     &__buttons {
       max-width: 300px;

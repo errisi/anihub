@@ -20,6 +20,14 @@
     flex-direction: column;
     align-items: center;
 
+    &__error {
+      color: $primary-color;
+      border: 1px solid $primary-color;
+      padding: 0 8px;
+      border-left: none;
+      border-right: none;
+    }
+
     &__form {
       display: flex;
       flex-direction: column;
@@ -37,6 +45,7 @@
 
     &__title {
       padding-top: 16px;
+      margin-bottom: 8px;
     }
 
     &__close {

@@ -79,6 +79,7 @@ const UserSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(init.pending, (state) => {
       state.loading = true;
+      state.error = '';
     });
 
     builder.addCase(init.fulfilled, (state, action) => {
@@ -89,7 +90,7 @@ const UserSlice = createSlice({
 
     builder.addCase(init.rejected, (state, action) => {
       state.loading = false;
-      state.error = `There was an error loading, this is what our server says: ${action.payload}`;
+      state.error = `${action.error.code}`;
     });
 
     builder.addCase(checkAuth.pending, (state) => {

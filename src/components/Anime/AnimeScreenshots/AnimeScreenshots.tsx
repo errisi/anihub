@@ -1,8 +1,5 @@
 import {
-  FC,
-  useCallback,
-  useEffect,
-  useState,
+  FC, useCallback, useEffect, useState,
 } from 'react';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 import './swiper.scss';
@@ -108,7 +105,8 @@ export const AnimeScreenshots: FC<Props> = ({ anime }) => {
                         title={`${video.id}`}
                         key={video.id}
                         height="200"
-                        src={video.player_url} // Замените videoId на фактический идентификатор видео
+                        src={video.player_url}
+                        allow="encrypted-media"
                         frameBorder={0}
                         allowFullScreen
                       />

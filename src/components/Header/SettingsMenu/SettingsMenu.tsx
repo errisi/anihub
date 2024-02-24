@@ -6,6 +6,7 @@ import {
   Button,
   ButtonGroup,
   FormControl,
+  FormHelperText,
   IconButton,
   InputAdornment,
   InputLabel,
@@ -30,8 +31,13 @@ export const SettingsMenu: FC<Props> = ({ setIsSettingsMenuOpened, user }) => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [avatar, setAvatar] = useState<File | null>(null);
-  const [avatarURL, setAvatarURL]
-    = useState(user.avatar || './images/not-found-avatar.jpg');
+  const [avatarURL, setAvatarURL] = useState(
+    user.avatar || './images/not-found-avatar.jpg',
+  );
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [isError, setIsError] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -50,29 +56,33 @@ export const SettingsMenu: FC<Props> = ({ setIsSettingsMenuOpened, user }) => {
 
     const formData = new FormData();
 
-    if (avatar) {
-      formData.append('file', avatar);
-
-      await axios.patch(
-        `${import.meta.env.VITE_API_URL}/users/${user.id}/update-avatar`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
+    try {
+      if (avatar) {
+        formData.append('file', avatar);
+        await axios.patch(
+          `${import.meta.env.VITE_API_URL}/users/${user.id}/update-avatar`,
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
           },
-        },
-      );
+        );
+      }
+
+      await axios.patch(`${import.meta.env.VITE_API_URL}/users/${user.id}/`, {
+        name: login !== user.name ? login : '',
+        email: email !== user.email ? email : '',
+        password,
+      });
+
+      await dispatch(UserActions.checkAuth());
+
+      setIsSettingsMenuOpened(false);
+      setIsError(false);
+    } catch {
+      setIsError(true);
     }
-
-    await axios.patch(`${import.meta.env.VITE_API_URL}/users/${user.id}/`, {
-      name: login !== user.name ? login : '',
-      email: email !== user.email ? email : '',
-      password,
-    });
-
-    await dispatch(UserActions.checkAuth());
-
-    setIsSettingsMenuOpened(false);
   };
 
   const handleSettingsCancel = () => {
@@ -94,6 +104,54 @@ export const SettingsMenu: FC<Props> = ({ setIsSettingsMenuOpened, user }) => {
     if (image) {
       setAvatar(image);
       fileReader.readAsDataURL(image);
+    }
+  };
+
+  const handleEmailChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setEmail(e.target.value);
+    const re = new RegExp(
+      // eslint-disable-next-line @typescript-eslint/quotes
+      `^(([^<>()[\\]\\.,;:\\s@\\"]+(\\.[^<>()[\\]\\.,;:\\s@\\"]+)*)|(\\".+\\"))@(([^<>()[\\]\\.,;:\\s@\\"]+\\.)+[^<>()[\\]\\.,;:\\s@\\"]{2,})$`,
+      'i',
+    );
+
+    if (!re.test(String(e.target.value).toLowerCase())) {
+      setEmailError('Некорректный Email');
+    } else {
+      setEmailError('');
+    }
+  };
+
+  const handlePasswordChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setPassword(e.target.value);
+
+    if (e.target.value.length && e.target.value.length < 8) {
+      setPasswordError('Пароль должен быть длиннее 8 символов');
+    } else {
+      setPasswordError('');
+    }
+  };
+
+  const handleLoginChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setLogin(e.target.value);
+    const re = new RegExp(
+      '^[a-zA-Z0-9](_(?!(\\.|_))|\\.(?!(_|\\.))|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$',
+    );
+
+    if (!re.test(String(e.target.value).toLowerCase())) {
+      setLoginError(
+        e.target.value.length > 4
+          ? 'Логин содержит запрещенные символы'
+          : 'Логин слишком короткий',
+      );
+    } else {
+      setLoginError('');
     }
   };
 
@@ -124,22 +182,25 @@ export const SettingsMenu: FC<Props> = ({ setIsSettingsMenuOpened, user }) => {
           onSubmit={(e) => handleSettingsAply(e)}
         >
           <h2 className={styles.settings__title}>Настройки</h2>
-          <img
-            src={avatarURL}
-            alt=""
-            className={styles.settings__avatar}
-          />
+          <img src={avatarURL} alt="" className={styles.settings__avatar} />
           <Button variant="text" component="label">
             Загрузить
             <input type="file" hidden onChange={handleAvatarChange} />
           </Button>
           <div className={styles.settings__content}>
+            {isError && (
+              <p className={styles.settings__error}>
+                Логин или Email уже занят
+              </p>
+            )}
             <TextField
               id="outlined-login-input"
               label="Логин"
               autoComplete="username"
               value={login}
-              onChange={(e) => setLogin(e.target.value)}
+              onChange={(e) => handleLoginChange(e)}
+              error={!!loginError}
+              helperText={loginError}
             />
             <TextField
               id="outlined-email-input"
@@ -147,7 +208,9 @@ export const SettingsMenu: FC<Props> = ({ setIsSettingsMenuOpened, user }) => {
               type="email"
               autoComplete="current-email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => handleEmailChange(e)}
+              error={!!emailError}
+              helperText={emailError}
             />
             <FormControl variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">
@@ -159,7 +222,8 @@ export const SettingsMenu: FC<Props> = ({ setIsSettingsMenuOpened, user }) => {
                 type={showPassword ? 'text' : 'password'}
                 label="Новый пароль"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => handlePasswordChange(e)}
+                error={!!passwordError}
                 endAdornment={(
                   <InputAdornment position="end">
                     <IconButton
@@ -173,6 +237,11 @@ export const SettingsMenu: FC<Props> = ({ setIsSettingsMenuOpened, user }) => {
                   </InputAdornment>
                 )}
               />
+              {!!passwordError && (
+                <FormHelperText error id="username-error">
+                  {passwordError}
+                </FormHelperText>
+              )}
             </FormControl>
           </div>
 
@@ -188,6 +257,7 @@ export const SettingsMenu: FC<Props> = ({ setIsSettingsMenuOpened, user }) => {
               variant="contained"
               onClick={handleSettingsAply}
               type="submit"
+              disabled={!!emailError || !!loginError || !!passwordError}
             >
               Применить
             </Button>

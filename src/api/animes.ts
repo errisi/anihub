@@ -18,7 +18,7 @@ export const getBestSeasonOngoings = () => {
 
 export const getNewReleased = () => {
   return get.request(
-    'animes?page=1&limit=15&order=aired_on&kind=tv&status=released&score=5',
+    'animes?page=1&limit=16&order=aired_on&kind=tv&status=released&score=5',
   );
 };
 

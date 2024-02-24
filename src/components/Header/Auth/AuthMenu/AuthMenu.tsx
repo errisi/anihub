@@ -35,6 +35,8 @@ type Props = {
   setLogin: React.Dispatch<React.SetStateAction<string>>;
   handleClickShowPassword: () => void;
   handleMouseDownPassword: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  registerError: string;
+  authError: string;
 };
 
 export const AuthMenu: FC<Props> = ({
@@ -53,15 +55,12 @@ export const AuthMenu: FC<Props> = ({
   setLogin,
   handleClickShowPassword,
   handleMouseDownPassword,
+  registerError,
+  authError,
 }) => {
-  const [emailDitry, setEmailDitry] = useState(false);
-  const [emailError, setEmailError] = useState('Email не может быть пустым');
-  const [passwordDitry, setPasswordDitry] = useState(false);
-  const [passwordError, setPasswordError] = useState(
-    'Пароль не может быть пустым',
-  );
-  const [loginDitry, setLoginDitry] = useState(false);
-  const [loginError, setLoginError] = useState('Логин не может быть пустым');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [loginError, setLoginError] = useState('');
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -99,11 +98,17 @@ export const AuthMenu: FC<Props> = ({
     );
 
     if (!re.test(String(e.target.value).toLowerCase())) {
-      setLoginError(
-        e.target.value.length > 4
-          ? 'Логин содержит запрещенные символы'
-          : 'Логин слишком короткий',
-      );
+      setLoginError(() => {
+        if (e.target.value.length <= 4) {
+          return 'Логин слишком короткий';
+        }
+
+        if (e.target.value.length > 18) {
+          return 'Логин слишком длинный';
+        }
+
+        return 'Логин содержит запрещенные символы';
+      });
     } else {
       setLoginError('');
     }
@@ -114,15 +119,24 @@ export const AuthMenu: FC<Props> = ({
   ) => {
     switch (e.target.name) {
       case 'email':
-        setEmailDitry(true);
+        if (!email) {
+          setEmailError('Email не может быть пустым');
+        }
+
         break;
 
       case 'password':
-        setPasswordDitry(true);
+        if (!password) {
+          setPasswordError('Пароль не может быть пустым');
+        }
+
         break;
 
       case 'login':
-        setLoginDitry(true);
+        if (!login) {
+          setLoginError('Логин не может быть пустым');
+        }
+
         break;
 
       default:
@@ -157,6 +171,11 @@ export const AuthMenu: FC<Props> = ({
             onSubmit={(e) => handleAuth(e)}
           >
             <h2 className={styles.header__auth__title}>Авторизация</h2>
+            {authError === 'ERR_BAD_REQUEST' && (
+              <p className={styles.header__auth__error}>
+                Неправильный логин или пароль
+              </p>
+            )}
             <div className={styles.header__auth__content}>
               <TextField
                 required
@@ -212,7 +231,7 @@ export const AuthMenu: FC<Props> = ({
               <Button
                 variant="contained"
                 onClick={handleAuth}
-                disabled={!!emailError || !!passwordError}
+                disabled={!!emailError}
               >
                 Войти
               </Button>
@@ -226,6 +245,11 @@ export const AuthMenu: FC<Props> = ({
             onSubmit={(e) => handleRegister(e)}
           >
             <h2 className={styles.header__auth__title}>Регистрация</h2>
+            {registerError === 'User alredy exist' && (
+              <p className={styles.header__auth__error}>
+                Такой пользователь уже существует
+              </p>
+            )}
             <div className={styles.header__auth__content}>
               <TextField
                 id="outlined-login-input"
@@ -235,8 +259,8 @@ export const AuthMenu: FC<Props> = ({
                 autoComplete="username"
                 value={login}
                 onBlur={(e) => handleOnBlur(e)}
-                error={!!(loginDitry && loginError)}
-                helperText={loginDitry ? loginError : ''}
+                error={!!loginError}
+                helperText={loginError}
                 onChange={(e) => handleLoginChange(e)}
               />
               <TextField
@@ -249,8 +273,8 @@ export const AuthMenu: FC<Props> = ({
                 name="email"
                 onBlur={(e) => handleOnBlur(e)}
                 onChange={handleEmailChange}
-                error={!!(emailDitry && emailError)}
-                helperText={emailDitry ? emailError : ''}
+                error={!!emailError}
+                helperText={emailError}
               />
               <FormControl variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">
@@ -265,7 +289,7 @@ export const AuthMenu: FC<Props> = ({
                   label="Введите пароль"
                   value={password}
                   onChange={(e) => handlePasswordChange(e)}
-                  error={!!(passwordDitry && passwordError)}
+                  error={!!passwordError}
                   endAdornment={(
                     <InputAdornment position="end">
                       <IconButton
@@ -279,7 +303,7 @@ export const AuthMenu: FC<Props> = ({
                     </InputAdornment>
                   )}
                 />
-                {!!passwordDitry && (
+                {!!passwordError && (
                   <FormHelperText error id="username-error">
                     {passwordError}
                   </FormHelperText>
