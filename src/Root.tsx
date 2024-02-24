@@ -16,10 +16,12 @@ import { AnimePage } from './pages/animePage/animePage';
 import { TermsPage } from './pages/termsPage/termsPage';
 import { ForOwnersPage } from './pages/forOwnersPage/forOwnersPage';
 import { PrivacyPage } from './pages/privacyPage/privacyPage';
-import {
-  AccountActivationPage,
-} from './pages/accountActivationPage/accountActivationPage';
+import { AccountActivationPage }
+  from './pages/accountActivationPage/accountActivationPage';
 import 'react-dotenv';
+import { ForgotPasswordPage }
+  from './pages/forgotPasswordPage/forgotPasswordPage';
+import { ResetPasswordPage } from './pages/resetPasswordPage/resetPasswordPage';
 
 export const Root = () => (
   <Provider store={store}>
@@ -39,6 +41,11 @@ export const Root = () => (
               path="activate/:activationToken"
               element={<AccountActivationPage />}
             />
+
+            <Route path="reset/">
+              <Route index element={<ForgotPasswordPage />} />
+              <Route path=":resetToken" element={<ResetPasswordPage />} />
+            </Route>
 
             <Route path="terms/" element={<TermsPage />} />
             <Route path="owners/" element={<ForOwnersPage />} />

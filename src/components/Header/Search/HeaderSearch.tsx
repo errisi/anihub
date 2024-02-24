@@ -80,6 +80,7 @@ export const AppHeaderSearch: FC<Props> = ({ type = 'outlined' }) => {
           label="Поиск аниме"
           variant={type as TextFieldVariants}
           size="small"
+          autoComplete="off"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onClick={

@@ -13,6 +13,14 @@ async function login(email: string, password: string) {
   return authClient.post('/users/login', { email, password });
 }
 
+async function sendResetToken(email: string) {
+  return authClient.post('/users/forgot-password', { email });
+}
+
+async function resetPassword(resetToken: string, password: string) {
+  return authClient.post(`/users/reset-password/${resetToken}`, { password });
+}
+
 async function logout() {
   return authClient.post('/users/logout');
 }
@@ -31,4 +39,6 @@ export const authService = {
   logout,
   activate,
   refresh,
+  sendResetToken,
+  resetPassword,
 };

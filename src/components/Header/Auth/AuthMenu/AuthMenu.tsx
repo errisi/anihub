@@ -216,7 +216,11 @@ export const AuthMenu: FC<Props> = ({
                 />
               </FormControl>
             </div>
-            <Link to="/" className="forgot">
+            <Link
+              to="../reset"
+              onClick={() => setIsAuthMenuOpened(false)}
+              className="forgot"
+            >
               <p>Забыли пароль?</p>
             </Link>
 
