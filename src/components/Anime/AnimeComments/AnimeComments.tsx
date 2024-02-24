@@ -165,7 +165,7 @@ export const AnimeComments: FC<Props> = ({ anime }) => {
                 <div className={styles.comments__item__content}>
                   <>
                     <img
-                      src={c.user.avatar}
+                      src={c.user.avatar || './images/not-found-avatar.jpg'}
                       alt=""
                       className={styles.comments__item__content__user__avatar}
                     />
@@ -264,7 +264,7 @@ export const AnimeComments: FC<Props> = ({ anime }) => {
                                 <div className={styles.comments__item__content}>
                                   <>
                                     <img
-                                      src={comm.user.avatar}
+                                      src={comm.user.avatar || './images/not-found-avatar.jpg'}
                                       alt=""
                                       className={
                                         styles.comments__item__content__user__avatar
