@@ -105,13 +105,13 @@ export const AnimeInfo: FC<Props> = ({
         </Button>
         {isSimilarOpen && (
           <div className={styles.anime__info__similar}>
-            <IconButton
-              className={styles.anime__info__similar__close}
-              onClick={handleSimilarButton}
-            >
-              <CloseIcon color="primary" fontSize="large" />
-            </IconButton>
             <div className={styles.anime__info__similar__content}>
+              <IconButton
+                className={styles.anime__info__similar__close}
+                onClick={handleSimilarButton}
+              >
+                <CloseIcon color="primary" fontSize="large" />
+              </IconButton>
               {(similar.length > 25 ? similar.splice(0, 25) : similar).map(
                 (a) => (
                   <AnimeCard to="../../" anime={a} />

@@ -56,7 +56,7 @@
 
       &__content {
         z-index: 56;
-        padding: 40px 20px;
+        padding: 54px 20px;
         width: fit-content;
         height: fit-content;
         background-color: rgba(#000000, 100%);
@@ -69,6 +69,7 @@
         align-items: start;
         justify-content: center;
         justify-items: stretch;
+        position: relative; 
 
         @media (max-width: 1064px) {
           grid-template-columns: repeat(4, 192px);
@@ -89,7 +90,8 @@
 
       &__close {
         position: absolute !important;
-        left: 78% !important;
+        right: 0 !important;
+        top: 0 !important;
         z-index: 57;
 
         @include onTablet {

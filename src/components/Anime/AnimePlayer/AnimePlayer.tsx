@@ -24,7 +24,7 @@ export const AnimePlayer: FC<Props> = ({ anime }) => {
         {`Смотреть аниме «${anime.russian}» онлайн`}
       </h2>
       <iframe
-        title="qwe"
+        title=" "
         src={playerLink}
         frameBorder="0"
         allow="autoplay *; fullscreen *"
