@@ -105,8 +105,7 @@ export const AnimeScreenshots: FC<Props> = ({ anime }) => {
                         title={`${video.id}`}
                         key={video.id}
                         height="200"
-                        src={video.player_url}
-                        allow="encrypted-media"
+                        src={video.player_url.replace('http://', 'https://')}
                         frameBorder={0}
                         allowFullScreen
                       />
