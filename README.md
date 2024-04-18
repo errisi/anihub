@@ -1,1 +1,1 @@
-anihub.icu
+[anihub.icu](https://anihub.icu/)
